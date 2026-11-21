@@ -22,8 +22,8 @@ config:
 # records deliberate deviations from the defaults, each with its reason.
 
 comments:
-  # Kreate's test suites live in src/<suite> and, in a multiplatform project, in src/common<Suite> and
-  # src/jvm<Suite>, which the default test exclusions of Detekt do not know.
+  # Kreate's test suites live in src/<suite> and, in a multiplatform project, in src/common<Suite>,
+  # src/jvm<Suite> and src/wasmJsTest, which the default test exclusions of Detekt do not know.
   UndocumentedPublicClass:
     active: true
     excludes: &testSources
@@ -32,6 +32,7 @@ comments:
       - '**/integrationTest/**'
       - '**/commonUnitTest/**'
       - '**/jvmUnitTest/**'
+      - '**/wasmJsTest/**'
       - '**/commonIntegrationTest/**'
       - '**/jvmIntegrationTest/**'
     searchInNestedClass: true
