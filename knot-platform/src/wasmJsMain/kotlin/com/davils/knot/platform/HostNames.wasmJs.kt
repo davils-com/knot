@@ -14,18 +14,11 @@
  * limitations under the License.
  */
 
-@file:OptIn(ExperimentalWasmJsInterop::class)
-
 package com.davils.knot.platform
 
-internal actual fun hostOsName(): String = processPlatform()
+private const val WEB: String = "web"
+private const val WASM: String = "wasm"
 
-internal actual fun hostOsArch(): String = processArch()
+internal actual fun hostOsName(): String = WEB
 
-private fun processPlatform(): String = js(
-    """(typeof process === "object" && process && typeof process.platform === "string") ? process.platform : ''""",
-)
-
-private fun processArch(): String = js(
-    """(typeof process === "object" && process && typeof process.arch === "string") ? process.arch : ''""",
-)
+internal actual fun hostOsArch(): String = WASM
