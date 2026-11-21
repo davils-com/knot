@@ -26,7 +26,7 @@ final enum class com.davils.knot.platform/Architecture : kotlin/Enum<com.davils.
 final enum class com.davils.knot.platform/OperatingSystem : kotlin/Enum<com.davils.knot.platform/OperatingSystem> { // com.davils.knot.platform/OperatingSystem|null[0]
     enum entry Linux // com.davils.knot.platform/OperatingSystem.Linux|null[0]
     enum entry MacOs // com.davils.knot.platform/OperatingSystem.MacOs|null[0]
-    enum entry Web // com.davils.knot.platform/OperatingSystem.Web|null[0]
+    enum entry Wasm // com.davils.knot.platform/OperatingSystem.Wasm|null[0]
     enum entry Windows // com.davils.knot.platform/OperatingSystem.Windows|null[0]
 
     final val entries // com.davils.knot.platform/OperatingSystem.entries|#static{}entries[0]
@@ -35,8 +35,8 @@ final enum class com.davils.knot.platform/OperatingSystem : kotlin/Enum<com.davi
         final fun <get-identifier>(): kotlin/String // com.davils.knot.platform/OperatingSystem.identifier.<get-identifier>|<get-identifier>(){}[0]
     final val isUnix // com.davils.knot.platform/OperatingSystem.isUnix|{}isUnix[0]
         final fun <get-isUnix>(): kotlin/Boolean // com.davils.knot.platform/OperatingSystem.isUnix.<get-isUnix>|<get-isUnix>(){}[0]
-    final val isWeb // com.davils.knot.platform/OperatingSystem.isWeb|{}isWeb[0]
-        final fun <get-isWeb>(): kotlin/Boolean // com.davils.knot.platform/OperatingSystem.isWeb.<get-isWeb>|<get-isWeb>(){}[0]
+    final val isWasm // com.davils.knot.platform/OperatingSystem.isWasm|{}isWasm[0]
+        final fun <get-isWasm>(): kotlin/Boolean // com.davils.knot.platform/OperatingSystem.isWasm.<get-isWasm>|<get-isWasm>(){}[0]
 
     final fun valueOf(kotlin/String): com.davils.knot.platform/OperatingSystem // com.davils.knot.platform/OperatingSystem.valueOf|valueOf#static(kotlin.String){}[0]
     final fun values(): kotlin/Array<com.davils.knot.platform/OperatingSystem> // com.davils.knot.platform/OperatingSystem.values|values#static(){}[0]
@@ -60,6 +60,8 @@ final class com.davils.knot.platform/Platform { // com.davils.knot.platform/Plat
         final fun <get-isMacOs>(): kotlin/Boolean // com.davils.knot.platform/Platform.isMacOs.<get-isMacOs>|<get-isMacOs>(){}[0]
     final val isUnix // com.davils.knot.platform/Platform.isUnix|{}isUnix[0]
         final fun <get-isUnix>(): kotlin/Boolean // com.davils.knot.platform/Platform.isUnix.<get-isUnix>|<get-isUnix>(){}[0]
+    final val isWasm // com.davils.knot.platform/Platform.isWasm|{}isWasm[0]
+        final fun <get-isWasm>(): kotlin/Boolean // com.davils.knot.platform/Platform.isWasm.<get-isWasm>|<get-isWasm>(){}[0]
     final val isWindows // com.davils.knot.platform/Platform.isWindows|{}isWindows[0]
         final fun <get-isWindows>(): kotlin/Boolean // com.davils.knot.platform/Platform.isWindows.<get-isWindows>|<get-isWindows>(){}[0]
     final val operatingSystem // com.davils.knot.platform/Platform.operatingSystem|{}operatingSystem[0]
