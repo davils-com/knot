@@ -12,9 +12,11 @@ License 2.0, for the JVM and WebAssembly, built on Kore 2.3.2 with Kreate 5.3.0.
 
 ### Added
 
-- `knot-platform`: `OperatingSystem`, `Architecture` and `Platform`, which resolve what the JVM or Node.js reports
-  into Linux, macOS or Windows on x86_64 or aarch64, parse and list the platform identifiers Kreate packages native
-  binaries under, and give the platform of the running program.
+- `knot-platform`: `OperatingSystem`, `Architecture` and `Platform`, which resolve what the JVM reports into Linux,
+  macOS or Windows on x86_64 or aarch64, parse and list the platform identifiers Kreate packages native binaries
+  under, and give the operating system and the platform of the running program. Every runtime of the `wasmJs`
+  target, a browser and Node.js alike, runs on `OperatingSystem.Web`, which `isWeb` tells apart and which has no
+  native platform.
 - `knot-environment`: `Environment` with the live process environment `Environment.SYSTEM` and `Environment.EMPTY`,
   and the `environment { }` DSL, which stacks layers on a base, overrides and removes variables, scopes them to a
   prefix and reports every broken declaration with a code of `EnvironmentViolationCodes`, bounded by
