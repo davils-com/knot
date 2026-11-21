@@ -16,15 +16,18 @@ public final class com/davils/knot/platform/OperatingSystem : java/lang/Enum {
 	public static final field Companion Lcom/davils/knot/platform/OperatingSystem$Companion;
 	public static final field Linux Lcom/davils/knot/platform/OperatingSystem;
 	public static final field MacOs Lcom/davils/knot/platform/OperatingSystem;
+	public static final field Web Lcom/davils/knot/platform/OperatingSystem;
 	public static final field Windows Lcom/davils/knot/platform/OperatingSystem;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public final fun getIdentifier ()Ljava/lang/String;
 	public final fun isUnix ()Z
+	public final fun isWeb ()Z
 	public static fun valueOf (Ljava/lang/String;)Lcom/davils/knot/platform/OperatingSystem;
 	public static fun values ()[Lcom/davils/knot/platform/OperatingSystem;
 }
 
 public final class com/davils/knot/platform/OperatingSystem$Companion {
+	public final fun getCurrent ()Lcom/davils/knot/platform/OperatingSystem;
 	public final fun resolve (Ljava/lang/String;)Lcom/davils/knot/platform/OperatingSystem;
 }
 
