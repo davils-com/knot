@@ -73,7 +73,7 @@ class PlatformTest : FunSpec({
         test("is never wasm, which has no native build") {
             Platform.resolve(osName = "wasm", osArch = AMD64) shouldBe null
             Platform.parseOrNull("wasm-x86_64") shouldBe null
-            Platform.entries.none { platform -> platform.operatingSystem.isWasm } shouldBe true
+            Platform.entries.none { platform -> platform.isWasm } shouldBe true
         }
 
         test("tells different machines apart and is never equal to something else") {

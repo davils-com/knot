@@ -71,6 +71,17 @@ public class Platform private constructor(
     public val isWindows: Boolean get() = operatingSystem == OperatingSystem.Windows
 
     /**
+     * Whether the operating system is [OperatingSystem.Wasm], see [OperatingSystem.isWasm].
+     *
+     * WebAssembly has no native build, so no platform of [entries], [resolve] or [parse] runs on it and the value is
+     * always `false` for them; on the `wasmJs` target there is no [current] platform. Check
+     * [OperatingSystem.current] to find out whether the program runs on WebAssembly.
+     *
+     * @since 1.0.0
+     */
+    public val isWasm: Boolean get() = operatingSystem.isWasm
+
+    /**
      * Whether the operating system is a Unix, see [OperatingSystem.isUnix].
      *
      * @since 1.0.0
