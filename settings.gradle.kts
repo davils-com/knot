@@ -126,3 +126,4 @@ dependencyResolutionManagement {
 rootProject.name = "knot"
 
 include(":knot-platform")
+include(":knot-environment")

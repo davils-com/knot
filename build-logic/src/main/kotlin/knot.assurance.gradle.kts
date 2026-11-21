@@ -86,7 +86,7 @@ kreate {
 
         aggregate {
             enabled = isRoot
-            members = setOf(":", ":knot-platform")
+            members = setOf(":", ":knot-platform", ":knot-environment")
         }
 
         reports {
