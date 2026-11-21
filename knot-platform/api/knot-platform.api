@@ -1,0 +1,54 @@
+public final class com/davils/knot/platform/Architecture : java/lang/Enum {
+	public static final field Arm64 Lcom/davils/knot/platform/Architecture;
+	public static final field Companion Lcom/davils/knot/platform/Architecture$Companion;
+	public static final field X64 Lcom/davils/knot/platform/Architecture;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getIdentifier ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/knot/platform/Architecture;
+	public static fun values ()[Lcom/davils/knot/platform/Architecture;
+}
+
+public final class com/davils/knot/platform/Architecture$Companion {
+	public final fun resolve (Ljava/lang/String;)Lcom/davils/knot/platform/Architecture;
+}
+
+public final class com/davils/knot/platform/OperatingSystem : java/lang/Enum {
+	public static final field Companion Lcom/davils/knot/platform/OperatingSystem$Companion;
+	public static final field Linux Lcom/davils/knot/platform/OperatingSystem;
+	public static final field MacOs Lcom/davils/knot/platform/OperatingSystem;
+	public static final field Windows Lcom/davils/knot/platform/OperatingSystem;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getIdentifier ()Ljava/lang/String;
+	public final fun isUnix ()Z
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/knot/platform/OperatingSystem;
+	public static fun values ()[Lcom/davils/knot/platform/OperatingSystem;
+}
+
+public final class com/davils/knot/platform/OperatingSystem$Companion {
+	public final fun resolve (Ljava/lang/String;)Lcom/davils/knot/platform/OperatingSystem;
+}
+
+public final class com/davils/knot/platform/Platform {
+	public static final field Companion Lcom/davils/knot/platform/Platform$Companion;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getArchitecture ()Lcom/davils/knot/platform/Architecture;
+	public final fun getIdentifier ()Ljava/lang/String;
+	public final fun getOperatingSystem ()Lcom/davils/knot/platform/OperatingSystem;
+	public fun hashCode ()I
+	public final fun isLinux ()Z
+	public final fun isMacOs ()Z
+	public final fun isUnix ()Z
+	public final fun isWindows ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/platform/Platform$Companion {
+	public final fun getCurrent ()Lcom/davils/knot/platform/Platform;
+	public final fun getEntries ()Ljava/util/List;
+	public final fun getIdentifiers ()Ljava/util/Set;
+	public final fun parse (Ljava/lang/String;)Lcom/davils/knot/platform/Platform;
+	public final fun parseOrNull (Ljava/lang/String;)Lcom/davils/knot/platform/Platform;
+	public final fun requireCurrent ()Lcom/davils/knot/platform/Platform;
+	public final fun resolve (Ljava/lang/String;Ljava/lang/String;)Lcom/davils/knot/platform/Platform;
+}
+

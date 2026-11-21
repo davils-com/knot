@@ -1,0 +1,79 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:knot-platform>
+final enum class com.davils.knot.platform/Architecture : kotlin/Enum<com.davils.knot.platform/Architecture> { // com.davils.knot.platform/Architecture|null[0]
+    enum entry Arm64 // com.davils.knot.platform/Architecture.Arm64|null[0]
+    enum entry X64 // com.davils.knot.platform/Architecture.X64|null[0]
+
+    final val entries // com.davils.knot.platform/Architecture.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.knot.platform/Architecture> // com.davils.knot.platform/Architecture.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val identifier // com.davils.knot.platform/Architecture.identifier|{}identifier[0]
+        final fun <get-identifier>(): kotlin/String // com.davils.knot.platform/Architecture.identifier.<get-identifier>|<get-identifier>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.knot.platform/Architecture // com.davils.knot.platform/Architecture.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.knot.platform/Architecture> // com.davils.knot.platform/Architecture.values|values#static(){}[0]
+
+    final object Companion { // com.davils.knot.platform/Architecture.Companion|null[0]
+        final fun resolve(kotlin/String): com.davils.knot.platform/Architecture? // com.davils.knot.platform/Architecture.Companion.resolve|resolve(kotlin.String){}[0]
+    }
+}
+
+final enum class com.davils.knot.platform/OperatingSystem : kotlin/Enum<com.davils.knot.platform/OperatingSystem> { // com.davils.knot.platform/OperatingSystem|null[0]
+    enum entry Linux // com.davils.knot.platform/OperatingSystem.Linux|null[0]
+    enum entry MacOs // com.davils.knot.platform/OperatingSystem.MacOs|null[0]
+    enum entry Windows // com.davils.knot.platform/OperatingSystem.Windows|null[0]
+
+    final val entries // com.davils.knot.platform/OperatingSystem.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.knot.platform/OperatingSystem> // com.davils.knot.platform/OperatingSystem.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val identifier // com.davils.knot.platform/OperatingSystem.identifier|{}identifier[0]
+        final fun <get-identifier>(): kotlin/String // com.davils.knot.platform/OperatingSystem.identifier.<get-identifier>|<get-identifier>(){}[0]
+    final val isUnix // com.davils.knot.platform/OperatingSystem.isUnix|{}isUnix[0]
+        final fun <get-isUnix>(): kotlin/Boolean // com.davils.knot.platform/OperatingSystem.isUnix.<get-isUnix>|<get-isUnix>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.knot.platform/OperatingSystem // com.davils.knot.platform/OperatingSystem.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.knot.platform/OperatingSystem> // com.davils.knot.platform/OperatingSystem.values|values#static(){}[0]
+
+    final object Companion { // com.davils.knot.platform/OperatingSystem.Companion|null[0]
+        final fun resolve(kotlin/String): com.davils.knot.platform/OperatingSystem? // com.davils.knot.platform/OperatingSystem.Companion.resolve|resolve(kotlin.String){}[0]
+    }
+}
+
+final class com.davils.knot.platform/Platform { // com.davils.knot.platform/Platform|null[0]
+    final val architecture // com.davils.knot.platform/Platform.architecture|{}architecture[0]
+        final fun <get-architecture>(): com.davils.knot.platform/Architecture // com.davils.knot.platform/Platform.architecture.<get-architecture>|<get-architecture>(){}[0]
+    final val identifier // com.davils.knot.platform/Platform.identifier|{}identifier[0]
+        final fun <get-identifier>(): kotlin/String // com.davils.knot.platform/Platform.identifier.<get-identifier>|<get-identifier>(){}[0]
+    final val isLinux // com.davils.knot.platform/Platform.isLinux|{}isLinux[0]
+        final fun <get-isLinux>(): kotlin/Boolean // com.davils.knot.platform/Platform.isLinux.<get-isLinux>|<get-isLinux>(){}[0]
+    final val isMacOs // com.davils.knot.platform/Platform.isMacOs|{}isMacOs[0]
+        final fun <get-isMacOs>(): kotlin/Boolean // com.davils.knot.platform/Platform.isMacOs.<get-isMacOs>|<get-isMacOs>(){}[0]
+    final val isUnix // com.davils.knot.platform/Platform.isUnix|{}isUnix[0]
+        final fun <get-isUnix>(): kotlin/Boolean // com.davils.knot.platform/Platform.isUnix.<get-isUnix>|<get-isUnix>(){}[0]
+    final val isWindows // com.davils.knot.platform/Platform.isWindows|{}isWindows[0]
+        final fun <get-isWindows>(): kotlin/Boolean // com.davils.knot.platform/Platform.isWindows.<get-isWindows>|<get-isWindows>(){}[0]
+    final val operatingSystem // com.davils.knot.platform/Platform.operatingSystem|{}operatingSystem[0]
+        final fun <get-operatingSystem>(): com.davils.knot.platform/OperatingSystem // com.davils.knot.platform/Platform.operatingSystem.<get-operatingSystem>|<get-operatingSystem>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.platform/Platform.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.knot.platform/Platform.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.platform/Platform.toString|toString(){}[0]
+
+    final object Companion { // com.davils.knot.platform/Platform.Companion|null[0]
+        final val current // com.davils.knot.platform/Platform.Companion.current|{}current[0]
+            final fun <get-current>(): com.davils.knot.platform/Platform? // com.davils.knot.platform/Platform.Companion.current.<get-current>|<get-current>(){}[0]
+        final val entries // com.davils.knot.platform/Platform.Companion.entries|{}entries[0]
+            final fun <get-entries>(): kotlin.collections/List<com.davils.knot.platform/Platform> // com.davils.knot.platform/Platform.Companion.entries.<get-entries>|<get-entries>(){}[0]
+        final val identifiers // com.davils.knot.platform/Platform.Companion.identifiers|{}identifiers[0]
+            final fun <get-identifiers>(): kotlin.collections/Set<kotlin/String> // com.davils.knot.platform/Platform.Companion.identifiers.<get-identifiers>|<get-identifiers>(){}[0]
+
+        final fun parse(kotlin/String): com.davils.knot.platform/Platform // com.davils.knot.platform/Platform.Companion.parse|parse(kotlin.String){}[0]
+        final fun parseOrNull(kotlin/String): com.davils.knot.platform/Platform? // com.davils.knot.platform/Platform.Companion.parseOrNull|parseOrNull(kotlin.String){}[0]
+        final fun requireCurrent(): com.davils.knot.platform/Platform // com.davils.knot.platform/Platform.Companion.requireCurrent|requireCurrent(){}[0]
+        final fun resolve(kotlin/String, kotlin/String): com.davils.knot.platform/Platform? // com.davils.knot.platform/Platform.Companion.resolve|resolve(kotlin.String;kotlin.String){}[0]
+    }
+}
