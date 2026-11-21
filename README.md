@@ -55,13 +55,13 @@ Platform.resolve(osName = "Mac OS X", osArch = "arm64")   // macos-aarch64
 Platform.parse("windows-x86_64").operatingSystem          // OperatingSystem.Windows
 Platform.entries                                          // every supported platform
 
-OperatingSystem.current                       // Linux, MacOs or Windows on the JVM, Web on wasmJs
-OperatingSystem.current?.isWeb                // true in a browser and under Node.js on wasmJs
+OperatingSystem.current                       // Linux, MacOs or Windows on the JVM, Wasm on wasmJs
+OperatingSystem.current?.isWasm               // true in a browser and under Node.js on wasmJs
 ```
 
 A system or an architecture without a build resolves to `null`: Knot never guesses, and a 32-bit machine never
 resolves to a 64-bit build. Every runtime of the `wasmJs` target, a browser and Node.js alike, runs on
-`OperatingSystem.Web`, which has no native build, so `Platform.current` is `null` there.
+`OperatingSystem.Wasm`, which has no native build, so `Platform.current` is `null` there.
 
 ### Environment
 

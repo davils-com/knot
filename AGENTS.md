@@ -10,7 +10,7 @@ with security first.
 
 | Module | Artifact | Purpose |
 |---|---|---|
-| `knot-platform` | `com.davils:knot-platform` | The operating system, the 64-bit architecture and the supported platform a program runs on, resolved from what the JVM reports, `OperatingSystem.Web` on every `wasmJs` runtime, and the platform identifiers Kreate packages native binaries under |
+| `knot-platform` | `com.davils:knot-platform` | The operating system, the 64-bit architecture and the supported platform a program runs on, resolved from what the JVM reports, `OperatingSystem.Wasm` on every `wasmJs` runtime, and the platform identifiers Kreate packages native binaries under |
 | `knot-environment` | `com.davils:knot-environment` | Environment variables: the live process environment, an empty one and the `environment { }` DSL that layers environments, overrides and removes variables and scopes them to a prefix |
 | `build-logic` | - | One convention plugin per Kreate concern, composed by `knot.kotlin-library` for the modules and `knot.root` for the root project; they hold nothing but `plugins { }` and `kreate { }` |
 
@@ -28,7 +28,7 @@ below: names lose their `Kide` prefix, public API gets KDoc, input is bounded an
 ## Targets
 
 Every module is a Kotlin Multiplatform library with two targets, `jvm` and `wasmJs`, like Kore. The Wasm tests run
-under Node.js; the published klib runs in the browser as well. On `wasmJs` the operating system is always `OperatingSystem.Web`, under
+under Node.js; the published klib runs in the browser as well. On `wasmJs` the operating system is always `OperatingSystem.Wasm`, under
 Node.js too, and there is no native platform; in a browser there is no environment variable either.
 
 - Code lives in `src/commonMain/kotlin` unless it needs the JVM. What only the JVM can offer lives in

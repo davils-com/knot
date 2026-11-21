@@ -53,7 +53,7 @@ The following are **not** vulnerabilities in Knot:
   Node.js, code of the same process may change `process.env` at any time, and a built environment sees the change.
 - The operating system and the platform of the running program are read once, on first use of
   `OperatingSystem.current` and `Platform.current`, and kept.
-- On the `wasmJs` target the operating system is always `OperatingSystem.Web`, in a browser and under Node.js alike,
+- On the `wasmJs` target the operating system is always `OperatingSystem.Wasm`, in a browser and under Node.js alike,
   and `Platform.current` is `null`. In a browser there is no environment variable: `Environment.SYSTEM` is empty.
 - `@DavilsInternal` is a compile-time opt-in, not an access boundary. Kotlin `internal` is public in JVM bytecode:
   Java code and reflection reach internal declarations through their mangled names. On the module path the
