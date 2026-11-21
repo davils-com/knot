@@ -70,6 +70,12 @@ class PlatformTest : FunSpec({
             Platform.resolve(osName = "darwin", osArch = "arm64") shouldBe Platform.parse(MAC_ARM64)
         }
 
+        test("is never the web, which has no native build") {
+            Platform.resolve(osName = "web", osArch = AMD64) shouldBe null
+            Platform.parseOrNull("web-x86_64") shouldBe null
+            Platform.entries.none { platform -> platform.operatingSystem.isWeb } shouldBe true
+        }
+
         test("tells different machines apart and is never equal to something else") {
             Platform.parse(LINUX_X64) shouldNotBe Platform.parse("linux-aarch64")
             Platform.parse(LINUX_X64) shouldNotBe Platform.parse(WINDOWS_X64)
