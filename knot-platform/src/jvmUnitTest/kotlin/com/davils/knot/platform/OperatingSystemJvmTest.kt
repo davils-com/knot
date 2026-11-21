@@ -1,0 +1,29 @@
+/*
+ * Copyright 2026 Davils
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.davils.knot.platform
+
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.shouldBe
+
+class OperatingSystemJvmTest : FunSpec({
+    context("current system on the JVM") {
+        test("is the system the JVM reports and never the web") {
+            OperatingSystem.current shouldBe OperatingSystem.resolve(System.getProperty("os.name"))
+            OperatingSystem.current?.isWeb shouldBe false
+        }
+    }
+})
