@@ -16,9 +16,8 @@
 
 package com.davils.knot.platform
 
-private const val WEB: String = "web"
 private const val WASM: String = "wasm"
 
-internal actual fun hostOsName(): String = WEB
+internal actual fun hostOsName(): String = WASM
 
 internal actual fun hostOsArch(): String = WASM

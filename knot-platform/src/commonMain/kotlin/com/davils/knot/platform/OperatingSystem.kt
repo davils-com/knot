@@ -25,16 +25,16 @@ private val namePrefixes: List<Pair<String, OperatingSystem>> = listOf(
 )
 
 private val exactNames: Map<String, OperatingSystem> = mapOf(
-    "web" to OperatingSystem.Web,
+    "wasm" to OperatingSystem.Wasm,
 )
 
 /**
- * An operating system that Davils applications are built for, or [Web] for a program that runs on WebAssembly.
+ * An operating system that Davils applications are built for, or [Wasm] for a program that runs on WebAssembly.
  *
- * Every system but [Web] has native builds, one per [Architecture], which [Platform] lists.
+ * Every system but [Wasm] has native builds, one per [Architecture], which [Platform] lists.
  *
  * @property identifier the name of the system in a platform identifier, such as `linux`.
- * @property isUnix whether the system is a Unix, which Linux and macOS are and Windows and the web are not.
+ * @property isUnix whether the system is a Unix, which Linux and macOS are and Windows and wasm are not.
  * @since 1.0.0
  */
 public enum class OperatingSystem(public val identifier: String, public val isUnix: Boolean) {
@@ -60,21 +60,21 @@ public enum class OperatingSystem(public val identifier: String, public val isUn
     Windows(identifier = "windows", isUnix = false),
 
     /**
-     * The web: every runtime of the `wasmJs` target, a browser and Node.js alike, whatever machine runs it.
+     * WebAssembly: every runtime of the `wasmJs` target, a browser and Node.js alike, whatever machine runs it.
      *
-     * It has no native build, so no [Platform] is web. Only the exact name `web` resolves to it.
+     * It has no native build, so no [Platform] runs on it. Only the exact name `wasm` resolves to it.
      *
      * @since 1.0.0
      */
-    Web(identifier = "web", isUnix = false),
+    Wasm(identifier = "wasm", isUnix = false),
     ;
 
     /**
-     * Whether this is [Web], the system of every runtime of the `wasmJs` target.
+     * Whether this is [Wasm], the system of every runtime of the `wasmJs` target.
      *
      * @since 1.0.0
      */
-    public val isWeb: Boolean get() = this == Web
+    public val isWasm: Boolean get() = this == Wasm
 
     /**
      * Resolves the operating systems that a runtime reports.
@@ -85,7 +85,7 @@ public enum class OperatingSystem(public val identifier: String, public val isUn
         /**
          * The operating system this program runs on, or `null` if the JVM reports a system without a build.
          *
-         * On the JVM it is read from the system property `os.name`; on the `wasmJs` target it is always [Web], in a
+         * On the JVM it is read from the system property `os.name`; on the `wasmJs` target it is always [Wasm], in a
          * browser and under Node.js alike. It is read once, on first use, and then kept; it is safe to share between
          * threads.
          *
@@ -96,13 +96,13 @@ public enum class OperatingSystem(public val identifier: String, public val isUn
         /**
          * Returns the operating system that [osName] names, as a JVM or Node.js reports it.
          *
-         * The name matches when it starts with a known prefix, so `Windows 11` is [Windows]; [Web] matches only the
-         * exact name `web`, so that a system such as `webOS` is not taken for the web. Surrounding whitespace and case
-         * are ignored. A name longer than
+         * The name matches when it starts with a known prefix, so `Windows 11` is [Windows]; [Wasm] matches only the
+         * exact name `wasm`, so that no other name that starts with it is taken for WebAssembly. Surrounding
+         * whitespace and case are ignored. A name longer than
          * [Limits.MAX_NAME_LENGTH][com.davils.kore.core.Limits.MAX_NAME_LENGTH] or with a character outside printable
          * ASCII is refused before it is compared.
          *
-         * @param osName the reported name, such as `Linux`, `Mac OS X`, `win32` or `web`.
+         * @param osName the reported name, such as `Linux`, `Mac OS X`, `win32` or `wasm`.
          * @return the operating system, or `null` if the name matches none.
          * @since 1.0.0
          */

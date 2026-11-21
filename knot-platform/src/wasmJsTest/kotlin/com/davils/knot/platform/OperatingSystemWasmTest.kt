@@ -21,8 +21,8 @@ import io.kotest.matchers.shouldBe
 
 class OperatingSystemWasmTest : FunSpec({
     context("current system on wasmJs") {
-        test("is the web, even under Node.js") {
-            OperatingSystem.current shouldBe OperatingSystem.Web
+        test("is wasm, even under Node.js") {
+            OperatingSystem.current shouldBe OperatingSystem.Wasm
         }
 
         test("has no native platform") {

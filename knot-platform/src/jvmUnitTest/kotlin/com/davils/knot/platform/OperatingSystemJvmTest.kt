@@ -21,9 +21,9 @@ import io.kotest.matchers.shouldBe
 
 class OperatingSystemJvmTest : FunSpec({
     context("current system on the JVM") {
-        test("is the system the JVM reports and never the web") {
+        test("is the system the JVM reports and never wasm") {
             OperatingSystem.current shouldBe OperatingSystem.resolve(System.getProperty("os.name"))
-            OperatingSystem.current?.isWeb shouldBe false
+            OperatingSystem.current?.isWasm shouldBe false
         }
     }
 })

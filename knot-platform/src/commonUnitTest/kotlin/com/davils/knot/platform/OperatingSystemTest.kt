@@ -40,8 +40,8 @@ class OperatingSystemTest : FunSpec({
             "Windows Server 2022" to OperatingSystem.Windows,
             "win32" to OperatingSystem.Windows,
             "  LINUX  " to OperatingSystem.Linux,
-            "web" to OperatingSystem.Web,
-            " WEB " to OperatingSystem.Web,
+            "wasm" to OperatingSystem.Wasm,
+            " WASM " to OperatingSystem.Wasm,
         ).forEach { (reported, expected) ->
             test("'$reported' is ${expected.identifier}") {
                 OperatingSystem.resolve(reported) shouldBe expected
@@ -50,7 +50,7 @@ class OperatingSystemTest : FunSpec({
     }
 
     context("leaves every other system unresolved instead of guessing") {
-        listOf("FreeBSD", "SunOS", "AIX", "Android", "webOS", "website", "", "   ").forEach { reported ->
+        listOf("FreeBSD", "SunOS", "AIX", "Android", "web", "wasm32", "wasmtime", "", "   ").forEach { reported ->
             test("'$reported' does not resolve") {
                 OperatingSystem.resolve(reported) shouldBe null
             }
@@ -84,19 +84,19 @@ class OperatingSystemTest : FunSpec({
     }
 
     context("unix") {
-        test("is true for Linux and macOS and false for Windows and the web") {
+        test("is true for Linux and macOS and false for Windows and wasm") {
             OperatingSystem.entries.associateWith { system -> system.isUnix } shouldBe mapOf(
                 OperatingSystem.Linux to true,
                 OperatingSystem.MacOs to true,
                 OperatingSystem.Windows to false,
-                OperatingSystem.Web to false,
+                OperatingSystem.Wasm to false,
             )
         }
     }
 
-    context("web") {
-        test("is true for the web only") {
-            OperatingSystem.entries.filter { system -> system.isWeb } shouldBe listOf(OperatingSystem.Web)
+    context("wasm") {
+        test("is true for wasm only") {
+            OperatingSystem.entries.filter { system -> system.isWasm } shouldBe listOf(OperatingSystem.Wasm)
         }
     }
 

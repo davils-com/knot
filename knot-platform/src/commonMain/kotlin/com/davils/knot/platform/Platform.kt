@@ -29,7 +29,7 @@ private const val SEPARATOR: Char = '-'
  * A pair of an [OperatingSystem] and an [Architecture] that Davils applications are built for.
  *
  * Every pair of a system with native builds and a supported architecture is a platform, and [entries] lists them all;
- * [OperatingSystem.Web] has no native build and is part of no platform. A
+ * [OperatingSystem.Wasm] has no native build and is part of no platform. A
  * platform is immutable and equal to every other platform of the same system and architecture, so two spellings of
  * one machine, such as `Darwin`/`arm64` and `Mac OS X`/`aarch64`, give equal platforms.
  *
@@ -110,7 +110,7 @@ public class Platform private constructor(
      */
     public companion object {
         /**
-         * Every supported platform, each operating system but [OperatingSystem.Web] paired with each architecture, in
+         * Every supported platform, each operating system but [OperatingSystem.Wasm] paired with each architecture, in
          * the order of the entries of [OperatingSystem] and then of [Architecture].
          *
          * @since 1.0.0
@@ -130,7 +130,7 @@ public class Platform private constructor(
          *
          * It is read once, on first use, from the system properties `os.name` and `os.arch` on the JVM, and then kept;
          * it is safe to share between threads. On the `wasmJs` target, in a browser and under Node.js alike, the
-         * operating system is [OperatingSystem.Web], which has no native build, so there is none; check
+         * operating system is [OperatingSystem.Wasm], which has no native build, so there is none; check
          * [OperatingSystem.current] instead.
          *
          * @since 1.0.0
@@ -142,7 +142,7 @@ public class Platform private constructor(
          *
          * @return the current platform.
          * @throws IllegalStateException if the runtime reports a system or an architecture that is not supported, and
-         * always on the `wasmJs` target, whose system is [OperatingSystem.Web].
+         * always on the `wasmJs` target, whose system is [OperatingSystem.Wasm].
          * @since 1.0.0
          */
         public fun requireCurrent(): Platform = requireSupported(osName = hostOsName(), osArch = hostOsArch())
@@ -154,7 +154,7 @@ public class Platform private constructor(
          * @param osName the reported name of the operating system, such as `Linux` or `Windows 11`.
          * @param osArch the reported name of the architecture, such as `amd64`.
          * @return the platform, or `null` if either name matches nothing supported or the system is
-         * [OperatingSystem.Web].
+         * [OperatingSystem.Wasm].
          * @since 1.0.0
          */
         public fun resolve(osName: String, osArch: String): Platform? {
@@ -197,7 +197,7 @@ public class Platform private constructor(
             }
 
         private fun pairs(): List<Platform> {
-            val native = OperatingSystem.entries.filterNot { operatingSystem -> operatingSystem.isWeb }
+            val native = OperatingSystem.entries.filterNot { operatingSystem -> operatingSystem.isWasm }
             return native.flatMap { operatingSystem ->
                 Architecture.entries.map { architecture -> Platform(operatingSystem, architecture) }
             }
