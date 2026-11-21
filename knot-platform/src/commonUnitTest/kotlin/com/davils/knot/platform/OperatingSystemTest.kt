@@ -20,6 +20,7 @@ import com.davils.kore.core.Limits
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldBeIn
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.types.shouldBeSameInstanceAs
 import io.kotest.property.Arb
 import io.kotest.property.arbitrary.string
 import io.kotest.property.checkAll
@@ -39,6 +40,8 @@ class OperatingSystemTest : FunSpec({
             "Windows Server 2022" to OperatingSystem.Windows,
             "win32" to OperatingSystem.Windows,
             "  LINUX  " to OperatingSystem.Linux,
+            "web" to OperatingSystem.Web,
+            " WEB " to OperatingSystem.Web,
         ).forEach { (reported, expected) ->
             test("'$reported' is ${expected.identifier}") {
                 OperatingSystem.resolve(reported) shouldBe expected
@@ -47,7 +50,7 @@ class OperatingSystemTest : FunSpec({
     }
 
     context("leaves every other system unresolved instead of guessing") {
-        listOf("FreeBSD", "SunOS", "AIX", "Android", "web", "", "   ").forEach { reported ->
+        listOf("FreeBSD", "SunOS", "AIX", "Android", "webOS", "website", "", "   ").forEach { reported ->
             test("'$reported' does not resolve") {
                 OperatingSystem.resolve(reported) shouldBe null
             }
@@ -81,12 +84,29 @@ class OperatingSystemTest : FunSpec({
     }
 
     context("unix") {
-        test("is true for Linux and macOS and false for Windows") {
+        test("is true for Linux and macOS and false for Windows and the web") {
             OperatingSystem.entries.associateWith { system -> system.isUnix } shouldBe mapOf(
                 OperatingSystem.Linux to true,
                 OperatingSystem.MacOs to true,
                 OperatingSystem.Windows to false,
+                OperatingSystem.Web to false,
             )
+        }
+    }
+
+    context("web") {
+        test("is true for the web only") {
+            OperatingSystem.entries.filter { system -> system.isWeb } shouldBe listOf(OperatingSystem.Web)
+        }
+    }
+
+    context("current system") {
+        test("resolves to what the runtime reports about it") {
+            OperatingSystem.current shouldBe OperatingSystem.resolve(hostOsName())
+        }
+
+        test("is read once and held") {
+            OperatingSystem.current shouldBeSameInstanceAs OperatingSystem.current
         }
     }
 })
