@@ -1,0 +1,50 @@
+public abstract interface class com/davils/knot/environment/Environment {
+	public static final field Companion Lcom/davils/knot/environment/Environment$Companion;
+	public abstract fun getNames ()Ljava/util/Set;
+	public abstract fun variable (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class com/davils/knot/environment/Environment$Companion {
+	public final fun getEMPTY ()Lcom/davils/knot/environment/Environment;
+	public final fun getSYSTEM ()Lcom/davils/knot/environment/Environment;
+}
+
+public final class com/davils/knot/environment/EnvironmentBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun layer (Lcom/davils/knot/environment/Environment;)V
+	public final fun layer (Lkotlin/jvm/functions/Function1;)V
+	public final fun remove (Ljava/lang/String;)V
+	public final fun scope (Ljava/lang/String;)V
+	public final fun variable (Ljava/lang/String;Ljava/lang/String;)V
+}
+
+public final class com/davils/knot/environment/EnvironmentLimits {
+	public static final field INSTANCE Lcom/davils/knot/environment/EnvironmentLimits;
+	public static final field MAX_CHANGES I
+	public static final field MAX_LAYERS I
+}
+
+public final class com/davils/knot/environment/EnvironmentViolationCodes {
+	public static final field INSTANCE Lcom/davils/knot/environment/EnvironmentViolationCodes;
+	public final fun getCONFLICTING_CHANGE-J_S2PC0 ()Ljava/lang/String;
+	public final fun getDUPLICATE_CHANGE-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_NAME-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_VALUE-J_S2PC0 ()Ljava/lang/String;
+	public final fun getREPEATED_SCOPE-J_S2PC0 ()Ljava/lang/String;
+	public final fun getTOO_LONG-J_S2PC0 ()Ljava/lang/String;
+	public final fun getTOO_MANY_CHANGES-J_S2PC0 ()Ljava/lang/String;
+	public final fun getTOO_MANY_LAYERS-J_S2PC0 ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/environment/EnvironmentsKt {
+	public static final fun environment (Lcom/davils/knot/environment/Environment;Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/environment/Environment;
+	public static synthetic fun environment$default (Lcom/davils/knot/environment/Environment;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/Environment;
+}
+
+public final class com/davils/knot/environment/LayeredEnvironment : com/davils/knot/environment/Environment, com/davils/kore/core/validation/Validatable {
+	public fun getNames ()Ljava/util/Set;
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+	public fun variable (Ljava/lang/String;)Ljava/lang/String;
+}
+

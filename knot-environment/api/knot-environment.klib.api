@@ -1,0 +1,66 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:knot-environment>
+abstract interface com.davils.knot.environment/Environment { // com.davils.knot.environment/Environment|null[0]
+    abstract val names // com.davils.knot.environment/Environment.names|{}names[0]
+        abstract fun <get-names>(): kotlin.collections/Set<kotlin/String> // com.davils.knot.environment/Environment.names.<get-names>|<get-names>(){}[0]
+
+    abstract fun variable(kotlin/String): kotlin/String? // com.davils.knot.environment/Environment.variable|variable(kotlin.String){}[0]
+
+    final object Companion { // com.davils.knot.environment/Environment.Companion|null[0]
+        final val EMPTY // com.davils.knot.environment/Environment.Companion.EMPTY|{}EMPTY[0]
+            final fun <get-EMPTY>(): com.davils.knot.environment/Environment // com.davils.knot.environment/Environment.Companion.EMPTY.<get-EMPTY>|<get-EMPTY>(){}[0]
+        final val SYSTEM // com.davils.knot.environment/Environment.Companion.SYSTEM|{}SYSTEM[0]
+            final fun <get-SYSTEM>(): com.davils.knot.environment/Environment // com.davils.knot.environment/Environment.Companion.SYSTEM.<get-SYSTEM>|<get-SYSTEM>(){}[0]
+    }
+}
+
+final class com.davils.knot.environment/EnvironmentBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.knot.environment/LayeredEnvironment> { // com.davils.knot.environment/EnvironmentBuilder|null[0]
+    final fun layer(com.davils.knot.environment/Environment) // com.davils.knot.environment/EnvironmentBuilder.layer|layer(com.davils.knot.environment.Environment){}[0]
+    final fun layer(kotlin/Function1<com.davils.knot.environment/EnvironmentBuilder, kotlin/Unit>) // com.davils.knot.environment/EnvironmentBuilder.layer|layer(kotlin.Function1<com.davils.knot.environment.EnvironmentBuilder,kotlin.Unit>){}[0]
+    final fun remove(kotlin/String) // com.davils.knot.environment/EnvironmentBuilder.remove|remove(kotlin.String){}[0]
+    final fun scope(kotlin/String) // com.davils.knot.environment/EnvironmentBuilder.scope|scope(kotlin.String){}[0]
+    final fun variable(kotlin/String, kotlin/String) // com.davils.knot.environment/EnvironmentBuilder.variable|variable(kotlin.String;kotlin.String){}[0]
+}
+
+final class com.davils.knot.environment/LayeredEnvironment : com.davils.knot.environment/Environment, com.davils.kore.core.validation/Validatable { // com.davils.knot.environment/LayeredEnvironment|null[0]
+    final val names // com.davils.knot.environment/LayeredEnvironment.names|{}names[0]
+        final fun <get-names>(): kotlin.collections/Set<kotlin/String> // com.davils.knot.environment/LayeredEnvironment.names.<get-names>|<get-names>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.knot.environment/LayeredEnvironment.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.environment/LayeredEnvironment.toString|toString(){}[0]
+    final fun variable(kotlin/String): kotlin/String? // com.davils.knot.environment/LayeredEnvironment.variable|variable(kotlin.String){}[0]
+}
+
+final object com.davils.knot.environment/EnvironmentLimits { // com.davils.knot.environment/EnvironmentLimits|null[0]
+    final const val MAX_CHANGES // com.davils.knot.environment/EnvironmentLimits.MAX_CHANGES|{}MAX_CHANGES[0]
+        final fun <get-MAX_CHANGES>(): kotlin/Int // com.davils.knot.environment/EnvironmentLimits.MAX_CHANGES.<get-MAX_CHANGES>|<get-MAX_CHANGES>(){}[0]
+    final const val MAX_LAYERS // com.davils.knot.environment/EnvironmentLimits.MAX_LAYERS|{}MAX_LAYERS[0]
+        final fun <get-MAX_LAYERS>(): kotlin/Int // com.davils.knot.environment/EnvironmentLimits.MAX_LAYERS.<get-MAX_LAYERS>|<get-MAX_LAYERS>(){}[0]
+}
+
+final object com.davils.knot.environment/EnvironmentViolationCodes { // com.davils.knot.environment/EnvironmentViolationCodes|null[0]
+    final val CONFLICTING_CHANGE // com.davils.knot.environment/EnvironmentViolationCodes.CONFLICTING_CHANGE|{}CONFLICTING_CHANGE[0]
+        final fun <get-CONFLICTING_CHANGE>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.environment/EnvironmentViolationCodes.CONFLICTING_CHANGE.<get-CONFLICTING_CHANGE>|<get-CONFLICTING_CHANGE>(){}[0]
+    final val DUPLICATE_CHANGE // com.davils.knot.environment/EnvironmentViolationCodes.DUPLICATE_CHANGE|{}DUPLICATE_CHANGE[0]
+        final fun <get-DUPLICATE_CHANGE>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.environment/EnvironmentViolationCodes.DUPLICATE_CHANGE.<get-DUPLICATE_CHANGE>|<get-DUPLICATE_CHANGE>(){}[0]
+    final val INVALID_NAME // com.davils.knot.environment/EnvironmentViolationCodes.INVALID_NAME|{}INVALID_NAME[0]
+        final fun <get-INVALID_NAME>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.environment/EnvironmentViolationCodes.INVALID_NAME.<get-INVALID_NAME>|<get-INVALID_NAME>(){}[0]
+    final val INVALID_VALUE // com.davils.knot.environment/EnvironmentViolationCodes.INVALID_VALUE|{}INVALID_VALUE[0]
+        final fun <get-INVALID_VALUE>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.environment/EnvironmentViolationCodes.INVALID_VALUE.<get-INVALID_VALUE>|<get-INVALID_VALUE>(){}[0]
+    final val REPEATED_SCOPE // com.davils.knot.environment/EnvironmentViolationCodes.REPEATED_SCOPE|{}REPEATED_SCOPE[0]
+        final fun <get-REPEATED_SCOPE>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.environment/EnvironmentViolationCodes.REPEATED_SCOPE.<get-REPEATED_SCOPE>|<get-REPEATED_SCOPE>(){}[0]
+    final val TOO_LONG // com.davils.knot.environment/EnvironmentViolationCodes.TOO_LONG|{}TOO_LONG[0]
+        final fun <get-TOO_LONG>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.environment/EnvironmentViolationCodes.TOO_LONG.<get-TOO_LONG>|<get-TOO_LONG>(){}[0]
+    final val TOO_MANY_CHANGES // com.davils.knot.environment/EnvironmentViolationCodes.TOO_MANY_CHANGES|{}TOO_MANY_CHANGES[0]
+        final fun <get-TOO_MANY_CHANGES>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.environment/EnvironmentViolationCodes.TOO_MANY_CHANGES.<get-TOO_MANY_CHANGES>|<get-TOO_MANY_CHANGES>(){}[0]
+    final val TOO_MANY_LAYERS // com.davils.knot.environment/EnvironmentViolationCodes.TOO_MANY_LAYERS|{}TOO_MANY_LAYERS[0]
+        final fun <get-TOO_MANY_LAYERS>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.environment/EnvironmentViolationCodes.TOO_MANY_LAYERS.<get-TOO_MANY_LAYERS>|<get-TOO_MANY_LAYERS>(){}[0]
+}
+
+final fun com.davils.knot.environment/environment(com.davils.knot.environment/Environment = ..., kotlin/Function1<com.davils.knot.environment/EnvironmentBuilder, kotlin/Unit>): com.davils.knot.environment/Environment // com.davils.knot.environment/environment|environment(com.davils.knot.environment.Environment;kotlin.Function1<com.davils.knot.environment.EnvironmentBuilder,kotlin.Unit>){}[0]
