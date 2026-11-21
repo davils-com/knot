@@ -28,7 +28,8 @@ private const val SEPARATOR: Char = '-'
 /**
  * A pair of an [OperatingSystem] and an [Architecture] that Davils applications are built for.
  *
- * Every pair of a supported system and a supported architecture is a platform, and [entries] lists them all. A
+ * Every pair of a system with native builds and a supported architecture is a platform, and [entries] lists them all;
+ * [OperatingSystem.Web] has no native build and is part of no platform. A
  * platform is immutable and equal to every other platform of the same system and architecture, so two spellings of
  * one machine, such as `Darwin`/`arm64` and `Mac OS X`/`aarch64`, give equal platforms.
  *
@@ -109,8 +110,8 @@ public class Platform private constructor(
      */
     public companion object {
         /**
-         * Every supported platform, each operating system paired with each architecture, in the order of the
-         * entries of [OperatingSystem] and then of [Architecture].
+         * Every supported platform, each operating system but [OperatingSystem.Web] paired with each architecture, in
+         * the order of the entries of [OperatingSystem] and then of [Architecture].
          *
          * @since 1.0.0
          */
@@ -124,12 +125,13 @@ public class Platform private constructor(
         public val identifiers: Set<String> = entries.map { platform -> platform.identifier }.immutableSet()
 
         /**
-         * The platform this program runs on, or `null` if the runtime reports a system or an architecture that is
-         * not supported.
+         * The platform this program runs on, or `null` if the JVM reports a system or an architecture that is not
+         * supported.
          *
-         * It is read once, on first use, from the system properties `os.name` and `os.arch` on the JVM and from
-         * `process.platform` and `process.arch` under Node.js; in a browser there is none. The value is then kept
-         * and is safe to share between threads.
+         * It is read once, on first use, from the system properties `os.name` and `os.arch` on the JVM, and then kept;
+         * it is safe to share between threads. On the `wasmJs` target, in a browser and under Node.js alike, the
+         * operating system is [OperatingSystem.Web], which has no native build, so there is none; check
+         * [OperatingSystem.current] instead.
          *
          * @since 1.0.0
          */
@@ -139,7 +141,8 @@ public class Platform private constructor(
          * Returns the platform this program runs on and refuses to go on without one.
          *
          * @return the current platform.
-         * @throws IllegalStateException if the runtime reports a system or an architecture that is not supported.
+         * @throws IllegalStateException if the runtime reports a system or an architecture that is not supported, and
+         * always on the `wasmJs` target, whose system is [OperatingSystem.Web].
          * @since 1.0.0
          */
         public fun requireCurrent(): Platform = requireSupported(osName = hostOsName(), osArch = hostOsArch())
@@ -150,14 +153,15 @@ public class Platform private constructor(
          *
          * @param osName the reported name of the operating system, such as `Linux` or `Windows 11`.
          * @param osArch the reported name of the architecture, such as `amd64`.
-         * @return the platform, or `null` if either name matches nothing supported.
+         * @return the platform, or `null` if either name matches nothing supported or the system is
+         * [OperatingSystem.Web].
          * @since 1.0.0
          */
         public fun resolve(osName: String, osArch: String): Platform? {
             val operatingSystem = OperatingSystem.resolve(osName)
             val architecture = Architecture.resolve(osArch)
             if (operatingSystem == null || architecture == null) return null
-            return entries.first { platform ->
+            return entries.firstOrNull { platform ->
                 platform.operatingSystem == operatingSystem && platform.architecture == architecture
             }
         }
@@ -192,8 +196,11 @@ public class Platform private constructor(
                 "The system $system with the architecture $architecture is not supported, only ${supportedList()} are"
             }
 
-        private fun pairs(): List<Platform> = OperatingSystem.entries.flatMap { operatingSystem ->
-            Architecture.entries.map { architecture -> Platform(operatingSystem, architecture) }
+        private fun pairs(): List<Platform> {
+            val native = OperatingSystem.entries.filterNot { operatingSystem -> operatingSystem.isWeb }
+            return native.flatMap { operatingSystem ->
+                Architecture.entries.map { architecture -> Platform(operatingSystem, architecture) }
+            }
         }
 
         private fun supportedList(): String {
