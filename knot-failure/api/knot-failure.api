@@ -1,0 +1,357 @@
+public abstract class com/davils/knot/failure/FailureEvent : com/davils/konfetti/core/Event {
+	public static final field Companion Lcom/davils/knot/failure/FailureEvent$Companion;
+	public synthetic fun <init> (Lcom/davils/knot/failure/UnexpectedFailure;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getFailure ()Lcom/davils/knot/failure/UnexpectedFailure;
+}
+
+public final class com/davils/knot/failure/FailureEvent$Companion {
+	public final fun getTOPIC ()Lcom/davils/konfetti/core/TopicKey;
+}
+
+public final class com/davils/knot/failure/FailureEvent$Occurred : com/davils/knot/failure/FailureEvent {
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailureEvent$Written : com/davils/knot/failure/FailureEvent {
+	public final fun getResult ()Lcom/davils/knot/failure/sink/SinkResult;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailureFingerprint {
+	public static final field Companion Lcom/davils/knot/failure/FailureFingerprint$Companion;
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lcom/davils/knot/failure/FailureFingerprint;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailureFingerprint$Companion {
+	public final fun of-yYFOxB4 (Ljava/lang/Throwable;)Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailureHandler : com/davils/kollect/core/health/HealthIndicator, java/lang/AutoCloseable {
+	public fun check (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun close ()V
+	public final fun coroutineHandler (Lcom/davils/knot/failure/FailureOrigin;)Lkotlinx/coroutines/CoroutineExceptionHandler;
+	public static synthetic fun coroutineHandler$default (Lcom/davils/knot/failure/FailureHandler;Lcom/davils/knot/failure/FailureOrigin;ILjava/lang/Object;)Lkotlinx/coroutines/CoroutineExceptionHandler;
+	public final fun drain (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getConfiguration ()Lcom/davils/knot/failure/FailureHandlerConfiguration;
+	public final fun getFailures ()Lkotlinx/coroutines/flow/Flow;
+	public final fun isClosed ()Z
+	public final fun metrics ()Lcom/davils/knot/failure/FailureMetrics;
+	public final fun report (Ljava/lang/Throwable;Lcom/davils/knot/failure/FailureOrigin;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun submit (Ljava/lang/Throwable;Lcom/davils/knot/failure/FailureOrigin;)V
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailureHandlerBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun classify (Lkotlin/jvm/functions/Function1;)V
+	public final fun getClock ()Lkotlin/time/Clock;
+	public final fun getDegradedAt ()I
+	public final fun getEventCapacity ()I
+	public final fun getEvents ()Lcom/davils/konfetti/core/EventBus;
+	public final fun getIds ()Lcom/davils/kore/core/identity/generator/UuidGenerator;
+	public final fun getMeters ()Lcom/davils/kollect/core/MeterRegistry;
+	public final fun getShutdown ()Lcom/davils/knot/shutdown/Shutdown;
+	public final fun getTracer ()Lcom/davils/kollect/core/trace/Tracer;
+	public final fun setClock (Lkotlin/time/Clock;)V
+	public final fun setDegradedAt (I)V
+	public final fun setEventCapacity (I)V
+	public final fun setEvents (Lcom/davils/konfetti/core/EventBus;)V
+	public final fun setIds (Lcom/davils/kore/core/identity/generator/UuidGenerator;)V
+	public final fun setMeters (Lcom/davils/kollect/core/MeterRegistry;)V
+	public final fun setShutdown (Lcom/davils/knot/shutdown/Shutdown;)V
+	public final fun setTracer (Lcom/davils/kollect/core/trace/Tracer;)V
+	public final fun sinks (Lkotlin/jvm/functions/Function1;)V
+	public final fun storm (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/davils/knot/failure/FailureHandlerConfiguration : com/davils/kore/core/validation/Validatable {
+	public final fun getClassification ()Lcom/davils/knot/failure/classify/FailureClassification;
+	public final fun getClock ()Lkotlin/time/Clock;
+	public final fun getDegradedAt ()I
+	public final fun getEventCapacity ()I
+	public final fun getEvents ()Lcom/davils/konfetti/core/EventBus;
+	public final fun getIds ()Lcom/davils/kore/core/identity/generator/UuidGenerator;
+	public final fun getMeters ()Lcom/davils/kollect/core/MeterRegistry;
+	public final fun getSinks ()Ljava/util/List;
+	public final fun getStorm ()Lcom/davils/knot/failure/storm/FailureStormConfiguration;
+	public final fun getTracer ()Lcom/davils/kollect/core/trace/Tracer;
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/knot/failure/FailureId {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lcom/davils/knot/failure/FailureId;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailureLimits {
+	public static final field INSTANCE Lcom/davils/knot/failure/FailureLimits;
+	public static final field MAX_CAUSE_DEPTH I
+	public static final field MAX_EVENT_CAPACITY I
+	public static final field MAX_FRAMES I
+	public static final field MAX_RECENT I
+	public static final field MAX_REPORT_LENGTH I
+	public static final field MAX_SINKS I
+	public static final field MAX_SINK_NAME_LENGTH I
+	public static final field MAX_STORM_REPORTS I
+	public static final field MAX_TRACKED_FINGERPRINTS I
+}
+
+public final class com/davils/knot/failure/FailureMetrics {
+	public final fun getIgnored ()J
+	public final fun getRecent ()I
+	public final fun getRejectedEvents ()J
+	public final fun getReported ()J
+	public final fun getSinkFailures ()J
+	public final fun getSuppressed ()J
+	public final fun getWritten ()J
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract class com/davils/knot/failure/FailureOrigin {
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun equals (Ljava/lang/Object;)Z
+	public final fun getKind ()Ljava/lang/String;
+	public final fun getSubject ()Ljava/lang/String;
+	public final fun hashCode ()I
+	public final fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailureOrigin$Action : com/davils/knot/failure/FailureOrigin {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun getId ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailureOrigin$Component : com/davils/knot/failure/FailureOrigin {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun getName ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailureOrigin$Coroutine : com/davils/knot/failure/FailureOrigin {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun getName ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailureOrigin$Job : com/davils/knot/failure/FailureOrigin {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun getId ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailureOrigin$Shutdown : com/davils/knot/failure/FailureOrigin {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun getTask ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailureOrigin$Startup : com/davils/knot/failure/FailureOrigin {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun getPhase ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailureOrigin$Thread : com/davils/knot/failure/FailureOrigin {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun getName ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/knot/failure/FailureReport {
+}
+
+public final class com/davils/knot/failure/FailureReport$Ignored : com/davils/knot/failure/FailureReport {
+	public final fun getCause ()Ljava/lang/Throwable;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailureReport$Recorded : com/davils/knot/failure/FailureReport {
+	public final fun getFailure ()Lcom/davils/knot/failure/UnexpectedFailure;
+	public final fun getResults ()Ljava/util/List;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailureReport$Suppressed : com/davils/knot/failure/FailureReport {
+	public final fun getFailure ()Lcom/davils/knot/failure/UnexpectedFailure;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailureReport$Unrecorded : com/davils/knot/failure/FailureReport {
+	public final fun getFailure ()Lcom/davils/knot/failure/UnexpectedFailure;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailureSeverity : java/lang/Enum {
+	public static final field Fatal Lcom/davils/knot/failure/FailureSeverity;
+	public static final field Recoverable Lcom/davils/knot/failure/FailureSeverity;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/knot/failure/FailureSeverity;
+	public static fun values ()[Lcom/davils/knot/failure/FailureSeverity;
+}
+
+public final class com/davils/knot/failure/FailureShutdownsKt {
+	public static final fun failures-exY8QGI (Lcom/davils/knot/shutdown/ShutdownPlanBuilder;Lcom/davils/knot/failure/FailureHandler;JLjava/lang/String;)V
+	public static synthetic fun failures-exY8QGI$default (Lcom/davils/knot/shutdown/ShutdownPlanBuilder;Lcom/davils/knot/failure/FailureHandler;JLjava/lang/String;ILjava/lang/Object;)V
+}
+
+public final class com/davils/knot/failure/FailureViolationCodes {
+	public static final field INSTANCE Lcom/davils/knot/failure/FailureViolationCodes;
+	public final fun getINVALID_LIMIT-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_SINK_NAME-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_TIMEOUT-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_WINDOW-J_S2PC0 ()Ljava/lang/String;
+	public final fun getNO_SEVERITY-J_S2PC0 ()Ljava/lang/String;
+	public final fun getTOO_MANY_SINKS-J_S2PC0 ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/FailuresKt {
+	public static final fun failures (Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/failure/FailureHandler;
+	public static synthetic fun failures$default (Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/failure/FailureHandler;
+}
+
+public final class com/davils/knot/failure/UncaughtFailuresKt {
+	public static final fun exitThrough (Lcom/davils/knot/failure/FailureHandlerBuilder;Lcom/davils/knot/shutdown/process/ProcessInstallation;)V
+	public static final fun installUncaughtHandler (Lcom/davils/knot/failure/FailureHandler;Lcom/davils/knot/shutdown/process/ShutdownRuntime;)Ljava/lang/AutoCloseable;
+	public static synthetic fun installUncaughtHandler$default (Lcom/davils/knot/failure/FailureHandler;Lcom/davils/knot/shutdown/process/ShutdownRuntime;ILjava/lang/Object;)Ljava/lang/AutoCloseable;
+}
+
+public final class com/davils/knot/failure/UnexpectedFailure {
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;Lcom/davils/knot/failure/FailureOrigin;Lcom/davils/knot/failure/FailureSeverity;Ljava/lang/String;Lkotlin/time/Instant;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAt ()Lkotlin/time/Instant;
+	public final fun getCause ()Ljava/lang/Throwable;
+	public final fun getFingerprint-SznZEQ8 ()Ljava/lang/String;
+	public final fun getId-dFBI0xw ()Ljava/lang/String;
+	public final fun getOrigin ()Lcom/davils/knot/failure/FailureOrigin;
+	public final fun getSeverity ()Lcom/davils/knot/failure/FailureSeverity;
+	public final fun getSuppressed ()I
+	public final fun getThread ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/classify/FailureClassification {
+	public final fun isFatal (Ljava/lang/Throwable;)Z
+	public final fun isIgnored (Ljava/lang/Throwable;)Z
+	public final fun severityOf (Ljava/lang/Throwable;)Lcom/davils/knot/failure/FailureSeverity;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/classify/FailureClassificationBuilder {
+	public final fun fatal (Lkotlin/jvm/functions/Function1;)V
+	public final fun ignore (Lkotlin/jvm/functions/Function1;)V
+}
+
+public abstract interface class com/davils/knot/failure/render/CrashReportRenderer {
+	public static final field Companion Lcom/davils/knot/failure/render/CrashReportRenderer$Companion;
+	public fun getContentType ()Ljava/lang/String;
+	public fun getExtension ()Ljava/lang/String;
+	public abstract fun render (Lcom/davils/knot/failure/UnexpectedFailure;)Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/render/CrashReportRenderer$Companion {
+	public final fun json (Lcom/davils/knot/failure/render/RenderOptions;)Lcom/davils/knot/failure/render/CrashReportRenderer;
+	public static synthetic fun json$default (Lcom/davils/knot/failure/render/CrashReportRenderer$Companion;Lcom/davils/knot/failure/render/RenderOptions;ILjava/lang/Object;)Lcom/davils/knot/failure/render/CrashReportRenderer;
+	public final fun text (Lcom/davils/knot/failure/render/RenderOptions;)Lcom/davils/knot/failure/render/CrashReportRenderer;
+	public static synthetic fun text$default (Lcom/davils/knot/failure/render/CrashReportRenderer$Companion;Lcom/davils/knot/failure/render/RenderOptions;ILjava/lang/Object;)Lcom/davils/knot/failure/render/CrashReportRenderer;
+}
+
+public final class com/davils/knot/failure/render/RenderOptions {
+	public fun <init> ()V
+	public fun <init> (ZZII)V
+	public synthetic fun <init> (ZZIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getHasMessages ()Z
+	public final fun getHasStackTrace ()Z
+	public final fun getMaxCauseDepth ()I
+	public final fun getMaxLength ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/sink/CrashReport {
+	public final fun getContentType ()Ljava/lang/String;
+	public final fun getFailure ()Lcom/davils/knot/failure/UnexpectedFailure;
+	public final fun getSink ()Ljava/lang/String;
+	public final fun getSuggestedName ()Ljava/lang/String;
+	public final fun getText ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/knot/failure/sink/FailureSink {
+	public abstract fun write (Lcom/davils/knot/failure/sink/CrashReport;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/knot/failure/sink/FailureSinksBuilder {
+	public final fun sink (Ljava/lang/String;Lcom/davils/knot/failure/sink/FailureSink;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun sink$default (Lcom/davils/knot/failure/sink/FailureSinksBuilder;Ljava/lang/String;Lcom/davils/knot/failure/sink/FailureSink;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+}
+
+public final class com/davils/knot/failure/sink/SinkBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getRenderer ()Lcom/davils/knot/failure/render/CrashReportRenderer;
+	public final fun getSeverities ()Ljava/util/Set;
+	public final fun getTimeout-UwyO8pc ()J
+	public final fun setRenderer (Lcom/davils/knot/failure/render/CrashReportRenderer;)V
+	public final fun setSeverities (Ljava/util/Set;)V
+	public final fun setTimeout-LRDsOJo (J)V
+}
+
+public final class com/davils/knot/failure/sink/SinkConfiguration : com/davils/kore/core/validation/Validatable {
+	public final fun getName ()Ljava/lang/String;
+	public final fun getRenderer ()Lcom/davils/knot/failure/render/CrashReportRenderer;
+	public final fun getSeverities ()Ljava/util/Set;
+	public final fun getSink ()Lcom/davils/knot/failure/sink/FailureSink;
+	public final fun getTimeout-UwyO8pc ()J
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public abstract class com/davils/knot/failure/sink/SinkResult {
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getSink ()Ljava/lang/String;
+	public final fun isWritten ()Z
+}
+
+public final class com/davils/knot/failure/sink/SinkResult$Failed : com/davils/knot/failure/sink/SinkResult {
+	public final fun getFailureType ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/sink/SinkResult$TimedOut : com/davils/knot/failure/sink/SinkResult {
+	public final fun getTimeout-UwyO8pc ()J
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/sink/SinkResult$Written : com/davils/knot/failure/sink/SinkResult {
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/failure/storm/FailureStormBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun getMaxReports ()I
+	public final fun getWindow-UwyO8pc ()J
+	public final fun setMaxReports (I)V
+	public final fun setWindow-LRDsOJo (J)V
+}
+
+public final class com/davils/knot/failure/storm/FailureStormConfiguration : com/davils/kore/core/validation/Validatable {
+	public final fun getMaxReports ()I
+	public final fun getWindow-UwyO8pc ()J
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+

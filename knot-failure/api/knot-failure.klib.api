@@ -1,0 +1,456 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:knot-failure>
+final enum class com.davils.knot.failure/FailureSeverity : kotlin/Enum<com.davils.knot.failure/FailureSeverity> { // com.davils.knot.failure/FailureSeverity|null[0]
+    enum entry Fatal // com.davils.knot.failure/FailureSeverity.Fatal|null[0]
+    enum entry Recoverable // com.davils.knot.failure/FailureSeverity.Recoverable|null[0]
+
+    final val entries // com.davils.knot.failure/FailureSeverity.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.knot.failure/FailureSeverity> // com.davils.knot.failure/FailureSeverity.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.knot.failure/FailureSeverity // com.davils.knot.failure/FailureSeverity.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.knot.failure/FailureSeverity> // com.davils.knot.failure/FailureSeverity.values|values#static(){}[0]
+}
+
+abstract fun interface com.davils.knot.failure.render/CrashReportRenderer { // com.davils.knot.failure.render/CrashReportRenderer|null[0]
+    open val contentType // com.davils.knot.failure.render/CrashReportRenderer.contentType|{}contentType[0]
+        open fun <get-contentType>(): kotlin/String // com.davils.knot.failure.render/CrashReportRenderer.contentType.<get-contentType>|<get-contentType>(){}[0]
+    open val extension // com.davils.knot.failure.render/CrashReportRenderer.extension|{}extension[0]
+        open fun <get-extension>(): kotlin/String // com.davils.knot.failure.render/CrashReportRenderer.extension.<get-extension>|<get-extension>(){}[0]
+
+    abstract fun render(com.davils.knot.failure/UnexpectedFailure): kotlin/String // com.davils.knot.failure.render/CrashReportRenderer.render|render(com.davils.knot.failure.UnexpectedFailure){}[0]
+
+    final object Companion { // com.davils.knot.failure.render/CrashReportRenderer.Companion|null[0]
+        final fun json(com.davils.knot.failure.render/RenderOptions = ...): com.davils.knot.failure.render/CrashReportRenderer // com.davils.knot.failure.render/CrashReportRenderer.Companion.json|json(com.davils.knot.failure.render.RenderOptions){}[0]
+        final fun text(com.davils.knot.failure.render/RenderOptions = ...): com.davils.knot.failure.render/CrashReportRenderer // com.davils.knot.failure.render/CrashReportRenderer.Companion.text|text(com.davils.knot.failure.render.RenderOptions){}[0]
+    }
+}
+
+abstract fun interface com.davils.knot.failure.sink/FailureSink { // com.davils.knot.failure.sink/FailureSink|null[0]
+    abstract suspend fun write(com.davils.knot.failure.sink/CrashReport) // com.davils.knot.failure.sink/FailureSink.write|write(com.davils.knot.failure.sink.CrashReport){}[0]
+}
+
+sealed interface com.davils.knot.failure/FailureReport { // com.davils.knot.failure/FailureReport|null[0]
+    final class Ignored : com.davils.knot.failure/FailureReport { // com.davils.knot.failure/FailureReport.Ignored|null[0]
+        final val cause // com.davils.knot.failure/FailureReport.Ignored.cause|{}cause[0]
+            final fun <get-cause>(): kotlin/Throwable // com.davils.knot.failure/FailureReport.Ignored.cause.<get-cause>|<get-cause>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.knot.failure/FailureReport.Ignored.toString|toString(){}[0]
+    }
+
+    final class Recorded : com.davils.knot.failure/FailureReport { // com.davils.knot.failure/FailureReport.Recorded|null[0]
+        final val failure // com.davils.knot.failure/FailureReport.Recorded.failure|{}failure[0]
+            final fun <get-failure>(): com.davils.knot.failure/UnexpectedFailure // com.davils.knot.failure/FailureReport.Recorded.failure.<get-failure>|<get-failure>(){}[0]
+        final val results // com.davils.knot.failure/FailureReport.Recorded.results|{}results[0]
+            final fun <get-results>(): kotlin.collections/List<com.davils.knot.failure.sink/SinkResult> // com.davils.knot.failure/FailureReport.Recorded.results.<get-results>|<get-results>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.knot.failure/FailureReport.Recorded.toString|toString(){}[0]
+    }
+
+    final class Suppressed : com.davils.knot.failure/FailureReport { // com.davils.knot.failure/FailureReport.Suppressed|null[0]
+        final val failure // com.davils.knot.failure/FailureReport.Suppressed.failure|{}failure[0]
+            final fun <get-failure>(): com.davils.knot.failure/UnexpectedFailure // com.davils.knot.failure/FailureReport.Suppressed.failure.<get-failure>|<get-failure>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.knot.failure/FailureReport.Suppressed.toString|toString(){}[0]
+    }
+
+    final class Unrecorded : com.davils.knot.failure/FailureReport { // com.davils.knot.failure/FailureReport.Unrecorded|null[0]
+        final val failure // com.davils.knot.failure/FailureReport.Unrecorded.failure|{}failure[0]
+            final fun <get-failure>(): com.davils.knot.failure/UnexpectedFailure // com.davils.knot.failure/FailureReport.Unrecorded.failure.<get-failure>|<get-failure>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.knot.failure/FailureReport.Unrecorded.toString|toString(){}[0]
+    }
+}
+
+final class com.davils.knot.failure.classify/FailureClassification { // com.davils.knot.failure.classify/FailureClassification|null[0]
+    final fun isFatal(kotlin/Throwable): kotlin/Boolean // com.davils.knot.failure.classify/FailureClassification.isFatal|isFatal(kotlin.Throwable){}[0]
+    final fun isIgnored(kotlin/Throwable): kotlin/Boolean // com.davils.knot.failure.classify/FailureClassification.isIgnored|isIgnored(kotlin.Throwable){}[0]
+    final fun severityOf(kotlin/Throwable): com.davils.knot.failure/FailureSeverity? // com.davils.knot.failure.classify/FailureClassification.severityOf|severityOf(kotlin.Throwable){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.failure.classify/FailureClassification.toString|toString(){}[0]
+}
+
+final class com.davils.knot.failure.classify/FailureClassificationBuilder { // com.davils.knot.failure.classify/FailureClassificationBuilder|null[0]
+    final fun fatal(kotlin/Function1<kotlin/Throwable, kotlin/Boolean>) // com.davils.knot.failure.classify/FailureClassificationBuilder.fatal|fatal(kotlin.Function1<kotlin.Throwable,kotlin.Boolean>){}[0]
+    final fun ignore(kotlin/Function1<kotlin/Throwable, kotlin/Boolean>) // com.davils.knot.failure.classify/FailureClassificationBuilder.ignore|ignore(kotlin.Function1<kotlin.Throwable,kotlin.Boolean>){}[0]
+    final inline fun <#A1: reified kotlin/Throwable> fatal() // com.davils.knot.failure.classify/FailureClassificationBuilder.fatal|fatal(){0§<kotlin.Throwable>}[0]
+    final inline fun <#A1: reified kotlin/Throwable> ignore() // com.davils.knot.failure.classify/FailureClassificationBuilder.ignore|ignore(){0§<kotlin.Throwable>}[0]
+}
+
+final class com.davils.knot.failure.render/RenderOptions { // com.davils.knot.failure.render/RenderOptions|null[0]
+    constructor <init>(kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Int = ..., kotlin/Int = ...) // com.davils.knot.failure.render/RenderOptions.<init>|<init>(kotlin.Boolean;kotlin.Boolean;kotlin.Int;kotlin.Int){}[0]
+
+    final val hasMessages // com.davils.knot.failure.render/RenderOptions.hasMessages|{}hasMessages[0]
+        final fun <get-hasMessages>(): kotlin/Boolean // com.davils.knot.failure.render/RenderOptions.hasMessages.<get-hasMessages>|<get-hasMessages>(){}[0]
+    final val hasStackTrace // com.davils.knot.failure.render/RenderOptions.hasStackTrace|{}hasStackTrace[0]
+        final fun <get-hasStackTrace>(): kotlin/Boolean // com.davils.knot.failure.render/RenderOptions.hasStackTrace.<get-hasStackTrace>|<get-hasStackTrace>(){}[0]
+    final val maxCauseDepth // com.davils.knot.failure.render/RenderOptions.maxCauseDepth|{}maxCauseDepth[0]
+        final fun <get-maxCauseDepth>(): kotlin/Int // com.davils.knot.failure.render/RenderOptions.maxCauseDepth.<get-maxCauseDepth>|<get-maxCauseDepth>(){}[0]
+    final val maxLength // com.davils.knot.failure.render/RenderOptions.maxLength|{}maxLength[0]
+        final fun <get-maxLength>(): kotlin/Int // com.davils.knot.failure.render/RenderOptions.maxLength.<get-maxLength>|<get-maxLength>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.knot.failure.render/RenderOptions.toString|toString(){}[0]
+}
+
+final class com.davils.knot.failure.sink/CrashReport { // com.davils.knot.failure.sink/CrashReport|null[0]
+    final val contentType // com.davils.knot.failure.sink/CrashReport.contentType|{}contentType[0]
+        final fun <get-contentType>(): kotlin/String // com.davils.knot.failure.sink/CrashReport.contentType.<get-contentType>|<get-contentType>(){}[0]
+    final val failure // com.davils.knot.failure.sink/CrashReport.failure|{}failure[0]
+        final fun <get-failure>(): com.davils.knot.failure/UnexpectedFailure // com.davils.knot.failure.sink/CrashReport.failure.<get-failure>|<get-failure>(){}[0]
+    final val sink // com.davils.knot.failure.sink/CrashReport.sink|{}sink[0]
+        final fun <get-sink>(): kotlin/String // com.davils.knot.failure.sink/CrashReport.sink.<get-sink>|<get-sink>(){}[0]
+    final val suggestedName // com.davils.knot.failure.sink/CrashReport.suggestedName|{}suggestedName[0]
+        final fun <get-suggestedName>(): kotlin/String // com.davils.knot.failure.sink/CrashReport.suggestedName.<get-suggestedName>|<get-suggestedName>(){}[0]
+    final val text // com.davils.knot.failure.sink/CrashReport.text|{}text[0]
+        final fun <get-text>(): kotlin/String // com.davils.knot.failure.sink/CrashReport.text.<get-text>|<get-text>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.knot.failure.sink/CrashReport.toString|toString(){}[0]
+}
+
+final class com.davils.knot.failure.sink/FailureSinksBuilder { // com.davils.knot.failure.sink/FailureSinksBuilder|null[0]
+    final fun sink(kotlin/String, com.davils.knot.failure.sink/FailureSink, kotlin/Function1<com.davils.knot.failure.sink/SinkBuilder, kotlin/Unit> = ...) // com.davils.knot.failure.sink/FailureSinksBuilder.sink|sink(kotlin.String;com.davils.knot.failure.sink.FailureSink;kotlin.Function1<com.davils.knot.failure.sink.SinkBuilder,kotlin.Unit>){}[0]
+}
+
+final class com.davils.knot.failure.sink/SinkBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.knot.failure.sink/SinkConfiguration> { // com.davils.knot.failure.sink/SinkBuilder|null[0]
+    final val name // com.davils.knot.failure.sink/SinkBuilder.name|{}name[0]
+        final fun <get-name>(): kotlin/String // com.davils.knot.failure.sink/SinkBuilder.name.<get-name>|<get-name>(){}[0]
+
+    final var renderer // com.davils.knot.failure.sink/SinkBuilder.renderer|{}renderer[0]
+        final fun <get-renderer>(): com.davils.knot.failure.render/CrashReportRenderer // com.davils.knot.failure.sink/SinkBuilder.renderer.<get-renderer>|<get-renderer>(){}[0]
+        final fun <set-renderer>(com.davils.knot.failure.render/CrashReportRenderer) // com.davils.knot.failure.sink/SinkBuilder.renderer.<set-renderer>|<set-renderer>(com.davils.knot.failure.render.CrashReportRenderer){}[0]
+    final var severities // com.davils.knot.failure.sink/SinkBuilder.severities|{}severities[0]
+        final fun <get-severities>(): kotlin.collections/Set<com.davils.knot.failure/FailureSeverity> // com.davils.knot.failure.sink/SinkBuilder.severities.<get-severities>|<get-severities>(){}[0]
+        final fun <set-severities>(kotlin.collections/Set<com.davils.knot.failure/FailureSeverity>) // com.davils.knot.failure.sink/SinkBuilder.severities.<set-severities>|<set-severities>(kotlin.collections.Set<com.davils.knot.failure.FailureSeverity>){}[0]
+    final var timeout // com.davils.knot.failure.sink/SinkBuilder.timeout|{}timeout[0]
+        final fun <get-timeout>(): kotlin.time/Duration // com.davils.knot.failure.sink/SinkBuilder.timeout.<get-timeout>|<get-timeout>(){}[0]
+        final fun <set-timeout>(kotlin.time/Duration) // com.davils.knot.failure.sink/SinkBuilder.timeout.<set-timeout>|<set-timeout>(kotlin.time.Duration){}[0]
+}
+
+final class com.davils.knot.failure.sink/SinkConfiguration : com.davils.kore.core.validation/Validatable { // com.davils.knot.failure.sink/SinkConfiguration|null[0]
+    final val name // com.davils.knot.failure.sink/SinkConfiguration.name|{}name[0]
+        final fun <get-name>(): kotlin/String // com.davils.knot.failure.sink/SinkConfiguration.name.<get-name>|<get-name>(){}[0]
+    final val renderer // com.davils.knot.failure.sink/SinkConfiguration.renderer|{}renderer[0]
+        final fun <get-renderer>(): com.davils.knot.failure.render/CrashReportRenderer // com.davils.knot.failure.sink/SinkConfiguration.renderer.<get-renderer>|<get-renderer>(){}[0]
+    final val severities // com.davils.knot.failure.sink/SinkConfiguration.severities|{}severities[0]
+        final fun <get-severities>(): kotlin.collections/Set<com.davils.knot.failure/FailureSeverity> // com.davils.knot.failure.sink/SinkConfiguration.severities.<get-severities>|<get-severities>(){}[0]
+    final val sink // com.davils.knot.failure.sink/SinkConfiguration.sink|{}sink[0]
+        final fun <get-sink>(): com.davils.knot.failure.sink/FailureSink // com.davils.knot.failure.sink/SinkConfiguration.sink.<get-sink>|<get-sink>(){}[0]
+    final val timeout // com.davils.knot.failure.sink/SinkConfiguration.timeout|{}timeout[0]
+        final fun <get-timeout>(): kotlin.time/Duration // com.davils.knot.failure.sink/SinkConfiguration.timeout.<get-timeout>|<get-timeout>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.knot.failure.sink/SinkConfiguration.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.failure.sink/SinkConfiguration.toString|toString(){}[0]
+}
+
+final class com.davils.knot.failure.storm/FailureStormBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.knot.failure.storm/FailureStormConfiguration> { // com.davils.knot.failure.storm/FailureStormBuilder|null[0]
+    final var maxReports // com.davils.knot.failure.storm/FailureStormBuilder.maxReports|{}maxReports[0]
+        final fun <get-maxReports>(): kotlin/Int // com.davils.knot.failure.storm/FailureStormBuilder.maxReports.<get-maxReports>|<get-maxReports>(){}[0]
+        final fun <set-maxReports>(kotlin/Int) // com.davils.knot.failure.storm/FailureStormBuilder.maxReports.<set-maxReports>|<set-maxReports>(kotlin.Int){}[0]
+    final var window // com.davils.knot.failure.storm/FailureStormBuilder.window|{}window[0]
+        final fun <get-window>(): kotlin.time/Duration // com.davils.knot.failure.storm/FailureStormBuilder.window.<get-window>|<get-window>(){}[0]
+        final fun <set-window>(kotlin.time/Duration) // com.davils.knot.failure.storm/FailureStormBuilder.window.<set-window>|<set-window>(kotlin.time.Duration){}[0]
+}
+
+final class com.davils.knot.failure.storm/FailureStormConfiguration : com.davils.kore.core.validation/Validatable { // com.davils.knot.failure.storm/FailureStormConfiguration|null[0]
+    final val maxReports // com.davils.knot.failure.storm/FailureStormConfiguration.maxReports|{}maxReports[0]
+        final fun <get-maxReports>(): kotlin/Int // com.davils.knot.failure.storm/FailureStormConfiguration.maxReports.<get-maxReports>|<get-maxReports>(){}[0]
+    final val window // com.davils.knot.failure.storm/FailureStormConfiguration.window|{}window[0]
+        final fun <get-window>(): kotlin.time/Duration // com.davils.knot.failure.storm/FailureStormConfiguration.window.<get-window>|<get-window>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.knot.failure.storm/FailureStormConfiguration.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.failure.storm/FailureStormConfiguration.toString|toString(){}[0]
+}
+
+final class com.davils.knot.failure/FailureHandler : com.davils.kollect.core.health/HealthIndicator, kotlin/AutoCloseable { // com.davils.knot.failure/FailureHandler|null[0]
+    final val configuration // com.davils.knot.failure/FailureHandler.configuration|{}configuration[0]
+        final fun <get-configuration>(): com.davils.knot.failure/FailureHandlerConfiguration // com.davils.knot.failure/FailureHandler.configuration.<get-configuration>|<get-configuration>(){}[0]
+    final val failures // com.davils.knot.failure/FailureHandler.failures|{}failures[0]
+        final fun <get-failures>(): kotlinx.coroutines.flow/Flow<com.davils.knot.failure/UnexpectedFailure> // com.davils.knot.failure/FailureHandler.failures.<get-failures>|<get-failures>(){}[0]
+    final val isClosed // com.davils.knot.failure/FailureHandler.isClosed|{}isClosed[0]
+        final fun <get-isClosed>(): kotlin/Boolean // com.davils.knot.failure/FailureHandler.isClosed.<get-isClosed>|<get-isClosed>(){}[0]
+
+    final fun close() // com.davils.knot.failure/FailureHandler.close|close(){}[0]
+    final fun coroutineHandler(com.davils.knot.failure/FailureOrigin = ...): kotlinx.coroutines/CoroutineExceptionHandler // com.davils.knot.failure/FailureHandler.coroutineHandler|coroutineHandler(com.davils.knot.failure.FailureOrigin){}[0]
+    final fun metrics(): com.davils.knot.failure/FailureMetrics // com.davils.knot.failure/FailureHandler.metrics|metrics(){}[0]
+    final fun submit(kotlin/Throwable, com.davils.knot.failure/FailureOrigin) // com.davils.knot.failure/FailureHandler.submit|submit(kotlin.Throwable;com.davils.knot.failure.FailureOrigin){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.failure/FailureHandler.toString|toString(){}[0]
+    final suspend fun check(): com.davils.kollect.core.health/Health // com.davils.knot.failure/FailureHandler.check|check(){}[0]
+    final suspend fun drain() // com.davils.knot.failure/FailureHandler.drain|drain(){}[0]
+    final suspend fun report(kotlin/Throwable, com.davils.knot.failure/FailureOrigin): com.davils.knot.failure/FailureReport // com.davils.knot.failure/FailureHandler.report|report(kotlin.Throwable;com.davils.knot.failure.FailureOrigin){}[0]
+}
+
+final class com.davils.knot.failure/FailureHandlerBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.knot.failure/FailureHandlerConfiguration> { // com.davils.knot.failure/FailureHandlerBuilder|null[0]
+    final var clock // com.davils.knot.failure/FailureHandlerBuilder.clock|{}clock[0]
+        final fun <get-clock>(): kotlin.time/Clock // com.davils.knot.failure/FailureHandlerBuilder.clock.<get-clock>|<get-clock>(){}[0]
+        final fun <set-clock>(kotlin.time/Clock) // com.davils.knot.failure/FailureHandlerBuilder.clock.<set-clock>|<set-clock>(kotlin.time.Clock){}[0]
+    final var degradedAt // com.davils.knot.failure/FailureHandlerBuilder.degradedAt|{}degradedAt[0]
+        final fun <get-degradedAt>(): kotlin/Int // com.davils.knot.failure/FailureHandlerBuilder.degradedAt.<get-degradedAt>|<get-degradedAt>(){}[0]
+        final fun <set-degradedAt>(kotlin/Int) // com.davils.knot.failure/FailureHandlerBuilder.degradedAt.<set-degradedAt>|<set-degradedAt>(kotlin.Int){}[0]
+    final var eventCapacity // com.davils.knot.failure/FailureHandlerBuilder.eventCapacity|{}eventCapacity[0]
+        final fun <get-eventCapacity>(): kotlin/Int // com.davils.knot.failure/FailureHandlerBuilder.eventCapacity.<get-eventCapacity>|<get-eventCapacity>(){}[0]
+        final fun <set-eventCapacity>(kotlin/Int) // com.davils.knot.failure/FailureHandlerBuilder.eventCapacity.<set-eventCapacity>|<set-eventCapacity>(kotlin.Int){}[0]
+    final var events // com.davils.knot.failure/FailureHandlerBuilder.events|{}events[0]
+        final fun <get-events>(): com.davils.konfetti.core/EventBus? // com.davils.knot.failure/FailureHandlerBuilder.events.<get-events>|<get-events>(){}[0]
+        final fun <set-events>(com.davils.konfetti.core/EventBus?) // com.davils.knot.failure/FailureHandlerBuilder.events.<set-events>|<set-events>(com.davils.konfetti.core.EventBus?){}[0]
+    final var ids // com.davils.knot.failure/FailureHandlerBuilder.ids|{}ids[0]
+        final fun <get-ids>(): com.davils.kore.core.identity.generator/UuidGenerator<com.davils.kore.core.identity/Uuid> // com.davils.knot.failure/FailureHandlerBuilder.ids.<get-ids>|<get-ids>(){}[0]
+        final fun <set-ids>(com.davils.kore.core.identity.generator/UuidGenerator<com.davils.kore.core.identity/Uuid>) // com.davils.knot.failure/FailureHandlerBuilder.ids.<set-ids>|<set-ids>(com.davils.kore.core.identity.generator.UuidGenerator<com.davils.kore.core.identity.Uuid>){}[0]
+    final var meters // com.davils.knot.failure/FailureHandlerBuilder.meters|{}meters[0]
+        final fun <get-meters>(): com.davils.kollect.core/MeterRegistry? // com.davils.knot.failure/FailureHandlerBuilder.meters.<get-meters>|<get-meters>(){}[0]
+        final fun <set-meters>(com.davils.kollect.core/MeterRegistry?) // com.davils.knot.failure/FailureHandlerBuilder.meters.<set-meters>|<set-meters>(com.davils.kollect.core.MeterRegistry?){}[0]
+    final var shutdown // com.davils.knot.failure/FailureHandlerBuilder.shutdown|{}shutdown[0]
+        final fun <get-shutdown>(): com.davils.knot.shutdown/Shutdown? // com.davils.knot.failure/FailureHandlerBuilder.shutdown.<get-shutdown>|<get-shutdown>(){}[0]
+        final fun <set-shutdown>(com.davils.knot.shutdown/Shutdown?) // com.davils.knot.failure/FailureHandlerBuilder.shutdown.<set-shutdown>|<set-shutdown>(com.davils.knot.shutdown.Shutdown?){}[0]
+    final var tracer // com.davils.knot.failure/FailureHandlerBuilder.tracer|{}tracer[0]
+        final fun <get-tracer>(): com.davils.kollect.core.trace/Tracer // com.davils.knot.failure/FailureHandlerBuilder.tracer.<get-tracer>|<get-tracer>(){}[0]
+        final fun <set-tracer>(com.davils.kollect.core.trace/Tracer) // com.davils.knot.failure/FailureHandlerBuilder.tracer.<set-tracer>|<set-tracer>(com.davils.kollect.core.trace.Tracer){}[0]
+
+    final fun classify(kotlin/Function1<com.davils.knot.failure.classify/FailureClassificationBuilder, kotlin/Unit>) // com.davils.knot.failure/FailureHandlerBuilder.classify|classify(kotlin.Function1<com.davils.knot.failure.classify.FailureClassificationBuilder,kotlin.Unit>){}[0]
+    final fun sinks(kotlin/Function1<com.davils.knot.failure.sink/FailureSinksBuilder, kotlin/Unit>) // com.davils.knot.failure/FailureHandlerBuilder.sinks|sinks(kotlin.Function1<com.davils.knot.failure.sink.FailureSinksBuilder,kotlin.Unit>){}[0]
+    final fun storm(kotlin/Function1<com.davils.knot.failure.storm/FailureStormBuilder, kotlin/Unit>) // com.davils.knot.failure/FailureHandlerBuilder.storm|storm(kotlin.Function1<com.davils.knot.failure.storm.FailureStormBuilder,kotlin.Unit>){}[0]
+}
+
+final class com.davils.knot.failure/FailureHandlerConfiguration : com.davils.kore.core.validation/Validatable { // com.davils.knot.failure/FailureHandlerConfiguration|null[0]
+    final val classification // com.davils.knot.failure/FailureHandlerConfiguration.classification|{}classification[0]
+        final fun <get-classification>(): com.davils.knot.failure.classify/FailureClassification // com.davils.knot.failure/FailureHandlerConfiguration.classification.<get-classification>|<get-classification>(){}[0]
+    final val clock // com.davils.knot.failure/FailureHandlerConfiguration.clock|{}clock[0]
+        final fun <get-clock>(): kotlin.time/Clock // com.davils.knot.failure/FailureHandlerConfiguration.clock.<get-clock>|<get-clock>(){}[0]
+    final val degradedAt // com.davils.knot.failure/FailureHandlerConfiguration.degradedAt|{}degradedAt[0]
+        final fun <get-degradedAt>(): kotlin/Int // com.davils.knot.failure/FailureHandlerConfiguration.degradedAt.<get-degradedAt>|<get-degradedAt>(){}[0]
+    final val eventCapacity // com.davils.knot.failure/FailureHandlerConfiguration.eventCapacity|{}eventCapacity[0]
+        final fun <get-eventCapacity>(): kotlin/Int // com.davils.knot.failure/FailureHandlerConfiguration.eventCapacity.<get-eventCapacity>|<get-eventCapacity>(){}[0]
+    final val events // com.davils.knot.failure/FailureHandlerConfiguration.events|{}events[0]
+        final fun <get-events>(): com.davils.konfetti.core/EventBus? // com.davils.knot.failure/FailureHandlerConfiguration.events.<get-events>|<get-events>(){}[0]
+    final val ids // com.davils.knot.failure/FailureHandlerConfiguration.ids|{}ids[0]
+        final fun <get-ids>(): com.davils.kore.core.identity.generator/UuidGenerator<com.davils.kore.core.identity/Uuid> // com.davils.knot.failure/FailureHandlerConfiguration.ids.<get-ids>|<get-ids>(){}[0]
+    final val meters // com.davils.knot.failure/FailureHandlerConfiguration.meters|{}meters[0]
+        final fun <get-meters>(): com.davils.kollect.core/MeterRegistry? // com.davils.knot.failure/FailureHandlerConfiguration.meters.<get-meters>|<get-meters>(){}[0]
+    final val sinks // com.davils.knot.failure/FailureHandlerConfiguration.sinks|{}sinks[0]
+        final fun <get-sinks>(): kotlin.collections/List<com.davils.knot.failure.sink/SinkConfiguration> // com.davils.knot.failure/FailureHandlerConfiguration.sinks.<get-sinks>|<get-sinks>(){}[0]
+    final val storm // com.davils.knot.failure/FailureHandlerConfiguration.storm|{}storm[0]
+        final fun <get-storm>(): com.davils.knot.failure.storm/FailureStormConfiguration // com.davils.knot.failure/FailureHandlerConfiguration.storm.<get-storm>|<get-storm>(){}[0]
+    final val tracer // com.davils.knot.failure/FailureHandlerConfiguration.tracer|{}tracer[0]
+        final fun <get-tracer>(): com.davils.kollect.core.trace/Tracer // com.davils.knot.failure/FailureHandlerConfiguration.tracer.<get-tracer>|<get-tracer>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.knot.failure/FailureHandlerConfiguration.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.failure/FailureHandlerConfiguration.toString|toString(){}[0]
+}
+
+final class com.davils.knot.failure/FailureMetrics { // com.davils.knot.failure/FailureMetrics|null[0]
+    final val ignored // com.davils.knot.failure/FailureMetrics.ignored|{}ignored[0]
+        final fun <get-ignored>(): kotlin/Long // com.davils.knot.failure/FailureMetrics.ignored.<get-ignored>|<get-ignored>(){}[0]
+    final val recent // com.davils.knot.failure/FailureMetrics.recent|{}recent[0]
+        final fun <get-recent>(): kotlin/Int // com.davils.knot.failure/FailureMetrics.recent.<get-recent>|<get-recent>(){}[0]
+    final val rejectedEvents // com.davils.knot.failure/FailureMetrics.rejectedEvents|{}rejectedEvents[0]
+        final fun <get-rejectedEvents>(): kotlin/Long // com.davils.knot.failure/FailureMetrics.rejectedEvents.<get-rejectedEvents>|<get-rejectedEvents>(){}[0]
+    final val reported // com.davils.knot.failure/FailureMetrics.reported|{}reported[0]
+        final fun <get-reported>(): kotlin/Long // com.davils.knot.failure/FailureMetrics.reported.<get-reported>|<get-reported>(){}[0]
+    final val sinkFailures // com.davils.knot.failure/FailureMetrics.sinkFailures|{}sinkFailures[0]
+        final fun <get-sinkFailures>(): kotlin/Long // com.davils.knot.failure/FailureMetrics.sinkFailures.<get-sinkFailures>|<get-sinkFailures>(){}[0]
+    final val suppressed // com.davils.knot.failure/FailureMetrics.suppressed|{}suppressed[0]
+        final fun <get-suppressed>(): kotlin/Long // com.davils.knot.failure/FailureMetrics.suppressed.<get-suppressed>|<get-suppressed>(){}[0]
+    final val written // com.davils.knot.failure/FailureMetrics.written|{}written[0]
+        final fun <get-written>(): kotlin/Long // com.davils.knot.failure/FailureMetrics.written.<get-written>|<get-written>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.knot.failure/FailureMetrics.toString|toString(){}[0]
+}
+
+final class com.davils.knot.failure/UnexpectedFailure { // com.davils.knot.failure/UnexpectedFailure|null[0]
+    constructor <init>(com.davils.knot.failure/FailureId, kotlin/Throwable, com.davils.knot.failure/FailureOrigin, com.davils.knot.failure/FailureSeverity, com.davils.knot.failure/FailureFingerprint, kotlin.time/Instant, kotlin/String?, kotlin/Int) // com.davils.knot.failure/UnexpectedFailure.<init>|<init>(com.davils.knot.failure.FailureId;kotlin.Throwable;com.davils.knot.failure.FailureOrigin;com.davils.knot.failure.FailureSeverity;com.davils.knot.failure.FailureFingerprint;kotlin.time.Instant;kotlin.String?;kotlin.Int){}[0]
+
+    final val at // com.davils.knot.failure/UnexpectedFailure.at|{}at[0]
+        final fun <get-at>(): kotlin.time/Instant // com.davils.knot.failure/UnexpectedFailure.at.<get-at>|<get-at>(){}[0]
+    final val cause // com.davils.knot.failure/UnexpectedFailure.cause|{}cause[0]
+        final fun <get-cause>(): kotlin/Throwable // com.davils.knot.failure/UnexpectedFailure.cause.<get-cause>|<get-cause>(){}[0]
+    final val fingerprint // com.davils.knot.failure/UnexpectedFailure.fingerprint|{}fingerprint[0]
+        final fun <get-fingerprint>(): com.davils.knot.failure/FailureFingerprint // com.davils.knot.failure/UnexpectedFailure.fingerprint.<get-fingerprint>|<get-fingerprint>(){}[0]
+    final val id // com.davils.knot.failure/UnexpectedFailure.id|{}id[0]
+        final fun <get-id>(): com.davils.knot.failure/FailureId // com.davils.knot.failure/UnexpectedFailure.id.<get-id>|<get-id>(){}[0]
+    final val origin // com.davils.knot.failure/UnexpectedFailure.origin|{}origin[0]
+        final fun <get-origin>(): com.davils.knot.failure/FailureOrigin // com.davils.knot.failure/UnexpectedFailure.origin.<get-origin>|<get-origin>(){}[0]
+    final val severity // com.davils.knot.failure/UnexpectedFailure.severity|{}severity[0]
+        final fun <get-severity>(): com.davils.knot.failure/FailureSeverity // com.davils.knot.failure/UnexpectedFailure.severity.<get-severity>|<get-severity>(){}[0]
+    final val suppressed // com.davils.knot.failure/UnexpectedFailure.suppressed|{}suppressed[0]
+        final fun <get-suppressed>(): kotlin/Int // com.davils.knot.failure/UnexpectedFailure.suppressed.<get-suppressed>|<get-suppressed>(){}[0]
+    final val thread // com.davils.knot.failure/UnexpectedFailure.thread|{}thread[0]
+        final fun <get-thread>(): kotlin/String? // com.davils.knot.failure/UnexpectedFailure.thread.<get-thread>|<get-thread>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.failure/UnexpectedFailure.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.knot.failure/UnexpectedFailure.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.failure/UnexpectedFailure.toString|toString(){}[0]
+}
+
+final value class com.davils.knot.failure/FailureFingerprint { // com.davils.knot.failure/FailureFingerprint|null[0]
+    constructor <init>(kotlin/String) // com.davils.knot.failure/FailureFingerprint.<init>|<init>(kotlin.String){}[0]
+
+    final val value // com.davils.knot.failure/FailureFingerprint.value|{}value[0]
+        final fun <get-value>(): kotlin/String // com.davils.knot.failure/FailureFingerprint.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.failure/FailureFingerprint.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.knot.failure/FailureFingerprint.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.failure/FailureFingerprint.toString|toString(){}[0]
+
+    final object Companion { // com.davils.knot.failure/FailureFingerprint.Companion|null[0]
+        final fun of(kotlin/Throwable): com.davils.knot.failure/FailureFingerprint // com.davils.knot.failure/FailureFingerprint.Companion.of|of(kotlin.Throwable){}[0]
+    }
+}
+
+final value class com.davils.knot.failure/FailureId { // com.davils.knot.failure/FailureId|null[0]
+    constructor <init>(kotlin/String) // com.davils.knot.failure/FailureId.<init>|<init>(kotlin.String){}[0]
+
+    final val value // com.davils.knot.failure/FailureId.value|{}value[0]
+        final fun <get-value>(): kotlin/String // com.davils.knot.failure/FailureId.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.failure/FailureId.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.knot.failure/FailureId.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.failure/FailureId.toString|toString(){}[0]
+}
+
+sealed class com.davils.knot.failure.sink/SinkResult { // com.davils.knot.failure.sink/SinkResult|null[0]
+    final val isWritten // com.davils.knot.failure.sink/SinkResult.isWritten|{}isWritten[0]
+        final fun <get-isWritten>(): kotlin/Boolean // com.davils.knot.failure.sink/SinkResult.isWritten.<get-isWritten>|<get-isWritten>(){}[0]
+    final val sink // com.davils.knot.failure.sink/SinkResult.sink|{}sink[0]
+        final fun <get-sink>(): kotlin/String // com.davils.knot.failure.sink/SinkResult.sink.<get-sink>|<get-sink>(){}[0]
+
+    final class Failed : com.davils.knot.failure.sink/SinkResult { // com.davils.knot.failure.sink/SinkResult.Failed|null[0]
+        final val failureType // com.davils.knot.failure.sink/SinkResult.Failed.failureType|{}failureType[0]
+            final fun <get-failureType>(): kotlin/String // com.davils.knot.failure.sink/SinkResult.Failed.failureType.<get-failureType>|<get-failureType>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.knot.failure.sink/SinkResult.Failed.toString|toString(){}[0]
+    }
+
+    final class TimedOut : com.davils.knot.failure.sink/SinkResult { // com.davils.knot.failure.sink/SinkResult.TimedOut|null[0]
+        final val timeout // com.davils.knot.failure.sink/SinkResult.TimedOut.timeout|{}timeout[0]
+            final fun <get-timeout>(): kotlin.time/Duration // com.davils.knot.failure.sink/SinkResult.TimedOut.timeout.<get-timeout>|<get-timeout>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.knot.failure.sink/SinkResult.TimedOut.toString|toString(){}[0]
+    }
+
+    final class Written : com.davils.knot.failure.sink/SinkResult { // com.davils.knot.failure.sink/SinkResult.Written|null[0]
+        final fun toString(): kotlin/String // com.davils.knot.failure.sink/SinkResult.Written.toString|toString(){}[0]
+    }
+}
+
+sealed class com.davils.knot.failure/FailureEvent : com.davils.konfetti.core/Event { // com.davils.knot.failure/FailureEvent|null[0]
+    final val failure // com.davils.knot.failure/FailureEvent.failure|{}failure[0]
+        final fun <get-failure>(): com.davils.knot.failure/UnexpectedFailure // com.davils.knot.failure/FailureEvent.failure.<get-failure>|<get-failure>(){}[0]
+
+    final class Occurred : com.davils.knot.failure/FailureEvent { // com.davils.knot.failure/FailureEvent.Occurred|null[0]
+        final fun toString(): kotlin/String // com.davils.knot.failure/FailureEvent.Occurred.toString|toString(){}[0]
+    }
+
+    final class Written : com.davils.knot.failure/FailureEvent { // com.davils.knot.failure/FailureEvent.Written|null[0]
+        final val result // com.davils.knot.failure/FailureEvent.Written.result|{}result[0]
+            final fun <get-result>(): com.davils.knot.failure.sink/SinkResult // com.davils.knot.failure/FailureEvent.Written.result.<get-result>|<get-result>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.knot.failure/FailureEvent.Written.toString|toString(){}[0]
+    }
+
+    final object Companion { // com.davils.knot.failure/FailureEvent.Companion|null[0]
+        final val TOPIC // com.davils.knot.failure/FailureEvent.Companion.TOPIC|{}TOPIC[0]
+            final fun <get-TOPIC>(): com.davils.konfetti.core/TopicKey<com.davils.knot.failure/FailureEvent> // com.davils.knot.failure/FailureEvent.Companion.TOPIC.<get-TOPIC>|<get-TOPIC>(){}[0]
+    }
+}
+
+sealed class com.davils.knot.failure/FailureOrigin { // com.davils.knot.failure/FailureOrigin|null[0]
+    final val kind // com.davils.knot.failure/FailureOrigin.kind|{}kind[0]
+        final fun <get-kind>(): kotlin/String // com.davils.knot.failure/FailureOrigin.kind.<get-kind>|<get-kind>(){}[0]
+    final val subject // com.davils.knot.failure/FailureOrigin.subject|{}subject[0]
+        final fun <get-subject>(): kotlin/String // com.davils.knot.failure/FailureOrigin.subject.<get-subject>|<get-subject>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.failure/FailureOrigin.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.knot.failure/FailureOrigin.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.failure/FailureOrigin.toString|toString(){}[0]
+
+    final class Action : com.davils.knot.failure/FailureOrigin { // com.davils.knot.failure/FailureOrigin.Action|null[0]
+        constructor <init>(kotlin/String) // com.davils.knot.failure/FailureOrigin.Action.<init>|<init>(kotlin.String){}[0]
+
+        final val id // com.davils.knot.failure/FailureOrigin.Action.id|{}id[0]
+            final fun <get-id>(): kotlin/String // com.davils.knot.failure/FailureOrigin.Action.id.<get-id>|<get-id>(){}[0]
+    }
+
+    final class Component : com.davils.knot.failure/FailureOrigin { // com.davils.knot.failure/FailureOrigin.Component|null[0]
+        constructor <init>(kotlin/String, kotlin/String) // com.davils.knot.failure/FailureOrigin.Component.<init>|<init>(kotlin.String;kotlin.String){}[0]
+
+        final val name // com.davils.knot.failure/FailureOrigin.Component.name|{}name[0]
+            final fun <get-name>(): kotlin/String // com.davils.knot.failure/FailureOrigin.Component.name.<get-name>|<get-name>(){}[0]
+    }
+
+    final class Coroutine : com.davils.knot.failure/FailureOrigin { // com.davils.knot.failure/FailureOrigin.Coroutine|null[0]
+        constructor <init>(kotlin/String) // com.davils.knot.failure/FailureOrigin.Coroutine.<init>|<init>(kotlin.String){}[0]
+
+        final val name // com.davils.knot.failure/FailureOrigin.Coroutine.name|{}name[0]
+            final fun <get-name>(): kotlin/String // com.davils.knot.failure/FailureOrigin.Coroutine.name.<get-name>|<get-name>(){}[0]
+    }
+
+    final class Job : com.davils.knot.failure/FailureOrigin { // com.davils.knot.failure/FailureOrigin.Job|null[0]
+        constructor <init>(kotlin/String) // com.davils.knot.failure/FailureOrigin.Job.<init>|<init>(kotlin.String){}[0]
+
+        final val id // com.davils.knot.failure/FailureOrigin.Job.id|{}id[0]
+            final fun <get-id>(): kotlin/String // com.davils.knot.failure/FailureOrigin.Job.id.<get-id>|<get-id>(){}[0]
+    }
+
+    final class Shutdown : com.davils.knot.failure/FailureOrigin { // com.davils.knot.failure/FailureOrigin.Shutdown|null[0]
+        constructor <init>(kotlin/String) // com.davils.knot.failure/FailureOrigin.Shutdown.<init>|<init>(kotlin.String){}[0]
+
+        final val task // com.davils.knot.failure/FailureOrigin.Shutdown.task|{}task[0]
+            final fun <get-task>(): kotlin/String // com.davils.knot.failure/FailureOrigin.Shutdown.task.<get-task>|<get-task>(){}[0]
+    }
+
+    final class Startup : com.davils.knot.failure/FailureOrigin { // com.davils.knot.failure/FailureOrigin.Startup|null[0]
+        constructor <init>(kotlin/String) // com.davils.knot.failure/FailureOrigin.Startup.<init>|<init>(kotlin.String){}[0]
+
+        final val phase // com.davils.knot.failure/FailureOrigin.Startup.phase|{}phase[0]
+            final fun <get-phase>(): kotlin/String // com.davils.knot.failure/FailureOrigin.Startup.phase.<get-phase>|<get-phase>(){}[0]
+    }
+
+    final class Thread : com.davils.knot.failure/FailureOrigin { // com.davils.knot.failure/FailureOrigin.Thread|null[0]
+        constructor <init>(kotlin/String) // com.davils.knot.failure/FailureOrigin.Thread.<init>|<init>(kotlin.String){}[0]
+
+        final val name // com.davils.knot.failure/FailureOrigin.Thread.name|{}name[0]
+            final fun <get-name>(): kotlin/String // com.davils.knot.failure/FailureOrigin.Thread.name.<get-name>|<get-name>(){}[0]
+    }
+}
+
+final object com.davils.knot.failure/FailureLimits { // com.davils.knot.failure/FailureLimits|null[0]
+    final const val MAX_CAUSE_DEPTH // com.davils.knot.failure/FailureLimits.MAX_CAUSE_DEPTH|{}MAX_CAUSE_DEPTH[0]
+        final fun <get-MAX_CAUSE_DEPTH>(): kotlin/Int // com.davils.knot.failure/FailureLimits.MAX_CAUSE_DEPTH.<get-MAX_CAUSE_DEPTH>|<get-MAX_CAUSE_DEPTH>(){}[0]
+    final const val MAX_EVENT_CAPACITY // com.davils.knot.failure/FailureLimits.MAX_EVENT_CAPACITY|{}MAX_EVENT_CAPACITY[0]
+        final fun <get-MAX_EVENT_CAPACITY>(): kotlin/Int // com.davils.knot.failure/FailureLimits.MAX_EVENT_CAPACITY.<get-MAX_EVENT_CAPACITY>|<get-MAX_EVENT_CAPACITY>(){}[0]
+    final const val MAX_FRAMES // com.davils.knot.failure/FailureLimits.MAX_FRAMES|{}MAX_FRAMES[0]
+        final fun <get-MAX_FRAMES>(): kotlin/Int // com.davils.knot.failure/FailureLimits.MAX_FRAMES.<get-MAX_FRAMES>|<get-MAX_FRAMES>(){}[0]
+    final const val MAX_RECENT // com.davils.knot.failure/FailureLimits.MAX_RECENT|{}MAX_RECENT[0]
+        final fun <get-MAX_RECENT>(): kotlin/Int // com.davils.knot.failure/FailureLimits.MAX_RECENT.<get-MAX_RECENT>|<get-MAX_RECENT>(){}[0]
+    final const val MAX_REPORT_LENGTH // com.davils.knot.failure/FailureLimits.MAX_REPORT_LENGTH|{}MAX_REPORT_LENGTH[0]
+        final fun <get-MAX_REPORT_LENGTH>(): kotlin/Int // com.davils.knot.failure/FailureLimits.MAX_REPORT_LENGTH.<get-MAX_REPORT_LENGTH>|<get-MAX_REPORT_LENGTH>(){}[0]
+    final const val MAX_SINKS // com.davils.knot.failure/FailureLimits.MAX_SINKS|{}MAX_SINKS[0]
+        final fun <get-MAX_SINKS>(): kotlin/Int // com.davils.knot.failure/FailureLimits.MAX_SINKS.<get-MAX_SINKS>|<get-MAX_SINKS>(){}[0]
+    final const val MAX_SINK_NAME_LENGTH // com.davils.knot.failure/FailureLimits.MAX_SINK_NAME_LENGTH|{}MAX_SINK_NAME_LENGTH[0]
+        final fun <get-MAX_SINK_NAME_LENGTH>(): kotlin/Int // com.davils.knot.failure/FailureLimits.MAX_SINK_NAME_LENGTH.<get-MAX_SINK_NAME_LENGTH>|<get-MAX_SINK_NAME_LENGTH>(){}[0]
+    final const val MAX_STORM_REPORTS // com.davils.knot.failure/FailureLimits.MAX_STORM_REPORTS|{}MAX_STORM_REPORTS[0]
+        final fun <get-MAX_STORM_REPORTS>(): kotlin/Int // com.davils.knot.failure/FailureLimits.MAX_STORM_REPORTS.<get-MAX_STORM_REPORTS>|<get-MAX_STORM_REPORTS>(){}[0]
+    final const val MAX_TRACKED_FINGERPRINTS // com.davils.knot.failure/FailureLimits.MAX_TRACKED_FINGERPRINTS|{}MAX_TRACKED_FINGERPRINTS[0]
+        final fun <get-MAX_TRACKED_FINGERPRINTS>(): kotlin/Int // com.davils.knot.failure/FailureLimits.MAX_TRACKED_FINGERPRINTS.<get-MAX_TRACKED_FINGERPRINTS>|<get-MAX_TRACKED_FINGERPRINTS>(){}[0]
+}
+
+final object com.davils.knot.failure/FailureViolationCodes { // com.davils.knot.failure/FailureViolationCodes|null[0]
+    final val INVALID_LIMIT // com.davils.knot.failure/FailureViolationCodes.INVALID_LIMIT|{}INVALID_LIMIT[0]
+        final fun <get-INVALID_LIMIT>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.failure/FailureViolationCodes.INVALID_LIMIT.<get-INVALID_LIMIT>|<get-INVALID_LIMIT>(){}[0]
+    final val INVALID_SINK_NAME // com.davils.knot.failure/FailureViolationCodes.INVALID_SINK_NAME|{}INVALID_SINK_NAME[0]
+        final fun <get-INVALID_SINK_NAME>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.failure/FailureViolationCodes.INVALID_SINK_NAME.<get-INVALID_SINK_NAME>|<get-INVALID_SINK_NAME>(){}[0]
+    final val INVALID_TIMEOUT // com.davils.knot.failure/FailureViolationCodes.INVALID_TIMEOUT|{}INVALID_TIMEOUT[0]
+        final fun <get-INVALID_TIMEOUT>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.failure/FailureViolationCodes.INVALID_TIMEOUT.<get-INVALID_TIMEOUT>|<get-INVALID_TIMEOUT>(){}[0]
+    final val INVALID_WINDOW // com.davils.knot.failure/FailureViolationCodes.INVALID_WINDOW|{}INVALID_WINDOW[0]
+        final fun <get-INVALID_WINDOW>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.failure/FailureViolationCodes.INVALID_WINDOW.<get-INVALID_WINDOW>|<get-INVALID_WINDOW>(){}[0]
+    final val NO_SEVERITY // com.davils.knot.failure/FailureViolationCodes.NO_SEVERITY|{}NO_SEVERITY[0]
+        final fun <get-NO_SEVERITY>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.failure/FailureViolationCodes.NO_SEVERITY.<get-NO_SEVERITY>|<get-NO_SEVERITY>(){}[0]
+    final val TOO_MANY_SINKS // com.davils.knot.failure/FailureViolationCodes.TOO_MANY_SINKS|{}TOO_MANY_SINKS[0]
+        final fun <get-TOO_MANY_SINKS>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.failure/FailureViolationCodes.TOO_MANY_SINKS.<get-TOO_MANY_SINKS>|<get-TOO_MANY_SINKS>(){}[0]
+}
+
+final fun (com.davils.knot.shutdown/ShutdownPlanBuilder<*>).com.davils.knot.failure/failures(com.davils.knot.failure/FailureHandler, kotlin.time/Duration = ..., kotlin/String = ...) // com.davils.knot.failure/failures|failures@com.davils.knot.shutdown.ShutdownPlanBuilder<*>(com.davils.knot.failure.FailureHandler;kotlin.time.Duration;kotlin.String){}[0]
+final fun com.davils.knot.failure/failures(kotlinx.coroutines/CoroutineScope, kotlin/Function1<com.davils.knot.failure/FailureHandlerBuilder, kotlin/Unit> = ...): com.davils.knot.failure/FailureHandler // com.davils.knot.failure/failures|failures(kotlinx.coroutines.CoroutineScope;kotlin.Function1<com.davils.knot.failure.FailureHandlerBuilder,kotlin.Unit>){}[0]
