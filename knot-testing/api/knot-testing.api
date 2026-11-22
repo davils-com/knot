@@ -1,0 +1,89 @@
+public final class com/davils/knot/testing/FailingFailureSink : com/davils/knot/failure/sink/FailureSink {
+	public fun <init> ()V
+	public fun <init> (Lkotlin/jvm/functions/Function0;)V
+	public synthetic fun <init> (Lkotlin/jvm/functions/Function0;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun toString ()Ljava/lang/String;
+	public fun write (Lcom/davils/knot/failure/sink/CrashReport;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/knot/testing/HostProbes {
+	public static final field INSTANCE Lcom/davils/knot/testing/HostProbes;
+	public final fun getAll ()Ljava/util/List;
+	public final fun getBunOnLinux ()Lcom/davils/knot/platform/HostProbe;
+	public final fun getChromeOnAndroid ()Lcom/davils/knot/platform/HostProbe;
+	public final fun getChromeOnWindows ()Lcom/davils/knot/platform/HostProbe;
+	public final fun getDedicatedWorker ()Lcom/davils/knot/platform/HostProbe;
+	public final fun getDenoOnMac ()Lcom/davils/knot/platform/HostProbe;
+	public final fun getFirefoxOnLinux ()Lcom/davils/knot/platform/HostProbe;
+	public final fun getJvmOnLinux ()Lcom/davils/knot/platform/HostProbe;
+	public final fun getNodeOnLinux ()Lcom/davils/knot/platform/HostProbe;
+	public final fun getSafariOnIphone ()Lcom/davils/knot/platform/HostProbe;
+	public final fun getSafariOnMac ()Lcom/davils/knot/platform/HostProbe;
+	public final fun getServiceWorker ()Lcom/davils/knot/platform/HostProbe;
+}
+
+public final class com/davils/knot/testing/ProcessExit : java/lang/RuntimeException {
+	public final fun getCode-r1j2jA8 ()I
+}
+
+public final class com/davils/knot/testing/ProcessHalt : java/lang/RuntimeException {
+	public final fun getCode-r1j2jA8 ()I
+}
+
+public final class com/davils/knot/testing/RecordingFailureSink : com/davils/knot/failure/sink/FailureSink {
+	public fun <init> ()V
+	public final fun awaitCount (ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun clear ()V
+	public final fun getReports ()Ljava/util/List;
+	public fun toString ()Ljava/lang/String;
+	public fun write (Lcom/davils/knot/failure/sink/CrashReport;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/knot/testing/RecordingShutdownRuntime : com/davils/knot/shutdown/process/ShutdownRuntime {
+	public fun <init> ()V
+	public fun addHook (Ljava/lang/String;Lkotlin/jvm/functions/Function0;)Ljava/lang/AutoCloseable;
+	public final fun crash (Ljava/lang/Throwable;Ljava/lang/Thread;)V
+	public static synthetic fun crash$default (Lcom/davils/knot/testing/RecordingShutdownRuntime;Ljava/lang/Throwable;Ljava/lang/Thread;ILjava/lang/Object;)V
+	public fun exit-j5FA_6U (I)Ljava/lang/Void;
+	public final fun fireTimers ()V
+	public final fun getExits ()Ljava/util/List;
+	public final fun getHalts ()Ljava/util/List;
+	public final fun getHookNames ()Ljava/util/Set;
+	public final fun getReported ()Ljava/util/List;
+	public final fun getTimerDelays ()Ljava/util/List;
+	public fun halt-j5FA_6U (I)Ljava/lang/Void;
+	public fun installUncaughtHandler (Ljava/lang/Thread$UncaughtExceptionHandler;)V
+	public fun reportUncaught (Ljava/lang/Thread;Ljava/lang/Throwable;)V
+	public final fun runHooks ()V
+	public fun schedule-8Mi8wO0 (Ljava/lang/String;JLkotlin/jvm/functions/Function0;)Ljava/lang/AutoCloseable;
+	public fun toString ()Ljava/lang/String;
+	public fun uncaughtHandler ()Ljava/lang/Thread$UncaughtExceptionHandler;
+}
+
+public final class com/davils/knot/testing/SlowFailureSink : com/davils/knot/failure/sink/FailureSink {
+	public synthetic fun <init> (JLcom/davils/knot/failure/sink/FailureSink;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (JLcom/davils/knot/failure/sink/FailureSink;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getDelay-UwyO8pc ()J
+	public fun toString ()Ljava/lang/String;
+	public fun write (Lcom/davils/knot/failure/sink/CrashReport;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/knot/testing/TestFailures {
+	public static final field ID Ljava/lang/String;
+	public static final field INSTANCE Lcom/davils/knot/testing/TestFailures;
+	public final fun failure (Ljava/lang/Throwable;Lcom/davils/knot/failure/FailureSeverity;Lcom/davils/knot/failure/FailureOrigin;Ljava/lang/String;Lkotlin/time/Instant;I)Lcom/davils/knot/failure/UnexpectedFailure;
+	public static synthetic fun failure$default (Lcom/davils/knot/testing/TestFailures;Ljava/lang/Throwable;Lcom/davils/knot/failure/FailureSeverity;Lcom/davils/knot/failure/FailureOrigin;Ljava/lang/String;Lkotlin/time/Instant;IILjava/lang/Object;)Lcom/davils/knot/failure/UnexpectedFailure;
+	public final fun getAT ()Lkotlin/time/Instant;
+	public final fun getORIGIN ()Lcom/davils/knot/failure/FailureOrigin;
+}
+
+public final class com/davils/knot/testing/TestShutdownReports {
+	public static final field INSTANCE Lcom/davils/knot/testing/TestShutdownReports;
+	public final fun getSTARTED_AT ()Lkotlin/time/Instant;
+	public final fun phase (Lcom/davils/knot/shutdown/ShutdownPhase;[Lcom/davils/knot/shutdown/report/TaskReport;)Lcom/davils/knot/shutdown/report/PhaseReport;
+	public final fun report-0TnOCYM ([Lcom/davils/knot/shutdown/report/PhaseReport;Lcom/davils/knot/shutdown/ShutdownReason;I)Lcom/davils/knot/shutdown/report/ShutdownReport;
+	public static synthetic fun report-0TnOCYM$default (Lcom/davils/knot/testing/TestShutdownReports;[Lcom/davils/knot/shutdown/report/PhaseReport;Lcom/davils/knot/shutdown/ShutdownReason;IILjava/lang/Object;)Lcom/davils/knot/shutdown/report/ShutdownReport;
+	public final fun task (Ljava/lang/String;Lcom/davils/knot/shutdown/ShutdownPhase;Lcom/davils/knot/shutdown/report/TaskOutcome;)Lcom/davils/knot/shutdown/report/TaskReport;
+	public static synthetic fun task$default (Lcom/davils/knot/testing/TestShutdownReports;Ljava/lang/String;Lcom/davils/knot/shutdown/ShutdownPhase;Lcom/davils/knot/shutdown/report/TaskOutcome;ILjava/lang/Object;)Lcom/davils/knot/shutdown/report/TaskReport;
+}
+

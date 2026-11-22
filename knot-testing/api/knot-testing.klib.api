@@ -1,0 +1,84 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:knot-testing>
+final class com.davils.knot.testing/FailingFailureSink : com.davils.knot.failure.sink/FailureSink { // com.davils.knot.testing/FailingFailureSink|null[0]
+    constructor <init>(kotlin/Function0<kotlin/Throwable> = ...) // com.davils.knot.testing/FailingFailureSink.<init>|<init>(kotlin.Function0<kotlin.Throwable>){}[0]
+
+    final fun toString(): kotlin/String // com.davils.knot.testing/FailingFailureSink.toString|toString(){}[0]
+    final suspend fun write(com.davils.knot.failure.sink/CrashReport) // com.davils.knot.testing/FailingFailureSink.write|write(com.davils.knot.failure.sink.CrashReport){}[0]
+}
+
+final class com.davils.knot.testing/RecordingFailureSink : com.davils.knot.failure.sink/FailureSink { // com.davils.knot.testing/RecordingFailureSink|null[0]
+    constructor <init>() // com.davils.knot.testing/RecordingFailureSink.<init>|<init>(){}[0]
+
+    final val reports // com.davils.knot.testing/RecordingFailureSink.reports|{}reports[0]
+        final fun <get-reports>(): kotlin.collections/List<com.davils.knot.failure.sink/CrashReport> // com.davils.knot.testing/RecordingFailureSink.reports.<get-reports>|<get-reports>(){}[0]
+
+    final fun clear() // com.davils.knot.testing/RecordingFailureSink.clear|clear(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.testing/RecordingFailureSink.toString|toString(){}[0]
+    final suspend fun awaitCount(kotlin/Int): kotlin.collections/List<com.davils.knot.failure.sink/CrashReport> // com.davils.knot.testing/RecordingFailureSink.awaitCount|awaitCount(kotlin.Int){}[0]
+    final suspend fun write(com.davils.knot.failure.sink/CrashReport) // com.davils.knot.testing/RecordingFailureSink.write|write(com.davils.knot.failure.sink.CrashReport){}[0]
+}
+
+final class com.davils.knot.testing/SlowFailureSink : com.davils.knot.failure.sink/FailureSink { // com.davils.knot.testing/SlowFailureSink|null[0]
+    constructor <init>(kotlin.time/Duration, com.davils.knot.failure.sink/FailureSink = ...) // com.davils.knot.testing/SlowFailureSink.<init>|<init>(kotlin.time.Duration;com.davils.knot.failure.sink.FailureSink){}[0]
+
+    final val delay // com.davils.knot.testing/SlowFailureSink.delay|{}delay[0]
+        final fun <get-delay>(): kotlin.time/Duration // com.davils.knot.testing/SlowFailureSink.delay.<get-delay>|<get-delay>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.knot.testing/SlowFailureSink.toString|toString(){}[0]
+    final suspend fun write(com.davils.knot.failure.sink/CrashReport) // com.davils.knot.testing/SlowFailureSink.write|write(com.davils.knot.failure.sink.CrashReport){}[0]
+}
+
+final object com.davils.knot.testing/HostProbes { // com.davils.knot.testing/HostProbes|null[0]
+    final val all // com.davils.knot.testing/HostProbes.all|{}all[0]
+        final fun <get-all>(): kotlin.collections/List<com.davils.knot.platform/HostProbe> // com.davils.knot.testing/HostProbes.all.<get-all>|<get-all>(){}[0]
+    final val bunOnLinux // com.davils.knot.testing/HostProbes.bunOnLinux|{}bunOnLinux[0]
+        final fun <get-bunOnLinux>(): com.davils.knot.platform/HostProbe // com.davils.knot.testing/HostProbes.bunOnLinux.<get-bunOnLinux>|<get-bunOnLinux>(){}[0]
+    final val chromeOnAndroid // com.davils.knot.testing/HostProbes.chromeOnAndroid|{}chromeOnAndroid[0]
+        final fun <get-chromeOnAndroid>(): com.davils.knot.platform/HostProbe // com.davils.knot.testing/HostProbes.chromeOnAndroid.<get-chromeOnAndroid>|<get-chromeOnAndroid>(){}[0]
+    final val chromeOnWindows // com.davils.knot.testing/HostProbes.chromeOnWindows|{}chromeOnWindows[0]
+        final fun <get-chromeOnWindows>(): com.davils.knot.platform/HostProbe // com.davils.knot.testing/HostProbes.chromeOnWindows.<get-chromeOnWindows>|<get-chromeOnWindows>(){}[0]
+    final val dedicatedWorker // com.davils.knot.testing/HostProbes.dedicatedWorker|{}dedicatedWorker[0]
+        final fun <get-dedicatedWorker>(): com.davils.knot.platform/HostProbe // com.davils.knot.testing/HostProbes.dedicatedWorker.<get-dedicatedWorker>|<get-dedicatedWorker>(){}[0]
+    final val denoOnMac // com.davils.knot.testing/HostProbes.denoOnMac|{}denoOnMac[0]
+        final fun <get-denoOnMac>(): com.davils.knot.platform/HostProbe // com.davils.knot.testing/HostProbes.denoOnMac.<get-denoOnMac>|<get-denoOnMac>(){}[0]
+    final val firefoxOnLinux // com.davils.knot.testing/HostProbes.firefoxOnLinux|{}firefoxOnLinux[0]
+        final fun <get-firefoxOnLinux>(): com.davils.knot.platform/HostProbe // com.davils.knot.testing/HostProbes.firefoxOnLinux.<get-firefoxOnLinux>|<get-firefoxOnLinux>(){}[0]
+    final val jvmOnLinux // com.davils.knot.testing/HostProbes.jvmOnLinux|{}jvmOnLinux[0]
+        final fun <get-jvmOnLinux>(): com.davils.knot.platform/HostProbe // com.davils.knot.testing/HostProbes.jvmOnLinux.<get-jvmOnLinux>|<get-jvmOnLinux>(){}[0]
+    final val nodeOnLinux // com.davils.knot.testing/HostProbes.nodeOnLinux|{}nodeOnLinux[0]
+        final fun <get-nodeOnLinux>(): com.davils.knot.platform/HostProbe // com.davils.knot.testing/HostProbes.nodeOnLinux.<get-nodeOnLinux>|<get-nodeOnLinux>(){}[0]
+    final val safariOnIphone // com.davils.knot.testing/HostProbes.safariOnIphone|{}safariOnIphone[0]
+        final fun <get-safariOnIphone>(): com.davils.knot.platform/HostProbe // com.davils.knot.testing/HostProbes.safariOnIphone.<get-safariOnIphone>|<get-safariOnIphone>(){}[0]
+    final val safariOnMac // com.davils.knot.testing/HostProbes.safariOnMac|{}safariOnMac[0]
+        final fun <get-safariOnMac>(): com.davils.knot.platform/HostProbe // com.davils.knot.testing/HostProbes.safariOnMac.<get-safariOnMac>|<get-safariOnMac>(){}[0]
+    final val serviceWorker // com.davils.knot.testing/HostProbes.serviceWorker|{}serviceWorker[0]
+        final fun <get-serviceWorker>(): com.davils.knot.platform/HostProbe // com.davils.knot.testing/HostProbes.serviceWorker.<get-serviceWorker>|<get-serviceWorker>(){}[0]
+}
+
+final object com.davils.knot.testing/TestFailures { // com.davils.knot.testing/TestFailures|null[0]
+    final const val ID // com.davils.knot.testing/TestFailures.ID|{}ID[0]
+        final fun <get-ID>(): kotlin/String // com.davils.knot.testing/TestFailures.ID.<get-ID>|<get-ID>(){}[0]
+
+    final val AT // com.davils.knot.testing/TestFailures.AT|{}AT[0]
+        final fun <get-AT>(): kotlin.time/Instant // com.davils.knot.testing/TestFailures.AT.<get-AT>|<get-AT>(){}[0]
+    final val ORIGIN // com.davils.knot.testing/TestFailures.ORIGIN|{}ORIGIN[0]
+        final fun <get-ORIGIN>(): com.davils.knot.failure/FailureOrigin // com.davils.knot.testing/TestFailures.ORIGIN.<get-ORIGIN>|<get-ORIGIN>(){}[0]
+
+    final fun failure(kotlin/Throwable = ..., com.davils.knot.failure/FailureSeverity = ..., com.davils.knot.failure/FailureOrigin = ..., kotlin/String = ..., kotlin.time/Instant = ..., kotlin/Int = ...): com.davils.knot.failure/UnexpectedFailure // com.davils.knot.testing/TestFailures.failure|failure(kotlin.Throwable;com.davils.knot.failure.FailureSeverity;com.davils.knot.failure.FailureOrigin;kotlin.String;kotlin.time.Instant;kotlin.Int){}[0]
+}
+
+final object com.davils.knot.testing/TestShutdownReports { // com.davils.knot.testing/TestShutdownReports|null[0]
+    final val STARTED_AT // com.davils.knot.testing/TestShutdownReports.STARTED_AT|{}STARTED_AT[0]
+        final fun <get-STARTED_AT>(): kotlin.time/Instant // com.davils.knot.testing/TestShutdownReports.STARTED_AT.<get-STARTED_AT>|<get-STARTED_AT>(){}[0]
+
+    final fun phase(com.davils.knot.shutdown/ShutdownPhase, kotlin/Array<out com.davils.knot.shutdown.report/TaskReport>...): com.davils.knot.shutdown.report/PhaseReport // com.davils.knot.testing/TestShutdownReports.phase|phase(com.davils.knot.shutdown.ShutdownPhase;kotlin.Array<out|com.davils.knot.shutdown.report.TaskReport>...){}[0]
+    final fun report(kotlin/Array<out com.davils.knot.shutdown.report/PhaseReport>..., com.davils.knot.shutdown/ShutdownReason = ..., com.davils.knot.shutdown.exit/ExitCode = ...): com.davils.knot.shutdown.report/ShutdownReport // com.davils.knot.testing/TestShutdownReports.report|report(kotlin.Array<out|com.davils.knot.shutdown.report.PhaseReport>...;com.davils.knot.shutdown.ShutdownReason;com.davils.knot.shutdown.exit.ExitCode){}[0]
+    final fun task(kotlin/String, com.davils.knot.shutdown/ShutdownPhase = ..., com.davils.knot.shutdown.report/TaskOutcome = ...): com.davils.knot.shutdown.report/TaskReport // com.davils.knot.testing/TestShutdownReports.task|task(kotlin.String;com.davils.knot.shutdown.ShutdownPhase;com.davils.knot.shutdown.report.TaskOutcome){}[0]
+}
