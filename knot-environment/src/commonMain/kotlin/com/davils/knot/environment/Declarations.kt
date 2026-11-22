@@ -19,9 +19,9 @@ package com.davils.knot.environment
 internal data class Declarations(
     val base: Environment,
     val layers: List<Environment>,
-    val variables: List<Pair<String, String>>,
-    val removals: List<String>,
-    val scopes: List<String>,
-    val hasTooManyLayers: Boolean,
-    val hasTooManyChanges: Boolean,
+    val changes: Changes,
+    val rules: Rules,
+    val options: Options,
+    val overflows: Overflows,
+    val dotenvProblems: List<DotenvProblem>,
 )

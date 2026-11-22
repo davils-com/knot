@@ -20,4 +20,5 @@ module com.davils.knot.environment {
     requires transitive com.davils.kore.core;
 
     exports com.davils.knot.environment;
+    exports com.davils.knot.environment.schema;
 }

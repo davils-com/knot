@@ -10,30 +10,89 @@ public final class com/davils/knot/environment/Environment$Companion {
 }
 
 public final class com/davils/knot/environment/EnvironmentBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public final fun alias (Ljava/lang/String;[Ljava/lang/String;)V
 	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun default (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun defaults (Ljava/util/Map;)V
+	public final fun dotenv (Ljava/lang/String;)V
+	public final fun expand (Lcom/davils/knot/environment/MissingReference;)V
+	public static synthetic fun expand$default (Lcom/davils/knot/environment/EnvironmentBuilder;Lcom/davils/knot/environment/MissingReference;ILjava/lang/Object;)V
+	public final fun filter (Lkotlin/jvm/functions/Function1;)V
+	public final fun getGrammar ()Lcom/davils/knot/environment/NameGrammar;
+	public final fun ignoreCase ()V
 	public final fun layer (Lcom/davils/knot/environment/Environment;)V
+	public final fun layer (Ljava/util/Map;)V
 	public final fun layer (Lkotlin/jvm/functions/Function1;)V
-	public final fun remove (Ljava/lang/String;)V
+	public final fun prefixed (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public final fun remove ([Ljava/lang/String;)V
+	public final fun require ([Ljava/lang/String;)V
 	public final fun scope (Ljava/lang/String;)V
+	public final fun setGrammar (Lcom/davils/knot/environment/NameGrammar;)V
+	public final fun snapshot ()V
 	public final fun variable (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun variables (Ljava/util/Map;)V
+}
+
+public final class com/davils/knot/environment/EnvironmentException : java/lang/IllegalStateException {
+	public final fun getCode-J_S2PC0 ()Ljava/lang/String;
+	public final fun getVariable ()Ljava/lang/String;
 }
 
 public final class com/davils/knot/environment/EnvironmentLimits {
 	public static final field INSTANCE Lcom/davils/knot/environment/EnvironmentLimits;
 	public static final field MAX_CHANGES I
+	public static final field MAX_DOTENV_LENGTH I
+	public static final field MAX_DOTENV_LINES I
+	public static final field MAX_ELEMENTS I
+	public static final field MAX_EXPANDED_LENGTH I
+	public static final field MAX_EXPANSION_DEPTH I
+	public static final field MAX_FALLBACKS I
 	public static final field MAX_LAYERS I
+	public static final field MAX_RULES I
+	public static final field MAX_SETTINGS I
+}
+
+public final class com/davils/knot/environment/EnvironmentReadsKt {
+	public static final fun boolean (Lcom/davils/knot/environment/Environment;Ljava/lang/String;)Ljava/lang/Boolean;
+	public static final fun double (Lcom/davils/knot/environment/Environment;Ljava/lang/String;)Ljava/lang/Double;
+	public static final fun duration-VTINZ0E (Lcom/davils/knot/environment/Environment;Ljava/lang/String;JJ)Lkotlin/time/Duration;
+	public static synthetic fun duration-VTINZ0E$default (Lcom/davils/knot/environment/Environment;Ljava/lang/String;JJILjava/lang/Object;)Lkotlin/time/Duration;
+	public static final fun int (Lcom/davils/knot/environment/Environment;Ljava/lang/String;)Ljava/lang/Integer;
+	public static final fun isSet (Lcom/davils/knot/environment/Environment;Ljava/lang/String;)Z
+	public static final fun list (Lcom/davils/knot/environment/Environment;Ljava/lang/String;C)Ljava/util/List;
+	public static final fun list (Lcom/davils/knot/environment/Environment;Ljava/lang/String;Lcom/davils/kore/core/arguments/conversion/Converter;C)Ljava/util/List;
+	public static synthetic fun list$default (Lcom/davils/knot/environment/Environment;Ljava/lang/String;CILjava/lang/Object;)Ljava/util/List;
+	public static synthetic fun list$default (Lcom/davils/knot/environment/Environment;Ljava/lang/String;Lcom/davils/kore/core/arguments/conversion/Converter;CILjava/lang/Object;)Ljava/util/List;
+	public static final fun long (Lcom/davils/knot/environment/Environment;Ljava/lang/String;)Ljava/lang/Long;
+	public static final fun map (Lcom/davils/knot/environment/Environment;Ljava/lang/String;CC)Ljava/util/Map;
+	public static synthetic fun map$default (Lcom/davils/knot/environment/Environment;Ljava/lang/String;CCILjava/lang/Object;)Ljava/util/Map;
+	public static final fun requireValue (Lcom/davils/knot/environment/Environment;Ljava/lang/String;Lcom/davils/kore/core/arguments/conversion/Converter;)Ljava/lang/Object;
+	public static final fun value (Lcom/davils/knot/environment/Environment;Ljava/lang/String;Lcom/davils/kore/core/arguments/conversion/Converter;)Ljava/lang/Object;
+	public static final fun value (Lcom/davils/knot/environment/Environment;Ljava/lang/String;Lcom/davils/kore/core/arguments/conversion/Converter;Ljava/lang/Object;)Ljava/lang/Object;
 }
 
 public final class com/davils/knot/environment/EnvironmentViolationCodes {
 	public static final field INSTANCE Lcom/davils/knot/environment/EnvironmentViolationCodes;
 	public final fun getCONFLICTING_CHANGE-J_S2PC0 ()Ljava/lang/String;
 	public final fun getDUPLICATE_CHANGE-J_S2PC0 ()Ljava/lang/String;
+	public final fun getEXPANSION_CYCLE-J_S2PC0 ()Ljava/lang/String;
+	public final fun getEXPANSION_TOO_LARGE-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_ALIAS-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_DOTENV-J_S2PC0 ()Ljava/lang/String;
 	public final fun getINVALID_NAME-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_REFERENCE-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_SCHEMA-J_S2PC0 ()Ljava/lang/String;
 	public final fun getINVALID_VALUE-J_S2PC0 ()Ljava/lang/String;
+	public final fun getMISSING_REQUIRED-J_S2PC0 ()Ljava/lang/String;
+	public final fun getREJECTED_VALUE-J_S2PC0 ()Ljava/lang/String;
 	public final fun getREPEATED_SCOPE-J_S2PC0 ()Ljava/lang/String;
 	public final fun getTOO_LONG-J_S2PC0 ()Ljava/lang/String;
 	public final fun getTOO_MANY_CHANGES-J_S2PC0 ()Ljava/lang/String;
 	public final fun getTOO_MANY_LAYERS-J_S2PC0 ()Ljava/lang/String;
+	public final fun getTOO_MANY_RULES-J_S2PC0 ()Ljava/lang/String;
+	public final fun getUNKNOWN_VARIABLE-J_S2PC0 ()Ljava/lang/String;
+	public final fun getUNREADABLE_VALUE-J_S2PC0 ()Ljava/lang/String;
+	public final fun getUNRESOLVED_REFERENCE-J_S2PC0 ()Ljava/lang/String;
 }
 
 public final class com/davils/knot/environment/EnvironmentsKt {
@@ -41,10 +100,100 @@ public final class com/davils/knot/environment/EnvironmentsKt {
 	public static synthetic fun environment$default (Lcom/davils/knot/environment/Environment;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/Environment;
 }
 
+public final class com/davils/knot/environment/FilterBuilder {
+	public final fun exclude ([Ljava/lang/String;)V
+	public final fun excludePrefix (Ljava/lang/String;)V
+	public final fun include ([Ljava/lang/String;)V
+	public final fun includePrefix (Ljava/lang/String;)V
+}
+
 public final class com/davils/knot/environment/LayeredEnvironment : com/davils/knot/environment/Environment, com/davils/kore/core/validation/Validatable {
 	public fun getNames ()Ljava/util/Set;
 	public fun toString ()Ljava/lang/String;
 	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
 	public fun variable (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class com/davils/knot/environment/MissingReference : java/lang/Enum {
+	public static final field Empty Lcom/davils/knot/environment/MissingReference;
+	public static final field Fail Lcom/davils/knot/environment/MissingReference;
+	public static final field Keep Lcom/davils/knot/environment/MissingReference;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/knot/environment/MissingReference;
+	public static fun values ()[Lcom/davils/knot/environment/MissingReference;
+}
+
+public final class com/davils/knot/environment/NameGrammar : java/lang/Enum {
+	public static final field Lenient Lcom/davils/knot/environment/NameGrammar;
+	public static final field Posix Lcom/davils/knot/environment/NameGrammar;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/knot/environment/NameGrammar;
+	public static fun values ()[Lcom/davils/knot/environment/NameGrammar;
+}
+
+public abstract class com/davils/knot/environment/schema/EnvironmentSchema {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;Z)V
+	public synthetic fun <init> (Ljava/lang/String;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	protected final fun boolean (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/environment/schema/Setting;
+	public static synthetic fun boolean$default (Lcom/davils/knot/environment/schema/EnvironmentSchema;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/schema/Setting;
+	protected final fun choice (Ljava/lang/String;[Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/environment/schema/Setting;
+	public static synthetic fun choice$default (Lcom/davils/knot/environment/schema/EnvironmentSchema;Ljava/lang/String;[Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/schema/Setting;
+	public final fun describe ()Ljava/util/List;
+	protected final fun double (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/environment/schema/Setting;
+	public static synthetic fun double$default (Lcom/davils/knot/environment/schema/EnvironmentSchema;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/schema/Setting;
+	protected final fun duration-vLdBGDU (Ljava/lang/String;JJLkotlin/jvm/functions/Function1;)Lcom/davils/knot/environment/schema/Setting;
+	public static synthetic fun duration-vLdBGDU$default (Lcom/davils/knot/environment/schema/EnvironmentSchema;Ljava/lang/String;JJLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/schema/Setting;
+	public final fun getPrefix ()Ljava/lang/String;
+	protected final fun int (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/environment/schema/Setting;
+	public static synthetic fun int$default (Lcom/davils/knot/environment/schema/EnvironmentSchema;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/schema/Setting;
+	public final fun isStrict ()Z
+	protected final fun list (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/environment/schema/Setting;
+	public static synthetic fun list$default (Lcom/davils/knot/environment/schema/EnvironmentSchema;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/schema/Setting;
+	public final fun load (Lcom/davils/knot/environment/Environment;)Lcom/davils/knot/environment/schema/EnvironmentSettings;
+	protected final fun long (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/environment/schema/Setting;
+	public static synthetic fun long$default (Lcom/davils/knot/environment/schema/EnvironmentSchema;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/schema/Setting;
+	protected final fun setting (Ljava/lang/String;Lcom/davils/kore/core/arguments/conversion/Converter;Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/environment/schema/Setting;
+	public static synthetic fun setting$default (Lcom/davils/knot/environment/schema/EnvironmentSchema;Ljava/lang/String;Lcom/davils/kore/core/arguments/conversion/Converter;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/schema/Setting;
+	protected final fun string (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/environment/schema/Setting;
+	public static synthetic fun string$default (Lcom/davils/knot/environment/schema/EnvironmentSchema;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/schema/Setting;
+}
+
+public final class com/davils/knot/environment/schema/EnvironmentSettings {
+	public final fun get (Lcom/davils/knot/environment/schema/Setting;)Ljava/lang/Object;
+	public final fun require (Lcom/davils/knot/environment/schema/Setting;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/environment/schema/Setting {
+	public final fun getDefault ()Ljava/lang/Object;
+	public final fun getDescription ()Ljava/lang/String;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getTypeName ()Ljava/lang/String;
+	public final fun isRequired ()Z
+	public final fun isSecret ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/environment/schema/SettingBuilder {
+	public final fun accept (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public final fun getDefault ()Ljava/lang/Object;
+	public final fun getDescription ()Ljava/lang/String;
+	public final fun required ()V
+	public final fun secret ()V
+	public final fun setDefault (Ljava/lang/Object;)V
+	public final fun setDescription (Ljava/lang/String;)V
+}
+
+public final class com/davils/knot/environment/schema/SettingDescription {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDefaultText ()Ljava/lang/String;
+	public final fun getDescription ()Ljava/lang/String;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getTypeName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isRequired ()Z
+	public final fun isSecret ()Z
+	public fun toString ()Ljava/lang/String;
 }
 
