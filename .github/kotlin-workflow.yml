@@ -23,12 +23,28 @@ gradle:
 check:
   tasks: [check]
   reproducible:
-    clean-tasks: [":knot-platform:clean", ":knot-environment:clean"]
-    tasks: [":knot-platform:jvmJar", ":knot-environment:jvmJar"]
-    artifacts: ["knot-platform/build/libs/*.jar", "knot-environment/build/libs/*.jar"]
+    clean-tasks:
+      - ":knot-platform:clean"
+      - ":knot-environment:clean"
+      - ":knot-shutdown:clean"
+      - ":knot-failure:clean"
+      - ":knot-testing:clean"
+    tasks:
+      - ":knot-platform:jvmJar"
+      - ":knot-environment:jvmJar"
+      - ":knot-shutdown:jvmJar"
+      - ":knot-failure:jvmJar"
+      - ":knot-testing:jvmJar"
+    artifacts:
+      - "knot-platform/build/libs/*.jar"
+      - "knot-environment/build/libs/*.jar"
+      - "knot-shutdown/build/libs/*.jar"
+      - "knot-failure/build/libs/*.jar"
+      - "knot-testing/build/libs/*.jar"
 
 policy:
-  # The resolution of the host platform differs between operating systems, so develop, main and a tag run on Windows too.
+  # The detection of the host and the process tests of the shutdown differ between operating systems, so develop,
+  # main and a tag run on Windows too.
   push-develop:
     stages: [check, snapshot]
     os: [ubuntu-latest, windows-latest]
@@ -54,6 +70,10 @@ publish:
   tasks:
     - ":knot-platform:publishAllPublicationsToDavilsRepository"
     - ":knot-environment:publishAllPublicationsToDavilsRepository"
+    - ":knot-shutdown:publishAllPublicationsToDavilsRepository"
+    - ":knot-failure:publishAllPublicationsToDavilsRepository"
+    - ":knot-testing:publishAllPublicationsToDavilsRepository"
+    - ":knot-bom:publishAllPublicationsToDavilsRepository"
 
 snapshot:
   # Knot's own build makes every build without a release tag a snapshot.

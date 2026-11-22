@@ -127,3 +127,7 @@ rootProject.name = "knot"
 
 include(":knot-platform")
 include(":knot-environment")
+include(":knot-shutdown")
+include(":knot-failure")
+include(":knot-testing")
+include(":knot-bom")
