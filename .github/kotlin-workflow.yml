@@ -102,12 +102,48 @@ release:
       - path: com/davils/knot-environment
         artifact: knot-environment
         task: ":knot-environment:publishKotlinMultiplatformPublicationToDavilsRepository"
+      - path: com/davils/knot-shutdown-jvm
+        artifact: knot-shutdown-jvm
+        task: ":knot-shutdown:publishJvmPublicationToDavilsRepository"
+      - path: com/davils/knot-shutdown-wasm-js
+        artifact: knot-shutdown-wasm-js
+        task: ":knot-shutdown:publishWasmJsPublicationToDavilsRepository"
+      - path: com/davils/knot-shutdown
+        artifact: knot-shutdown
+        task: ":knot-shutdown:publishKotlinMultiplatformPublicationToDavilsRepository"
+      - path: com/davils/knot-failure-jvm
+        artifact: knot-failure-jvm
+        task: ":knot-failure:publishJvmPublicationToDavilsRepository"
+      - path: com/davils/knot-failure-wasm-js
+        artifact: knot-failure-wasm-js
+        task: ":knot-failure:publishWasmJsPublicationToDavilsRepository"
+      - path: com/davils/knot-failure
+        artifact: knot-failure
+        task: ":knot-failure:publishKotlinMultiplatformPublicationToDavilsRepository"
+      - path: com/davils/knot-testing-jvm
+        artifact: knot-testing-jvm
+        task: ":knot-testing:publishJvmPublicationToDavilsRepository"
+      - path: com/davils/knot-testing-wasm-js
+        artifact: knot-testing-wasm-js
+        task: ":knot-testing:publishWasmJsPublicationToDavilsRepository"
+      - path: com/davils/knot-testing
+        artifact: knot-testing
+        task: ":knot-testing:publishKotlinMultiplatformPublicationToDavilsRepository"
+      - path: com/davils/knot-bom
+        artifact: knot-bom
+        task: ":knot-bom:publishMavenPublicationToDavilsRepository"
   attest:
     subjects:
       - "knot-platform/build/libs/*.jar"
       - "knot-platform/build/libs/*.klib"
       - "knot-environment/build/libs/*.jar"
       - "knot-environment/build/libs/*.klib"
+      - "knot-shutdown/build/libs/*.jar"
+      - "knot-shutdown/build/libs/*.klib"
+      - "knot-failure/build/libs/*.jar"
+      - "knot-failure/build/libs/*.klib"
+      - "knot-testing/build/libs/*.jar"
+      - "knot-testing/build/libs/*.klib"
   github-release:
     enabled: false
 
