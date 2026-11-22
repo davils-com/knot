@@ -1,0 +1,519 @@
+public final class com/davils/knot/shutdown/EventBusShutdownsKt {
+	public static final fun eventBus-exY8QGI (Lcom/davils/knot/shutdown/ShutdownPlanBuilder;Lcom/davils/konfetti/core/EventBus;JLjava/lang/String;)V
+	public static synthetic fun eventBus-exY8QGI$default (Lcom/davils/knot/shutdown/ShutdownPlanBuilder;Lcom/davils/konfetti/core/EventBus;JLjava/lang/String;ILjava/lang/Object;)V
+}
+
+public abstract interface class com/davils/knot/shutdown/RegistrationRefusal {
+}
+
+public final class com/davils/knot/shutdown/RegistrationRefusal$Invalid : com/davils/knot/shutdown/RegistrationRefusal {
+	public final fun getReport ()Lcom/davils/kore/core/validation/report/ValidationReport;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/RegistrationRefusal$ShuttingDown : com/davils/knot/shutdown/RegistrationRefusal {
+	public static final field INSTANCE Lcom/davils/knot/shutdown/RegistrationRefusal$ShuttingDown;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/Shutdown : com/davils/kollect/core/health/HealthIndicator {
+	public final fun awaitTermination (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun check (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getConfiguration ()Lcom/davils/knot/shutdown/ShutdownConfiguration;
+	public final fun getEventFlow ()Lkotlinx/coroutines/flow/Flow;
+	public final fun getState ()Lkotlinx/coroutines/flow/StateFlow;
+	public final fun initiate (Lcom/davils/knot/shutdown/ShutdownReason;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun initiate$default (Lcom/davils/knot/shutdown/Shutdown;Lcom/davils/knot/shutdown/ShutdownReason;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun isStarted ()Z
+	public final fun metrics ()Lcom/davils/knot/shutdown/ShutdownMetrics;
+	public final fun register (Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/shutdown/ShutdownRegistration;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/ShutdownBuilder : com/davils/knot/shutdown/ShutdownPlanBuilder {
+	public static final field Companion Lcom/davils/knot/shutdown/ShutdownBuilder$Companion;
+	public static final field DEFAULT_EVENT_CAPACITY I
+	public static final field DEFAULT_NAME Ljava/lang/String;
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun getCancellationGrace-UwyO8pc ()J
+	public final fun getClock ()Lkotlin/time/Clock;
+	public final fun getEventCapacity ()I
+	public final fun getEvents ()Lcom/davils/konfetti/core/EventBus;
+	public final fun getExitCodes ()Lcom/davils/knot/shutdown/exit/ExitCodes;
+	public final fun getGracePeriod-UwyO8pc ()J
+	public final fun getMeters ()Lcom/davils/kollect/core/MeterRegistry;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getTaskTimeout-UwyO8pc ()J
+	public final fun getTimeSource ()Lkotlin/time/TimeSource$WithComparableMarks;
+	public final fun getTracer ()Lcom/davils/kollect/core/trace/Tracer;
+	public final fun setCancellationGrace-LRDsOJo (J)V
+	public final fun setClock (Lkotlin/time/Clock;)V
+	public final fun setEventCapacity (I)V
+	public final fun setEvents (Lcom/davils/konfetti/core/EventBus;)V
+	public final fun setExitCodes (Lcom/davils/knot/shutdown/exit/ExitCodes;)V
+	public final fun setGracePeriod-LRDsOJo (J)V
+	public final fun setMeters (Lcom/davils/kollect/core/MeterRegistry;)V
+	public final fun setName (Ljava/lang/String;)V
+	public final fun setTaskTimeout-LRDsOJo (J)V
+	public final fun setTimeSource (Lkotlin/time/TimeSource$WithComparableMarks;)V
+	public final fun setTracer (Lcom/davils/kollect/core/trace/Tracer;)V
+}
+
+public final class com/davils/knot/shutdown/ShutdownBuilder$Companion {
+	public final fun getDEFAULT_CANCELLATION_GRACE-UwyO8pc ()J
+	public final fun getDEFAULT_GRACE_PERIOD-UwyO8pc ()J
+	public final fun getDEFAULT_TASK_TIMEOUT-UwyO8pc ()J
+}
+
+public final class com/davils/knot/shutdown/ShutdownConfiguration : com/davils/kore/core/validation/Validatable {
+	public final fun getCancellationGrace-UwyO8pc ()J
+	public final fun getClock ()Lkotlin/time/Clock;
+	public final fun getEventCapacity ()I
+	public final fun getEvents ()Lcom/davils/konfetti/core/EventBus;
+	public final fun getExitCodes ()Lcom/davils/knot/shutdown/exit/ExitCodes;
+	public final fun getGracePeriod-UwyO8pc ()J
+	public final fun getMeters ()Lcom/davils/kollect/core/MeterRegistry;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getTaskTimeout-UwyO8pc ()J
+	public final fun getTasks ()Ljava/util/List;
+	public final fun getTimeSource ()Lkotlin/time/TimeSource$WithComparableMarks;
+	public final fun getTracer ()Lcom/davils/kollect/core/trace/Tracer;
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public abstract class com/davils/knot/shutdown/ShutdownEvent : com/davils/konfetti/core/Event {
+	public static final field Companion Lcom/davils/knot/shutdown/ShutdownEvent$Companion;
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getShutdown ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/ShutdownEvent$Companion {
+	public final fun getTOPIC ()Lcom/davils/konfetti/core/TopicKey;
+}
+
+public final class com/davils/knot/shutdown/ShutdownEvent$Escalated : com/davils/knot/shutdown/ShutdownEvent {
+	public final fun getAfter-UwyO8pc ()J
+	public final fun getExitCode-r1j2jA8 ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/ShutdownEvent$Initiated : com/davils/knot/shutdown/ShutdownEvent {
+	public final fun getReason ()Lcom/davils/knot/shutdown/ShutdownReason;
+	public final fun getTasks ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/ShutdownEvent$PhaseCompleted : com/davils/knot/shutdown/ShutdownEvent {
+	public final fun getReport ()Lcom/davils/knot/shutdown/report/PhaseReport;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/ShutdownEvent$PhaseStarted : com/davils/knot/shutdown/ShutdownEvent {
+	public final fun getPhase ()Lcom/davils/knot/shutdown/ShutdownPhase;
+	public final fun getTasks ()Ljava/util/List;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/ShutdownEvent$TaskConcluded : com/davils/knot/shutdown/ShutdownEvent {
+	public final fun getTask ()Lcom/davils/knot/shutdown/report/TaskReport;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/ShutdownEvent$Terminated : com/davils/knot/shutdown/ShutdownEvent {
+	public final fun getReport ()Lcom/davils/knot/shutdown/report/ShutdownReport;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/ShutdownLimits {
+	public static final field INSTANCE Lcom/davils/knot/shutdown/ShutdownLimits;
+	public static final field MAX_DEPENDENCIES I
+	public static final field MAX_EVENT_CAPACITY I
+	public static final field MAX_NAME_LENGTH I
+	public static final field MAX_TASKS I
+	public final fun getMAX_GRACE_PERIOD-UwyO8pc ()J
+}
+
+public final class com/davils/knot/shutdown/ShutdownMetrics {
+	public final fun getAbandoned ()J
+	public final fun getCompleted ()J
+	public final fun getDeadlineExceeded ()J
+	public final fun getEscalations ()J
+	public final fun getFailed ()J
+	public final fun getRefusedRegistrations ()J
+	public final fun getRegisteredTasks ()I
+	public final fun getRejectedEvents ()J
+	public final fun getTimedOut ()J
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/ShutdownPhase : java/lang/Enum {
+	public static final field Announce Lcom/davils/knot/shutdown/ShutdownPhase;
+	public static final field Drain Lcom/davils/knot/shutdown/ShutdownPhase;
+	public static final field Flush Lcom/davils/knot/shutdown/ShutdownPhase;
+	public static final field Release Lcom/davils/knot/shutdown/ShutdownPhase;
+	public static final field Stop Lcom/davils/knot/shutdown/ShutdownPhase;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/knot/shutdown/ShutdownPhase;
+	public static fun values ()[Lcom/davils/knot/shutdown/ShutdownPhase;
+}
+
+public final class com/davils/knot/shutdown/ShutdownPlan : com/davils/kore/core/validation/Validatable {
+	public final fun getTasks ()Ljava/util/List;
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public abstract class com/davils/knot/shutdown/ShutdownPlanBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public final fun announce (Lkotlin/jvm/functions/Function1;)V
+	public final fun drain (Lkotlin/jvm/functions/Function1;)V
+	public final fun flush (Lkotlin/jvm/functions/Function1;)V
+	public final fun phase (Lcom/davils/knot/shutdown/ShutdownPhase;Lkotlin/jvm/functions/Function1;)V
+	public final fun release (Lkotlin/jvm/functions/Function1;)V
+	public final fun stop (Lkotlin/jvm/functions/Function1;)V
+}
+
+public abstract interface class com/davils/knot/shutdown/ShutdownReason {
+}
+
+public final class com/davils/knot/shutdown/ShutdownReason$FatalError : com/davils/knot/shutdown/ShutdownReason {
+	public fun <init> (Ljava/lang/Throwable;Ljava/lang/String;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCause ()Ljava/lang/Throwable;
+	public final fun getOrigin ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/ShutdownReason$ProcessExit : com/davils/knot/shutdown/ShutdownReason {
+	public static final field INSTANCE Lcom/davils/knot/shutdown/ShutdownReason$ProcessExit;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/ShutdownReason$Requested : com/davils/knot/shutdown/ShutdownReason {
+	public fun <init> ()V
+	public synthetic fun <init> (Ljava/lang/String;Lcom/davils/knot/shutdown/exit/ExitCode;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Lcom/davils/knot/shutdown/exit/ExitCode;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExitCode-81O7Rs0 ()Lcom/davils/knot/shutdown/exit/ExitCode;
+	public final fun getSource ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/knot/shutdown/ShutdownRegistration {
+	public abstract fun getOrThrow ()Lcom/davils/knot/shutdown/ShutdownRegistration$Registered;
+}
+
+public final class com/davils/knot/shutdown/ShutdownRegistration$Refused : com/davils/knot/shutdown/ShutdownRegistration {
+	public fun getOrThrow ()Lcom/davils/knot/shutdown/ShutdownRegistration$Registered;
+	public final fun getRefusal ()Lcom/davils/knot/shutdown/RegistrationRefusal;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/ShutdownRegistration$Registered : com/davils/knot/shutdown/ShutdownRegistration {
+	public fun getOrThrow ()Lcom/davils/knot/shutdown/ShutdownRegistration$Registered;
+	public final fun getTasks ()Ljava/util/Set;
+	public fun toString ()Ljava/lang/String;
+	public final fun unregister ()Z
+}
+
+public final class com/davils/knot/shutdown/ShutdownRegistrationBuilder : com/davils/knot/shutdown/ShutdownPlanBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+}
+
+public abstract interface class com/davils/knot/shutdown/ShutdownState {
+}
+
+public final class com/davils/knot/shutdown/ShutdownState$Running : com/davils/knot/shutdown/ShutdownState {
+	public static final field INSTANCE Lcom/davils/knot/shutdown/ShutdownState$Running;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/ShutdownState$ShuttingDown : com/davils/knot/shutdown/ShutdownState {
+	public fun <init> (Lcom/davils/knot/shutdown/ShutdownReason;Lcom/davils/knot/shutdown/ShutdownPhase;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPhase ()Lcom/davils/knot/shutdown/ShutdownPhase;
+	public final fun getReason ()Lcom/davils/knot/shutdown/ShutdownReason;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/ShutdownState$Terminated : com/davils/knot/shutdown/ShutdownState {
+	public fun <init> (Lcom/davils/knot/shutdown/report/ShutdownReport;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getReport ()Lcom/davils/knot/shutdown/report/ShutdownReport;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/ShutdownViolationCodes {
+	public static final field INSTANCE Lcom/davils/knot/shutdown/ShutdownViolationCodes;
+	public final fun getDEPENDENCY_CYCLE-J_S2PC0 ()Ljava/lang/String;
+	public final fun getDUPLICATE_TASK-J_S2PC0 ()Ljava/lang/String;
+	public final fun getEMPTY_REGISTRATION-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_CANCELLATION_GRACE-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_ESCALATION-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_EVENT_CAPACITY-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_GRACE_PERIOD-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_NAME-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_TASK_NAME-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_TIMEOUT-J_S2PC0 ()Ljava/lang/String;
+	public final fun getLATER_PHASE_DEPENDENCY-J_S2PC0 ()Ljava/lang/String;
+	public final fun getMISSING_ACTION-J_S2PC0 ()Ljava/lang/String;
+	public final fun getNO_TRIGGER-J_S2PC0 ()Ljava/lang/String;
+	public final fun getTIMEOUT_EXCEEDS_GRACE-J_S2PC0 ()Ljava/lang/String;
+	public final fun getTOO_MANY_DEPENDENCIES-J_S2PC0 ()Ljava/lang/String;
+	public final fun getTOO_MANY_TASKS-J_S2PC0 ()Ljava/lang/String;
+	public final fun getUNKNOWN_DEPENDENCY-J_S2PC0 ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/ShutdownsKt {
+	public static final fun shutdown (Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/shutdown/Shutdown;
+	public static synthetic fun shutdown$default (Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/shutdown/Shutdown;
+}
+
+public final class com/davils/knot/shutdown/exit/ExitCode {
+	public static final field Companion Lcom/davils/knot/shutdown/exit/ExitCode$Companion;
+	public static final synthetic fun box-impl (I)Lcom/davils/knot/shutdown/exit/ExitCode;
+	public static fun constructor-impl (I)I
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (ILjava/lang/Object;)Z
+	public static final fun equals-impl0 (II)Z
+	public final fun getValue ()I
+	public fun hashCode ()I
+	public static fun hashCode-impl (I)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (I)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()I
+}
+
+public final class com/davils/knot/shutdown/exit/ExitCode$Companion {
+	public final fun getFAILURE-r1j2jA8 ()I
+	public final fun getSOFTWARE-r1j2jA8 ()I
+	public final fun getSUCCESS-r1j2jA8 ()I
+	public final fun getTIMED_OUT-r1j2jA8 ()I
+}
+
+public final class com/davils/knot/shutdown/exit/ExitCodes {
+	public fun <init> ()V
+	public synthetic fun <init> (IIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (IIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun codeOf-qOFnLDA (Lcom/davils/knot/shutdown/ShutdownReason;Z)I
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCompleted-r1j2jA8 ()I
+	public final fun getFailed-r1j2jA8 ()I
+	public final fun getFatal-r1j2jA8 ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/knot/shutdown/process/Escalation {
+}
+
+public final class com/davils/knot/shutdown/process/Escalation$Halt : com/davils/knot/shutdown/process/Escalation {
+	public fun <init> ()V
+	public synthetic fun <init> (JIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (JILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAfter-UwyO8pc ()J
+	public final fun getExitCode-r1j2jA8 ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/process/Escalation$None : com/davils/knot/shutdown/process/Escalation {
+	public static final field INSTANCE Lcom/davils/knot/shutdown/process/Escalation$None;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/knot/shutdown/process/FatalErrorPolicy {
+}
+
+public final class com/davils/knot/shutdown/process/FatalErrorPolicy$Exit : com/davils/knot/shutdown/process/FatalErrorPolicy {
+	public fun <init> ()V
+	public fun <init> (Lkotlin/jvm/functions/Function1;)V
+	public synthetic fun <init> (Lkotlin/jvm/functions/Function1;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getMatching ()Lkotlin/jvm/functions/Function1;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/process/FatalErrorPolicy$Ignore : com/davils/knot/shutdown/process/FatalErrorPolicy {
+	public static final field INSTANCE Lcom/davils/knot/shutdown/process/FatalErrorPolicy$Ignore;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/process/ProcessInstallation {
+	public final fun exit (Lcom/davils/knot/shutdown/ShutdownReason;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun exit$default (Lcom/davils/knot/shutdown/process/ProcessInstallation;Lcom/davils/knot/shutdown/ShutdownReason;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getConfiguration ()Lcom/davils/knot/shutdown/process/ProcessInstallationConfiguration;
+	public final fun getShutdown ()Lcom/davils/knot/shutdown/Shutdown;
+	public final fun isInstalled ()Z
+	public fun toString ()Ljava/lang/String;
+	public final fun uninstall ()Z
+}
+
+public final class com/davils/knot/shutdown/process/ProcessInstallationBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun getEscalation ()Lcom/davils/knot/shutdown/process/Escalation;
+	public final fun getFatalErrors ()Lcom/davils/knot/shutdown/process/FatalErrorPolicy;
+	public final fun getHasExitHook ()Z
+	public final fun setEscalation (Lcom/davils/knot/shutdown/process/Escalation;)V
+	public final fun setFatalErrors (Lcom/davils/knot/shutdown/process/FatalErrorPolicy;)V
+	public final fun setHasExitHook (Z)V
+}
+
+public final class com/davils/knot/shutdown/process/ProcessInstallationConfiguration : com/davils/kore/core/validation/Validatable {
+	public final fun getEscalation ()Lcom/davils/knot/shutdown/process/Escalation;
+	public final fun getFatalErrors ()Lcom/davils/knot/shutdown/process/FatalErrorPolicy;
+	public final fun getHasExitHook ()Z
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/knot/shutdown/process/ProcessShutdownsKt {
+	public static final fun install (Lcom/davils/knot/shutdown/Shutdown;Lcom/davils/knot/shutdown/process/ShutdownRuntime;Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/shutdown/process/ProcessInstallation;
+	public static synthetic fun install$default (Lcom/davils/knot/shutdown/Shutdown;Lcom/davils/knot/shutdown/process/ShutdownRuntime;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/shutdown/process/ProcessInstallation;
+}
+
+public abstract interface class com/davils/knot/shutdown/process/ShutdownRuntime {
+	public static final field Companion Lcom/davils/knot/shutdown/process/ShutdownRuntime$Companion;
+	public abstract fun addHook (Ljava/lang/String;Lkotlin/jvm/functions/Function0;)Ljava/lang/AutoCloseable;
+	public abstract fun exit-j5FA_6U (I)Ljava/lang/Void;
+	public abstract fun halt-j5FA_6U (I)Ljava/lang/Void;
+	public abstract fun installUncaughtHandler (Ljava/lang/Thread$UncaughtExceptionHandler;)V
+	public abstract fun reportUncaught (Ljava/lang/Thread;Ljava/lang/Throwable;)V
+	public abstract fun schedule-8Mi8wO0 (Ljava/lang/String;JLkotlin/jvm/functions/Function0;)Ljava/lang/AutoCloseable;
+	public abstract fun uncaughtHandler ()Ljava/lang/Thread$UncaughtExceptionHandler;
+}
+
+public final class com/davils/knot/shutdown/process/ShutdownRuntime$Companion {
+	public final fun getJvm ()Lcom/davils/knot/shutdown/process/ShutdownRuntime;
+}
+
+public final class com/davils/knot/shutdown/report/PhaseReport {
+	public synthetic fun <init> (Lcom/davils/knot/shutdown/ShutdownPhase;Ljava/util/List;JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getElapsed-UwyO8pc ()J
+	public final fun getPhase ()Lcom/davils/knot/shutdown/ShutdownPhase;
+	public final fun getTasks ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun isClean ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/report/ShutdownReport {
+	public synthetic fun <init> (Lcom/davils/knot/shutdown/ShutdownReason;Lkotlin/time/Instant;JLjava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getElapsed-UwyO8pc ()J
+	public final fun getExitCode-r1j2jA8 ()I
+	public final fun getPhases ()Ljava/util/List;
+	public final fun getReason ()Lcom/davils/knot/shutdown/ShutdownReason;
+	public final fun getStartedAt ()Lkotlin/time/Instant;
+	public final fun getTasks ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun isClean ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/knot/shutdown/report/TaskOutcome {
+	public fun isCompleted ()Z
+}
+
+public final class com/davils/knot/shutdown/report/TaskOutcome$Abandoned : com/davils/knot/shutdown/report/TaskOutcome {
+	public synthetic fun <init> (JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getTimeout-UwyO8pc ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/report/TaskOutcome$Completed : com/davils/knot/shutdown/report/TaskOutcome {
+	public synthetic fun <init> (JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getElapsed-UwyO8pc ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/report/TaskOutcome$DeadlineExceeded : com/davils/knot/shutdown/report/TaskOutcome {
+	public static final field INSTANCE Lcom/davils/knot/shutdown/report/TaskOutcome$DeadlineExceeded;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/report/TaskOutcome$Failed : com/davils/knot/shutdown/report/TaskOutcome {
+	public synthetic fun <init> (Ljava/lang/Throwable;JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCause ()Ljava/lang/Throwable;
+	public final fun getElapsed-UwyO8pc ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/report/TaskOutcome$TimedOut : com/davils/knot/shutdown/report/TaskOutcome {
+	public synthetic fun <init> (JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getTimeout-UwyO8pc ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/report/TaskReport {
+	public synthetic fun <init> (Ljava/lang/String;Lcom/davils/knot/shutdown/ShutdownPhase;Lcom/davils/knot/shutdown/report/TaskOutcome;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName-iyUJPvA ()Ljava/lang/String;
+	public final fun getOutcome ()Lcom/davils/knot/shutdown/report/TaskOutcome;
+	public final fun getPhase ()Lcom/davils/knot/shutdown/ShutdownPhase;
+	public fun hashCode ()I
+	public final fun isCompleted ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/task/PhaseBuilder {
+	public final fun closing-moChb0s (Ljava/lang/String;Ljava/lang/AutoCloseable;Lkotlin/time/Duration;)V
+	public static synthetic fun closing-moChb0s$default (Lcom/davils/knot/shutdown/task/PhaseBuilder;Ljava/lang/String;Ljava/lang/AutoCloseable;Lkotlin/time/Duration;ILjava/lang/Object;)V
+	public final fun getPhase ()Lcom/davils/knot/shutdown/ShutdownPhase;
+	public final fun task (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/davils/knot/shutdown/task/ShutdownContext {
+	public final fun getPhase ()Lcom/davils/knot/shutdown/ShutdownPhase;
+	public final fun getReason ()Lcom/davils/knot/shutdown/ShutdownReason;
+	public final fun getRemaining-UwyO8pc ()J
+	public final fun getTask-iyUJPvA ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/shutdown/task/ShutdownTaskBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public final fun action (Lkotlin/jvm/functions/Function2;)V
+	public final fun after ([Ljava/lang/String;)V
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun getName-iyUJPvA ()Ljava/lang/String;
+	public final fun getPhase ()Lcom/davils/knot/shutdown/ShutdownPhase;
+	public final fun getTimeout-FghU774 ()Lkotlin/time/Duration;
+	public final fun setTimeout-BwNAW2A (Lkotlin/time/Duration;)V
+}
+
+public final class com/davils/knot/shutdown/task/ShutdownTaskConfiguration : com/davils/kore/core/validation/Validatable {
+	public final fun getAfter ()Ljava/util/Set;
+	public final fun getName-iyUJPvA ()Ljava/lang/String;
+	public final fun getPhase ()Lcom/davils/knot/shutdown/ShutdownPhase;
+	public final fun getTimeout-FghU774 ()Lkotlin/time/Duration;
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/knot/shutdown/task/ShutdownTaskName {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lcom/davils/knot/shutdown/task/ShutdownTaskName;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+

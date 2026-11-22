@@ -1,0 +1,579 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:knot-shutdown>
+final enum class com.davils.knot.shutdown/ShutdownPhase : kotlin/Enum<com.davils.knot.shutdown/ShutdownPhase> { // com.davils.knot.shutdown/ShutdownPhase|null[0]
+    enum entry Announce // com.davils.knot.shutdown/ShutdownPhase.Announce|null[0]
+    enum entry Drain // com.davils.knot.shutdown/ShutdownPhase.Drain|null[0]
+    enum entry Flush // com.davils.knot.shutdown/ShutdownPhase.Flush|null[0]
+    enum entry Release // com.davils.knot.shutdown/ShutdownPhase.Release|null[0]
+    enum entry Stop // com.davils.knot.shutdown/ShutdownPhase.Stop|null[0]
+
+    final val entries // com.davils.knot.shutdown/ShutdownPhase.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.knot.shutdown/ShutdownPhase> // com.davils.knot.shutdown/ShutdownPhase.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.knot.shutdown/ShutdownPhase // com.davils.knot.shutdown/ShutdownPhase.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.knot.shutdown/ShutdownPhase> // com.davils.knot.shutdown/ShutdownPhase.values|values#static(){}[0]
+}
+
+sealed interface com.davils.knot.shutdown.report/TaskOutcome { // com.davils.knot.shutdown.report/TaskOutcome|null[0]
+    open val isCompleted // com.davils.knot.shutdown.report/TaskOutcome.isCompleted|{}isCompleted[0]
+        open fun <get-isCompleted>(): kotlin/Boolean // com.davils.knot.shutdown.report/TaskOutcome.isCompleted.<get-isCompleted>|<get-isCompleted>(){}[0]
+
+    final class Abandoned : com.davils.knot.shutdown.report/TaskOutcome { // com.davils.knot.shutdown.report/TaskOutcome.Abandoned|null[0]
+        constructor <init>(kotlin.time/Duration) // com.davils.knot.shutdown.report/TaskOutcome.Abandoned.<init>|<init>(kotlin.time.Duration){}[0]
+
+        final val timeout // com.davils.knot.shutdown.report/TaskOutcome.Abandoned.timeout|{}timeout[0]
+            final fun <get-timeout>(): kotlin.time/Duration // com.davils.knot.shutdown.report/TaskOutcome.Abandoned.timeout.<get-timeout>|<get-timeout>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.shutdown.report/TaskOutcome.Abandoned.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.knot.shutdown.report/TaskOutcome.Abandoned.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.knot.shutdown.report/TaskOutcome.Abandoned.toString|toString(){}[0]
+    }
+
+    final class Completed : com.davils.knot.shutdown.report/TaskOutcome { // com.davils.knot.shutdown.report/TaskOutcome.Completed|null[0]
+        constructor <init>(kotlin.time/Duration) // com.davils.knot.shutdown.report/TaskOutcome.Completed.<init>|<init>(kotlin.time.Duration){}[0]
+
+        final val elapsed // com.davils.knot.shutdown.report/TaskOutcome.Completed.elapsed|{}elapsed[0]
+            final fun <get-elapsed>(): kotlin.time/Duration // com.davils.knot.shutdown.report/TaskOutcome.Completed.elapsed.<get-elapsed>|<get-elapsed>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.shutdown.report/TaskOutcome.Completed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.knot.shutdown.report/TaskOutcome.Completed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.knot.shutdown.report/TaskOutcome.Completed.toString|toString(){}[0]
+    }
+
+    final class Failed : com.davils.knot.shutdown.report/TaskOutcome { // com.davils.knot.shutdown.report/TaskOutcome.Failed|null[0]
+        constructor <init>(kotlin/Throwable, kotlin.time/Duration) // com.davils.knot.shutdown.report/TaskOutcome.Failed.<init>|<init>(kotlin.Throwable;kotlin.time.Duration){}[0]
+
+        final val cause // com.davils.knot.shutdown.report/TaskOutcome.Failed.cause|{}cause[0]
+            final fun <get-cause>(): kotlin/Throwable // com.davils.knot.shutdown.report/TaskOutcome.Failed.cause.<get-cause>|<get-cause>(){}[0]
+        final val elapsed // com.davils.knot.shutdown.report/TaskOutcome.Failed.elapsed|{}elapsed[0]
+            final fun <get-elapsed>(): kotlin.time/Duration // com.davils.knot.shutdown.report/TaskOutcome.Failed.elapsed.<get-elapsed>|<get-elapsed>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.shutdown.report/TaskOutcome.Failed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.knot.shutdown.report/TaskOutcome.Failed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.knot.shutdown.report/TaskOutcome.Failed.toString|toString(){}[0]
+    }
+
+    final class TimedOut : com.davils.knot.shutdown.report/TaskOutcome { // com.davils.knot.shutdown.report/TaskOutcome.TimedOut|null[0]
+        constructor <init>(kotlin.time/Duration) // com.davils.knot.shutdown.report/TaskOutcome.TimedOut.<init>|<init>(kotlin.time.Duration){}[0]
+
+        final val timeout // com.davils.knot.shutdown.report/TaskOutcome.TimedOut.timeout|{}timeout[0]
+            final fun <get-timeout>(): kotlin.time/Duration // com.davils.knot.shutdown.report/TaskOutcome.TimedOut.timeout.<get-timeout>|<get-timeout>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.shutdown.report/TaskOutcome.TimedOut.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.knot.shutdown.report/TaskOutcome.TimedOut.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.knot.shutdown.report/TaskOutcome.TimedOut.toString|toString(){}[0]
+    }
+
+    final object DeadlineExceeded : com.davils.knot.shutdown.report/TaskOutcome { // com.davils.knot.shutdown.report/TaskOutcome.DeadlineExceeded|null[0]
+        final fun toString(): kotlin/String // com.davils.knot.shutdown.report/TaskOutcome.DeadlineExceeded.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.knot.shutdown/RegistrationRefusal { // com.davils.knot.shutdown/RegistrationRefusal|null[0]
+    final class Invalid : com.davils.knot.shutdown/RegistrationRefusal { // com.davils.knot.shutdown/RegistrationRefusal.Invalid|null[0]
+        final val report // com.davils.knot.shutdown/RegistrationRefusal.Invalid.report|{}report[0]
+            final fun <get-report>(): com.davils.kore.core.validation.report/ValidationReport // com.davils.knot.shutdown/RegistrationRefusal.Invalid.report.<get-report>|<get-report>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.knot.shutdown/RegistrationRefusal.Invalid.toString|toString(){}[0]
+    }
+
+    final object ShuttingDown : com.davils.knot.shutdown/RegistrationRefusal { // com.davils.knot.shutdown/RegistrationRefusal.ShuttingDown|null[0]
+        final fun toString(): kotlin/String // com.davils.knot.shutdown/RegistrationRefusal.ShuttingDown.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.knot.shutdown/ShutdownReason { // com.davils.knot.shutdown/ShutdownReason|null[0]
+    final class FatalError : com.davils.knot.shutdown/ShutdownReason { // com.davils.knot.shutdown/ShutdownReason.FatalError|null[0]
+        constructor <init>(kotlin/Throwable, kotlin/String) // com.davils.knot.shutdown/ShutdownReason.FatalError.<init>|<init>(kotlin.Throwable;kotlin.String){}[0]
+
+        final val cause // com.davils.knot.shutdown/ShutdownReason.FatalError.cause|{}cause[0]
+            final fun <get-cause>(): kotlin/Throwable // com.davils.knot.shutdown/ShutdownReason.FatalError.cause.<get-cause>|<get-cause>(){}[0]
+        final val origin // com.davils.knot.shutdown/ShutdownReason.FatalError.origin|{}origin[0]
+            final fun <get-origin>(): kotlin/String // com.davils.knot.shutdown/ShutdownReason.FatalError.origin.<get-origin>|<get-origin>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.shutdown/ShutdownReason.FatalError.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.knot.shutdown/ShutdownReason.FatalError.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.knot.shutdown/ShutdownReason.FatalError.toString|toString(){}[0]
+    }
+
+    final class Requested : com.davils.knot.shutdown/ShutdownReason { // com.davils.knot.shutdown/ShutdownReason.Requested|null[0]
+        constructor <init>(kotlin/String? = ..., com.davils.knot.shutdown.exit/ExitCode? = ...) // com.davils.knot.shutdown/ShutdownReason.Requested.<init>|<init>(kotlin.String?;com.davils.knot.shutdown.exit.ExitCode?){}[0]
+
+        final val exitCode // com.davils.knot.shutdown/ShutdownReason.Requested.exitCode|{}exitCode[0]
+            final fun <get-exitCode>(): com.davils.knot.shutdown.exit/ExitCode? // com.davils.knot.shutdown/ShutdownReason.Requested.exitCode.<get-exitCode>|<get-exitCode>(){}[0]
+        final val source // com.davils.knot.shutdown/ShutdownReason.Requested.source|{}source[0]
+            final fun <get-source>(): kotlin/String? // com.davils.knot.shutdown/ShutdownReason.Requested.source.<get-source>|<get-source>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.shutdown/ShutdownReason.Requested.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.knot.shutdown/ShutdownReason.Requested.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.knot.shutdown/ShutdownReason.Requested.toString|toString(){}[0]
+    }
+
+    final object ProcessExit : com.davils.knot.shutdown/ShutdownReason { // com.davils.knot.shutdown/ShutdownReason.ProcessExit|null[0]
+        final fun toString(): kotlin/String // com.davils.knot.shutdown/ShutdownReason.ProcessExit.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.knot.shutdown/ShutdownRegistration { // com.davils.knot.shutdown/ShutdownRegistration|null[0]
+    abstract fun getOrThrow(): com.davils.knot.shutdown/ShutdownRegistration.Registered // com.davils.knot.shutdown/ShutdownRegistration.getOrThrow|getOrThrow(){}[0]
+
+    final class Refused : com.davils.knot.shutdown/ShutdownRegistration { // com.davils.knot.shutdown/ShutdownRegistration.Refused|null[0]
+        final val refusal // com.davils.knot.shutdown/ShutdownRegistration.Refused.refusal|{}refusal[0]
+            final fun <get-refusal>(): com.davils.knot.shutdown/RegistrationRefusal // com.davils.knot.shutdown/ShutdownRegistration.Refused.refusal.<get-refusal>|<get-refusal>(){}[0]
+
+        final fun getOrThrow(): com.davils.knot.shutdown/ShutdownRegistration.Registered // com.davils.knot.shutdown/ShutdownRegistration.Refused.getOrThrow|getOrThrow(){}[0]
+        final fun toString(): kotlin/String // com.davils.knot.shutdown/ShutdownRegistration.Refused.toString|toString(){}[0]
+    }
+
+    final class Registered : com.davils.knot.shutdown/ShutdownRegistration { // com.davils.knot.shutdown/ShutdownRegistration.Registered|null[0]
+        final val tasks // com.davils.knot.shutdown/ShutdownRegistration.Registered.tasks|{}tasks[0]
+            final fun <get-tasks>(): kotlin.collections/Set<com.davils.knot.shutdown.task/ShutdownTaskName> // com.davils.knot.shutdown/ShutdownRegistration.Registered.tasks.<get-tasks>|<get-tasks>(){}[0]
+
+        final fun getOrThrow(): com.davils.knot.shutdown/ShutdownRegistration.Registered // com.davils.knot.shutdown/ShutdownRegistration.Registered.getOrThrow|getOrThrow(){}[0]
+        final fun toString(): kotlin/String // com.davils.knot.shutdown/ShutdownRegistration.Registered.toString|toString(){}[0]
+        final fun unregister(): kotlin/Boolean // com.davils.knot.shutdown/ShutdownRegistration.Registered.unregister|unregister(){}[0]
+    }
+}
+
+sealed interface com.davils.knot.shutdown/ShutdownState { // com.davils.knot.shutdown/ShutdownState|null[0]
+    final class ShuttingDown : com.davils.knot.shutdown/ShutdownState { // com.davils.knot.shutdown/ShutdownState.ShuttingDown|null[0]
+        constructor <init>(com.davils.knot.shutdown/ShutdownReason, com.davils.knot.shutdown/ShutdownPhase) // com.davils.knot.shutdown/ShutdownState.ShuttingDown.<init>|<init>(com.davils.knot.shutdown.ShutdownReason;com.davils.knot.shutdown.ShutdownPhase){}[0]
+
+        final val phase // com.davils.knot.shutdown/ShutdownState.ShuttingDown.phase|{}phase[0]
+            final fun <get-phase>(): com.davils.knot.shutdown/ShutdownPhase // com.davils.knot.shutdown/ShutdownState.ShuttingDown.phase.<get-phase>|<get-phase>(){}[0]
+        final val reason // com.davils.knot.shutdown/ShutdownState.ShuttingDown.reason|{}reason[0]
+            final fun <get-reason>(): com.davils.knot.shutdown/ShutdownReason // com.davils.knot.shutdown/ShutdownState.ShuttingDown.reason.<get-reason>|<get-reason>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.shutdown/ShutdownState.ShuttingDown.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.knot.shutdown/ShutdownState.ShuttingDown.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.knot.shutdown/ShutdownState.ShuttingDown.toString|toString(){}[0]
+    }
+
+    final class Terminated : com.davils.knot.shutdown/ShutdownState { // com.davils.knot.shutdown/ShutdownState.Terminated|null[0]
+        constructor <init>(com.davils.knot.shutdown.report/ShutdownReport) // com.davils.knot.shutdown/ShutdownState.Terminated.<init>|<init>(com.davils.knot.shutdown.report.ShutdownReport){}[0]
+
+        final val report // com.davils.knot.shutdown/ShutdownState.Terminated.report|{}report[0]
+            final fun <get-report>(): com.davils.knot.shutdown.report/ShutdownReport // com.davils.knot.shutdown/ShutdownState.Terminated.report.<get-report>|<get-report>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.shutdown/ShutdownState.Terminated.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.knot.shutdown/ShutdownState.Terminated.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.knot.shutdown/ShutdownState.Terminated.toString|toString(){}[0]
+    }
+
+    final object Running : com.davils.knot.shutdown/ShutdownState { // com.davils.knot.shutdown/ShutdownState.Running|null[0]
+        final fun toString(): kotlin/String // com.davils.knot.shutdown/ShutdownState.Running.toString|toString(){}[0]
+    }
+}
+
+abstract class <#A: com.davils.kore.core.validation/Validatable> com.davils.knot.shutdown/ShutdownPlanBuilder : com.davils.kore.core.dsl/ValidatingBuilder<#A> { // com.davils.knot.shutdown/ShutdownPlanBuilder|null[0]
+    final fun announce(kotlin/Function1<com.davils.knot.shutdown.task/PhaseBuilder, kotlin/Unit>) // com.davils.knot.shutdown/ShutdownPlanBuilder.announce|announce(kotlin.Function1<com.davils.knot.shutdown.task.PhaseBuilder,kotlin.Unit>){}[0]
+    final fun drain(kotlin/Function1<com.davils.knot.shutdown.task/PhaseBuilder, kotlin/Unit>) // com.davils.knot.shutdown/ShutdownPlanBuilder.drain|drain(kotlin.Function1<com.davils.knot.shutdown.task.PhaseBuilder,kotlin.Unit>){}[0]
+    final fun flush(kotlin/Function1<com.davils.knot.shutdown.task/PhaseBuilder, kotlin/Unit>) // com.davils.knot.shutdown/ShutdownPlanBuilder.flush|flush(kotlin.Function1<com.davils.knot.shutdown.task.PhaseBuilder,kotlin.Unit>){}[0]
+    final fun phase(com.davils.knot.shutdown/ShutdownPhase, kotlin/Function1<com.davils.knot.shutdown.task/PhaseBuilder, kotlin/Unit>) // com.davils.knot.shutdown/ShutdownPlanBuilder.phase|phase(com.davils.knot.shutdown.ShutdownPhase;kotlin.Function1<com.davils.knot.shutdown.task.PhaseBuilder,kotlin.Unit>){}[0]
+    final fun release(kotlin/Function1<com.davils.knot.shutdown.task/PhaseBuilder, kotlin/Unit>) // com.davils.knot.shutdown/ShutdownPlanBuilder.release|release(kotlin.Function1<com.davils.knot.shutdown.task.PhaseBuilder,kotlin.Unit>){}[0]
+    final fun stop(kotlin/Function1<com.davils.knot.shutdown.task/PhaseBuilder, kotlin/Unit>) // com.davils.knot.shutdown/ShutdownPlanBuilder.stop|stop(kotlin.Function1<com.davils.knot.shutdown.task.PhaseBuilder,kotlin.Unit>){}[0]
+}
+
+final class com.davils.knot.shutdown.exit/ExitCodes { // com.davils.knot.shutdown.exit/ExitCodes|null[0]
+    constructor <init>(com.davils.knot.shutdown.exit/ExitCode = ..., com.davils.knot.shutdown.exit/ExitCode = ..., com.davils.knot.shutdown.exit/ExitCode = ...) // com.davils.knot.shutdown.exit/ExitCodes.<init>|<init>(com.davils.knot.shutdown.exit.ExitCode;com.davils.knot.shutdown.exit.ExitCode;com.davils.knot.shutdown.exit.ExitCode){}[0]
+
+    final val completed // com.davils.knot.shutdown.exit/ExitCodes.completed|{}completed[0]
+        final fun <get-completed>(): com.davils.knot.shutdown.exit/ExitCode // com.davils.knot.shutdown.exit/ExitCodes.completed.<get-completed>|<get-completed>(){}[0]
+    final val failed // com.davils.knot.shutdown.exit/ExitCodes.failed|{}failed[0]
+        final fun <get-failed>(): com.davils.knot.shutdown.exit/ExitCode // com.davils.knot.shutdown.exit/ExitCodes.failed.<get-failed>|<get-failed>(){}[0]
+    final val fatal // com.davils.knot.shutdown.exit/ExitCodes.fatal|{}fatal[0]
+        final fun <get-fatal>(): com.davils.knot.shutdown.exit/ExitCode // com.davils.knot.shutdown.exit/ExitCodes.fatal.<get-fatal>|<get-fatal>(){}[0]
+
+    final fun codeOf(com.davils.knot.shutdown/ShutdownReason, kotlin/Boolean): com.davils.knot.shutdown.exit/ExitCode // com.davils.knot.shutdown.exit/ExitCodes.codeOf|codeOf(com.davils.knot.shutdown.ShutdownReason;kotlin.Boolean){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.shutdown.exit/ExitCodes.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.knot.shutdown.exit/ExitCodes.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.shutdown.exit/ExitCodes.toString|toString(){}[0]
+}
+
+final class com.davils.knot.shutdown.report/PhaseReport { // com.davils.knot.shutdown.report/PhaseReport|null[0]
+    constructor <init>(com.davils.knot.shutdown/ShutdownPhase, kotlin.collections/List<com.davils.knot.shutdown.report/TaskReport>, kotlin.time/Duration) // com.davils.knot.shutdown.report/PhaseReport.<init>|<init>(com.davils.knot.shutdown.ShutdownPhase;kotlin.collections.List<com.davils.knot.shutdown.report.TaskReport>;kotlin.time.Duration){}[0]
+
+    final val elapsed // com.davils.knot.shutdown.report/PhaseReport.elapsed|{}elapsed[0]
+        final fun <get-elapsed>(): kotlin.time/Duration // com.davils.knot.shutdown.report/PhaseReport.elapsed.<get-elapsed>|<get-elapsed>(){}[0]
+    final val isClean // com.davils.knot.shutdown.report/PhaseReport.isClean|{}isClean[0]
+        final fun <get-isClean>(): kotlin/Boolean // com.davils.knot.shutdown.report/PhaseReport.isClean.<get-isClean>|<get-isClean>(){}[0]
+    final val phase // com.davils.knot.shutdown.report/PhaseReport.phase|{}phase[0]
+        final fun <get-phase>(): com.davils.knot.shutdown/ShutdownPhase // com.davils.knot.shutdown.report/PhaseReport.phase.<get-phase>|<get-phase>(){}[0]
+    final val tasks // com.davils.knot.shutdown.report/PhaseReport.tasks|{}tasks[0]
+        final fun <get-tasks>(): kotlin.collections/List<com.davils.knot.shutdown.report/TaskReport> // com.davils.knot.shutdown.report/PhaseReport.tasks.<get-tasks>|<get-tasks>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.shutdown.report/PhaseReport.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.knot.shutdown.report/PhaseReport.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.shutdown.report/PhaseReport.toString|toString(){}[0]
+}
+
+final class com.davils.knot.shutdown.report/ShutdownReport { // com.davils.knot.shutdown.report/ShutdownReport|null[0]
+    constructor <init>(com.davils.knot.shutdown/ShutdownReason, kotlin.time/Instant, kotlin.time/Duration, kotlin.collections/List<com.davils.knot.shutdown.report/PhaseReport>, com.davils.knot.shutdown.exit/ExitCode) // com.davils.knot.shutdown.report/ShutdownReport.<init>|<init>(com.davils.knot.shutdown.ShutdownReason;kotlin.time.Instant;kotlin.time.Duration;kotlin.collections.List<com.davils.knot.shutdown.report.PhaseReport>;com.davils.knot.shutdown.exit.ExitCode){}[0]
+
+    final val elapsed // com.davils.knot.shutdown.report/ShutdownReport.elapsed|{}elapsed[0]
+        final fun <get-elapsed>(): kotlin.time/Duration // com.davils.knot.shutdown.report/ShutdownReport.elapsed.<get-elapsed>|<get-elapsed>(){}[0]
+    final val exitCode // com.davils.knot.shutdown.report/ShutdownReport.exitCode|{}exitCode[0]
+        final fun <get-exitCode>(): com.davils.knot.shutdown.exit/ExitCode // com.davils.knot.shutdown.report/ShutdownReport.exitCode.<get-exitCode>|<get-exitCode>(){}[0]
+    final val isClean // com.davils.knot.shutdown.report/ShutdownReport.isClean|{}isClean[0]
+        final fun <get-isClean>(): kotlin/Boolean // com.davils.knot.shutdown.report/ShutdownReport.isClean.<get-isClean>|<get-isClean>(){}[0]
+    final val phases // com.davils.knot.shutdown.report/ShutdownReport.phases|{}phases[0]
+        final fun <get-phases>(): kotlin.collections/List<com.davils.knot.shutdown.report/PhaseReport> // com.davils.knot.shutdown.report/ShutdownReport.phases.<get-phases>|<get-phases>(){}[0]
+    final val reason // com.davils.knot.shutdown.report/ShutdownReport.reason|{}reason[0]
+        final fun <get-reason>(): com.davils.knot.shutdown/ShutdownReason // com.davils.knot.shutdown.report/ShutdownReport.reason.<get-reason>|<get-reason>(){}[0]
+    final val startedAt // com.davils.knot.shutdown.report/ShutdownReport.startedAt|{}startedAt[0]
+        final fun <get-startedAt>(): kotlin.time/Instant // com.davils.knot.shutdown.report/ShutdownReport.startedAt.<get-startedAt>|<get-startedAt>(){}[0]
+    final val tasks // com.davils.knot.shutdown.report/ShutdownReport.tasks|{}tasks[0]
+        final fun <get-tasks>(): kotlin.collections/List<com.davils.knot.shutdown.report/TaskReport> // com.davils.knot.shutdown.report/ShutdownReport.tasks.<get-tasks>|<get-tasks>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.shutdown.report/ShutdownReport.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.knot.shutdown.report/ShutdownReport.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.shutdown.report/ShutdownReport.toString|toString(){}[0]
+}
+
+final class com.davils.knot.shutdown.report/TaskReport { // com.davils.knot.shutdown.report/TaskReport|null[0]
+    constructor <init>(com.davils.knot.shutdown.task/ShutdownTaskName, com.davils.knot.shutdown/ShutdownPhase, com.davils.knot.shutdown.report/TaskOutcome) // com.davils.knot.shutdown.report/TaskReport.<init>|<init>(com.davils.knot.shutdown.task.ShutdownTaskName;com.davils.knot.shutdown.ShutdownPhase;com.davils.knot.shutdown.report.TaskOutcome){}[0]
+
+    final val isCompleted // com.davils.knot.shutdown.report/TaskReport.isCompleted|{}isCompleted[0]
+        final fun <get-isCompleted>(): kotlin/Boolean // com.davils.knot.shutdown.report/TaskReport.isCompleted.<get-isCompleted>|<get-isCompleted>(){}[0]
+    final val name // com.davils.knot.shutdown.report/TaskReport.name|{}name[0]
+        final fun <get-name>(): com.davils.knot.shutdown.task/ShutdownTaskName // com.davils.knot.shutdown.report/TaskReport.name.<get-name>|<get-name>(){}[0]
+    final val outcome // com.davils.knot.shutdown.report/TaskReport.outcome|{}outcome[0]
+        final fun <get-outcome>(): com.davils.knot.shutdown.report/TaskOutcome // com.davils.knot.shutdown.report/TaskReport.outcome.<get-outcome>|<get-outcome>(){}[0]
+    final val phase // com.davils.knot.shutdown.report/TaskReport.phase|{}phase[0]
+        final fun <get-phase>(): com.davils.knot.shutdown/ShutdownPhase // com.davils.knot.shutdown.report/TaskReport.phase.<get-phase>|<get-phase>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.shutdown.report/TaskReport.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.knot.shutdown.report/TaskReport.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.shutdown.report/TaskReport.toString|toString(){}[0]
+}
+
+final class com.davils.knot.shutdown.task/PhaseBuilder { // com.davils.knot.shutdown.task/PhaseBuilder|null[0]
+    final val phase // com.davils.knot.shutdown.task/PhaseBuilder.phase|{}phase[0]
+        final fun <get-phase>(): com.davils.knot.shutdown/ShutdownPhase // com.davils.knot.shutdown.task/PhaseBuilder.phase.<get-phase>|<get-phase>(){}[0]
+
+    final fun closing(kotlin/String, kotlin/AutoCloseable, kotlin.time/Duration? = ...) // com.davils.knot.shutdown.task/PhaseBuilder.closing|closing(kotlin.String;kotlin.AutoCloseable;kotlin.time.Duration?){}[0]
+    final fun task(kotlin/String, kotlin/Function1<com.davils.knot.shutdown.task/ShutdownTaskBuilder, kotlin/Unit>) // com.davils.knot.shutdown.task/PhaseBuilder.task|task(kotlin.String;kotlin.Function1<com.davils.knot.shutdown.task.ShutdownTaskBuilder,kotlin.Unit>){}[0]
+}
+
+final class com.davils.knot.shutdown.task/ShutdownContext { // com.davils.knot.shutdown.task/ShutdownContext|null[0]
+    final val phase // com.davils.knot.shutdown.task/ShutdownContext.phase|{}phase[0]
+        final fun <get-phase>(): com.davils.knot.shutdown/ShutdownPhase // com.davils.knot.shutdown.task/ShutdownContext.phase.<get-phase>|<get-phase>(){}[0]
+    final val reason // com.davils.knot.shutdown.task/ShutdownContext.reason|{}reason[0]
+        final fun <get-reason>(): com.davils.knot.shutdown/ShutdownReason // com.davils.knot.shutdown.task/ShutdownContext.reason.<get-reason>|<get-reason>(){}[0]
+    final val remaining // com.davils.knot.shutdown.task/ShutdownContext.remaining|{}remaining[0]
+        final fun <get-remaining>(): kotlin.time/Duration // com.davils.knot.shutdown.task/ShutdownContext.remaining.<get-remaining>|<get-remaining>(){}[0]
+    final val task // com.davils.knot.shutdown.task/ShutdownContext.task|{}task[0]
+        final fun <get-task>(): com.davils.knot.shutdown.task/ShutdownTaskName // com.davils.knot.shutdown.task/ShutdownContext.task.<get-task>|<get-task>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.knot.shutdown.task/ShutdownContext.toString|toString(){}[0]
+}
+
+final class com.davils.knot.shutdown.task/ShutdownTaskBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.knot.shutdown.task/ShutdownTaskConfiguration> { // com.davils.knot.shutdown.task/ShutdownTaskBuilder|null[0]
+    final val name // com.davils.knot.shutdown.task/ShutdownTaskBuilder.name|{}name[0]
+        final fun <get-name>(): com.davils.knot.shutdown.task/ShutdownTaskName // com.davils.knot.shutdown.task/ShutdownTaskBuilder.name.<get-name>|<get-name>(){}[0]
+    final val phase // com.davils.knot.shutdown.task/ShutdownTaskBuilder.phase|{}phase[0]
+        final fun <get-phase>(): com.davils.knot.shutdown/ShutdownPhase // com.davils.knot.shutdown.task/ShutdownTaskBuilder.phase.<get-phase>|<get-phase>(){}[0]
+
+    final var timeout // com.davils.knot.shutdown.task/ShutdownTaskBuilder.timeout|{}timeout[0]
+        final fun <get-timeout>(): kotlin.time/Duration? // com.davils.knot.shutdown.task/ShutdownTaskBuilder.timeout.<get-timeout>|<get-timeout>(){}[0]
+        final fun <set-timeout>(kotlin.time/Duration?) // com.davils.knot.shutdown.task/ShutdownTaskBuilder.timeout.<set-timeout>|<set-timeout>(kotlin.time.Duration?){}[0]
+
+    final fun action(kotlin.coroutines/SuspendFunction1<com.davils.knot.shutdown.task/ShutdownContext, kotlin/Unit>) // com.davils.knot.shutdown.task/ShutdownTaskBuilder.action|action(kotlin.coroutines.SuspendFunction1<com.davils.knot.shutdown.task.ShutdownContext,kotlin.Unit>){}[0]
+    final fun after(kotlin/Array<out kotlin/String>...) // com.davils.knot.shutdown.task/ShutdownTaskBuilder.after|after(kotlin.Array<out|kotlin.String>...){}[0]
+}
+
+final class com.davils.knot.shutdown.task/ShutdownTaskConfiguration : com.davils.kore.core.validation/Validatable { // com.davils.knot.shutdown.task/ShutdownTaskConfiguration|null[0]
+    final val after // com.davils.knot.shutdown.task/ShutdownTaskConfiguration.after|{}after[0]
+        final fun <get-after>(): kotlin.collections/Set<com.davils.knot.shutdown.task/ShutdownTaskName> // com.davils.knot.shutdown.task/ShutdownTaskConfiguration.after.<get-after>|<get-after>(){}[0]
+    final val name // com.davils.knot.shutdown.task/ShutdownTaskConfiguration.name|{}name[0]
+        final fun <get-name>(): com.davils.knot.shutdown.task/ShutdownTaskName // com.davils.knot.shutdown.task/ShutdownTaskConfiguration.name.<get-name>|<get-name>(){}[0]
+    final val phase // com.davils.knot.shutdown.task/ShutdownTaskConfiguration.phase|{}phase[0]
+        final fun <get-phase>(): com.davils.knot.shutdown/ShutdownPhase // com.davils.knot.shutdown.task/ShutdownTaskConfiguration.phase.<get-phase>|<get-phase>(){}[0]
+    final val timeout // com.davils.knot.shutdown.task/ShutdownTaskConfiguration.timeout|{}timeout[0]
+        final fun <get-timeout>(): kotlin.time/Duration? // com.davils.knot.shutdown.task/ShutdownTaskConfiguration.timeout.<get-timeout>|<get-timeout>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.knot.shutdown.task/ShutdownTaskConfiguration.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.shutdown.task/ShutdownTaskConfiguration.toString|toString(){}[0]
+}
+
+final class com.davils.knot.shutdown/Shutdown : com.davils.kollect.core.health/HealthIndicator { // com.davils.knot.shutdown/Shutdown|null[0]
+    final val configuration // com.davils.knot.shutdown/Shutdown.configuration|{}configuration[0]
+        final fun <get-configuration>(): com.davils.knot.shutdown/ShutdownConfiguration // com.davils.knot.shutdown/Shutdown.configuration.<get-configuration>|<get-configuration>(){}[0]
+    final val eventFlow // com.davils.knot.shutdown/Shutdown.eventFlow|{}eventFlow[0]
+        final fun <get-eventFlow>(): kotlinx.coroutines.flow/Flow<com.davils.knot.shutdown/ShutdownEvent> // com.davils.knot.shutdown/Shutdown.eventFlow.<get-eventFlow>|<get-eventFlow>(){}[0]
+    final val isStarted // com.davils.knot.shutdown/Shutdown.isStarted|{}isStarted[0]
+        final fun <get-isStarted>(): kotlin/Boolean // com.davils.knot.shutdown/Shutdown.isStarted.<get-isStarted>|<get-isStarted>(){}[0]
+    final val state // com.davils.knot.shutdown/Shutdown.state|{}state[0]
+        final fun <get-state>(): kotlinx.coroutines.flow/StateFlow<com.davils.knot.shutdown/ShutdownState> // com.davils.knot.shutdown/Shutdown.state.<get-state>|<get-state>(){}[0]
+
+    final fun metrics(): com.davils.knot.shutdown/ShutdownMetrics // com.davils.knot.shutdown/Shutdown.metrics|metrics(){}[0]
+    final fun register(kotlin/Function1<com.davils.knot.shutdown/ShutdownRegistrationBuilder, kotlin/Unit>): com.davils.knot.shutdown/ShutdownRegistration // com.davils.knot.shutdown/Shutdown.register|register(kotlin.Function1<com.davils.knot.shutdown.ShutdownRegistrationBuilder,kotlin.Unit>){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.shutdown/Shutdown.toString|toString(){}[0]
+    final suspend fun awaitTermination(): com.davils.knot.shutdown.report/ShutdownReport // com.davils.knot.shutdown/Shutdown.awaitTermination|awaitTermination(){}[0]
+    final suspend fun check(): com.davils.kollect.core.health/Health // com.davils.knot.shutdown/Shutdown.check|check(){}[0]
+    final suspend fun initiate(com.davils.knot.shutdown/ShutdownReason = ...): com.davils.knot.shutdown.report/ShutdownReport // com.davils.knot.shutdown/Shutdown.initiate|initiate(com.davils.knot.shutdown.ShutdownReason){}[0]
+}
+
+final class com.davils.knot.shutdown/ShutdownBuilder : com.davils.knot.shutdown/ShutdownPlanBuilder<com.davils.knot.shutdown/ShutdownConfiguration> { // com.davils.knot.shutdown/ShutdownBuilder|null[0]
+    final var cancellationGrace // com.davils.knot.shutdown/ShutdownBuilder.cancellationGrace|{}cancellationGrace[0]
+        final fun <get-cancellationGrace>(): kotlin.time/Duration // com.davils.knot.shutdown/ShutdownBuilder.cancellationGrace.<get-cancellationGrace>|<get-cancellationGrace>(){}[0]
+        final fun <set-cancellationGrace>(kotlin.time/Duration) // com.davils.knot.shutdown/ShutdownBuilder.cancellationGrace.<set-cancellationGrace>|<set-cancellationGrace>(kotlin.time.Duration){}[0]
+    final var clock // com.davils.knot.shutdown/ShutdownBuilder.clock|{}clock[0]
+        final fun <get-clock>(): kotlin.time/Clock // com.davils.knot.shutdown/ShutdownBuilder.clock.<get-clock>|<get-clock>(){}[0]
+        final fun <set-clock>(kotlin.time/Clock) // com.davils.knot.shutdown/ShutdownBuilder.clock.<set-clock>|<set-clock>(kotlin.time.Clock){}[0]
+    final var eventCapacity // com.davils.knot.shutdown/ShutdownBuilder.eventCapacity|{}eventCapacity[0]
+        final fun <get-eventCapacity>(): kotlin/Int // com.davils.knot.shutdown/ShutdownBuilder.eventCapacity.<get-eventCapacity>|<get-eventCapacity>(){}[0]
+        final fun <set-eventCapacity>(kotlin/Int) // com.davils.knot.shutdown/ShutdownBuilder.eventCapacity.<set-eventCapacity>|<set-eventCapacity>(kotlin.Int){}[0]
+    final var events // com.davils.knot.shutdown/ShutdownBuilder.events|{}events[0]
+        final fun <get-events>(): com.davils.konfetti.core/EventBus? // com.davils.knot.shutdown/ShutdownBuilder.events.<get-events>|<get-events>(){}[0]
+        final fun <set-events>(com.davils.konfetti.core/EventBus?) // com.davils.knot.shutdown/ShutdownBuilder.events.<set-events>|<set-events>(com.davils.konfetti.core.EventBus?){}[0]
+    final var exitCodes // com.davils.knot.shutdown/ShutdownBuilder.exitCodes|{}exitCodes[0]
+        final fun <get-exitCodes>(): com.davils.knot.shutdown.exit/ExitCodes // com.davils.knot.shutdown/ShutdownBuilder.exitCodes.<get-exitCodes>|<get-exitCodes>(){}[0]
+        final fun <set-exitCodes>(com.davils.knot.shutdown.exit/ExitCodes) // com.davils.knot.shutdown/ShutdownBuilder.exitCodes.<set-exitCodes>|<set-exitCodes>(com.davils.knot.shutdown.exit.ExitCodes){}[0]
+    final var gracePeriod // com.davils.knot.shutdown/ShutdownBuilder.gracePeriod|{}gracePeriod[0]
+        final fun <get-gracePeriod>(): kotlin.time/Duration // com.davils.knot.shutdown/ShutdownBuilder.gracePeriod.<get-gracePeriod>|<get-gracePeriod>(){}[0]
+        final fun <set-gracePeriod>(kotlin.time/Duration) // com.davils.knot.shutdown/ShutdownBuilder.gracePeriod.<set-gracePeriod>|<set-gracePeriod>(kotlin.time.Duration){}[0]
+    final var meters // com.davils.knot.shutdown/ShutdownBuilder.meters|{}meters[0]
+        final fun <get-meters>(): com.davils.kollect.core/MeterRegistry? // com.davils.knot.shutdown/ShutdownBuilder.meters.<get-meters>|<get-meters>(){}[0]
+        final fun <set-meters>(com.davils.kollect.core/MeterRegistry?) // com.davils.knot.shutdown/ShutdownBuilder.meters.<set-meters>|<set-meters>(com.davils.kollect.core.MeterRegistry?){}[0]
+    final var name // com.davils.knot.shutdown/ShutdownBuilder.name|{}name[0]
+        final fun <get-name>(): kotlin/String // com.davils.knot.shutdown/ShutdownBuilder.name.<get-name>|<get-name>(){}[0]
+        final fun <set-name>(kotlin/String) // com.davils.knot.shutdown/ShutdownBuilder.name.<set-name>|<set-name>(kotlin.String){}[0]
+    final var taskTimeout // com.davils.knot.shutdown/ShutdownBuilder.taskTimeout|{}taskTimeout[0]
+        final fun <get-taskTimeout>(): kotlin.time/Duration // com.davils.knot.shutdown/ShutdownBuilder.taskTimeout.<get-taskTimeout>|<get-taskTimeout>(){}[0]
+        final fun <set-taskTimeout>(kotlin.time/Duration) // com.davils.knot.shutdown/ShutdownBuilder.taskTimeout.<set-taskTimeout>|<set-taskTimeout>(kotlin.time.Duration){}[0]
+    final var timeSource // com.davils.knot.shutdown/ShutdownBuilder.timeSource|{}timeSource[0]
+        final fun <get-timeSource>(): kotlin.time/TimeSource.WithComparableMarks // com.davils.knot.shutdown/ShutdownBuilder.timeSource.<get-timeSource>|<get-timeSource>(){}[0]
+        final fun <set-timeSource>(kotlin.time/TimeSource.WithComparableMarks) // com.davils.knot.shutdown/ShutdownBuilder.timeSource.<set-timeSource>|<set-timeSource>(kotlin.time.TimeSource.WithComparableMarks){}[0]
+    final var tracer // com.davils.knot.shutdown/ShutdownBuilder.tracer|{}tracer[0]
+        final fun <get-tracer>(): com.davils.kollect.core.trace/Tracer // com.davils.knot.shutdown/ShutdownBuilder.tracer.<get-tracer>|<get-tracer>(){}[0]
+        final fun <set-tracer>(com.davils.kollect.core.trace/Tracer) // com.davils.knot.shutdown/ShutdownBuilder.tracer.<set-tracer>|<set-tracer>(com.davils.kollect.core.trace.Tracer){}[0]
+
+    final object Companion { // com.davils.knot.shutdown/ShutdownBuilder.Companion|null[0]
+        final const val DEFAULT_EVENT_CAPACITY // com.davils.knot.shutdown/ShutdownBuilder.Companion.DEFAULT_EVENT_CAPACITY|{}DEFAULT_EVENT_CAPACITY[0]
+            final fun <get-DEFAULT_EVENT_CAPACITY>(): kotlin/Int // com.davils.knot.shutdown/ShutdownBuilder.Companion.DEFAULT_EVENT_CAPACITY.<get-DEFAULT_EVENT_CAPACITY>|<get-DEFAULT_EVENT_CAPACITY>(){}[0]
+        final const val DEFAULT_NAME // com.davils.knot.shutdown/ShutdownBuilder.Companion.DEFAULT_NAME|{}DEFAULT_NAME[0]
+            final fun <get-DEFAULT_NAME>(): kotlin/String // com.davils.knot.shutdown/ShutdownBuilder.Companion.DEFAULT_NAME.<get-DEFAULT_NAME>|<get-DEFAULT_NAME>(){}[0]
+
+        final val DEFAULT_CANCELLATION_GRACE // com.davils.knot.shutdown/ShutdownBuilder.Companion.DEFAULT_CANCELLATION_GRACE|{}DEFAULT_CANCELLATION_GRACE[0]
+            final fun <get-DEFAULT_CANCELLATION_GRACE>(): kotlin.time/Duration // com.davils.knot.shutdown/ShutdownBuilder.Companion.DEFAULT_CANCELLATION_GRACE.<get-DEFAULT_CANCELLATION_GRACE>|<get-DEFAULT_CANCELLATION_GRACE>(){}[0]
+        final val DEFAULT_GRACE_PERIOD // com.davils.knot.shutdown/ShutdownBuilder.Companion.DEFAULT_GRACE_PERIOD|{}DEFAULT_GRACE_PERIOD[0]
+            final fun <get-DEFAULT_GRACE_PERIOD>(): kotlin.time/Duration // com.davils.knot.shutdown/ShutdownBuilder.Companion.DEFAULT_GRACE_PERIOD.<get-DEFAULT_GRACE_PERIOD>|<get-DEFAULT_GRACE_PERIOD>(){}[0]
+        final val DEFAULT_TASK_TIMEOUT // com.davils.knot.shutdown/ShutdownBuilder.Companion.DEFAULT_TASK_TIMEOUT|{}DEFAULT_TASK_TIMEOUT[0]
+            final fun <get-DEFAULT_TASK_TIMEOUT>(): kotlin.time/Duration // com.davils.knot.shutdown/ShutdownBuilder.Companion.DEFAULT_TASK_TIMEOUT.<get-DEFAULT_TASK_TIMEOUT>|<get-DEFAULT_TASK_TIMEOUT>(){}[0]
+    }
+}
+
+final class com.davils.knot.shutdown/ShutdownConfiguration : com.davils.kore.core.validation/Validatable { // com.davils.knot.shutdown/ShutdownConfiguration|null[0]
+    final val cancellationGrace // com.davils.knot.shutdown/ShutdownConfiguration.cancellationGrace|{}cancellationGrace[0]
+        final fun <get-cancellationGrace>(): kotlin.time/Duration // com.davils.knot.shutdown/ShutdownConfiguration.cancellationGrace.<get-cancellationGrace>|<get-cancellationGrace>(){}[0]
+    final val clock // com.davils.knot.shutdown/ShutdownConfiguration.clock|{}clock[0]
+        final fun <get-clock>(): kotlin.time/Clock // com.davils.knot.shutdown/ShutdownConfiguration.clock.<get-clock>|<get-clock>(){}[0]
+    final val eventCapacity // com.davils.knot.shutdown/ShutdownConfiguration.eventCapacity|{}eventCapacity[0]
+        final fun <get-eventCapacity>(): kotlin/Int // com.davils.knot.shutdown/ShutdownConfiguration.eventCapacity.<get-eventCapacity>|<get-eventCapacity>(){}[0]
+    final val events // com.davils.knot.shutdown/ShutdownConfiguration.events|{}events[0]
+        final fun <get-events>(): com.davils.konfetti.core/EventBus? // com.davils.knot.shutdown/ShutdownConfiguration.events.<get-events>|<get-events>(){}[0]
+    final val exitCodes // com.davils.knot.shutdown/ShutdownConfiguration.exitCodes|{}exitCodes[0]
+        final fun <get-exitCodes>(): com.davils.knot.shutdown.exit/ExitCodes // com.davils.knot.shutdown/ShutdownConfiguration.exitCodes.<get-exitCodes>|<get-exitCodes>(){}[0]
+    final val gracePeriod // com.davils.knot.shutdown/ShutdownConfiguration.gracePeriod|{}gracePeriod[0]
+        final fun <get-gracePeriod>(): kotlin.time/Duration // com.davils.knot.shutdown/ShutdownConfiguration.gracePeriod.<get-gracePeriod>|<get-gracePeriod>(){}[0]
+    final val meters // com.davils.knot.shutdown/ShutdownConfiguration.meters|{}meters[0]
+        final fun <get-meters>(): com.davils.kollect.core/MeterRegistry? // com.davils.knot.shutdown/ShutdownConfiguration.meters.<get-meters>|<get-meters>(){}[0]
+    final val name // com.davils.knot.shutdown/ShutdownConfiguration.name|{}name[0]
+        final fun <get-name>(): kotlin/String // com.davils.knot.shutdown/ShutdownConfiguration.name.<get-name>|<get-name>(){}[0]
+    final val taskTimeout // com.davils.knot.shutdown/ShutdownConfiguration.taskTimeout|{}taskTimeout[0]
+        final fun <get-taskTimeout>(): kotlin.time/Duration // com.davils.knot.shutdown/ShutdownConfiguration.taskTimeout.<get-taskTimeout>|<get-taskTimeout>(){}[0]
+    final val tasks // com.davils.knot.shutdown/ShutdownConfiguration.tasks|{}tasks[0]
+        final fun <get-tasks>(): kotlin.collections/List<com.davils.knot.shutdown.task/ShutdownTaskConfiguration> // com.davils.knot.shutdown/ShutdownConfiguration.tasks.<get-tasks>|<get-tasks>(){}[0]
+    final val timeSource // com.davils.knot.shutdown/ShutdownConfiguration.timeSource|{}timeSource[0]
+        final fun <get-timeSource>(): kotlin.time/TimeSource.WithComparableMarks // com.davils.knot.shutdown/ShutdownConfiguration.timeSource.<get-timeSource>|<get-timeSource>(){}[0]
+    final val tracer // com.davils.knot.shutdown/ShutdownConfiguration.tracer|{}tracer[0]
+        final fun <get-tracer>(): com.davils.kollect.core.trace/Tracer // com.davils.knot.shutdown/ShutdownConfiguration.tracer.<get-tracer>|<get-tracer>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.knot.shutdown/ShutdownConfiguration.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.shutdown/ShutdownConfiguration.toString|toString(){}[0]
+}
+
+final class com.davils.knot.shutdown/ShutdownMetrics { // com.davils.knot.shutdown/ShutdownMetrics|null[0]
+    final val abandoned // com.davils.knot.shutdown/ShutdownMetrics.abandoned|{}abandoned[0]
+        final fun <get-abandoned>(): kotlin/Long // com.davils.knot.shutdown/ShutdownMetrics.abandoned.<get-abandoned>|<get-abandoned>(){}[0]
+    final val completed // com.davils.knot.shutdown/ShutdownMetrics.completed|{}completed[0]
+        final fun <get-completed>(): kotlin/Long // com.davils.knot.shutdown/ShutdownMetrics.completed.<get-completed>|<get-completed>(){}[0]
+    final val deadlineExceeded // com.davils.knot.shutdown/ShutdownMetrics.deadlineExceeded|{}deadlineExceeded[0]
+        final fun <get-deadlineExceeded>(): kotlin/Long // com.davils.knot.shutdown/ShutdownMetrics.deadlineExceeded.<get-deadlineExceeded>|<get-deadlineExceeded>(){}[0]
+    final val escalations // com.davils.knot.shutdown/ShutdownMetrics.escalations|{}escalations[0]
+        final fun <get-escalations>(): kotlin/Long // com.davils.knot.shutdown/ShutdownMetrics.escalations.<get-escalations>|<get-escalations>(){}[0]
+    final val failed // com.davils.knot.shutdown/ShutdownMetrics.failed|{}failed[0]
+        final fun <get-failed>(): kotlin/Long // com.davils.knot.shutdown/ShutdownMetrics.failed.<get-failed>|<get-failed>(){}[0]
+    final val refusedRegistrations // com.davils.knot.shutdown/ShutdownMetrics.refusedRegistrations|{}refusedRegistrations[0]
+        final fun <get-refusedRegistrations>(): kotlin/Long // com.davils.knot.shutdown/ShutdownMetrics.refusedRegistrations.<get-refusedRegistrations>|<get-refusedRegistrations>(){}[0]
+    final val registeredTasks // com.davils.knot.shutdown/ShutdownMetrics.registeredTasks|{}registeredTasks[0]
+        final fun <get-registeredTasks>(): kotlin/Int // com.davils.knot.shutdown/ShutdownMetrics.registeredTasks.<get-registeredTasks>|<get-registeredTasks>(){}[0]
+    final val rejectedEvents // com.davils.knot.shutdown/ShutdownMetrics.rejectedEvents|{}rejectedEvents[0]
+        final fun <get-rejectedEvents>(): kotlin/Long // com.davils.knot.shutdown/ShutdownMetrics.rejectedEvents.<get-rejectedEvents>|<get-rejectedEvents>(){}[0]
+    final val timedOut // com.davils.knot.shutdown/ShutdownMetrics.timedOut|{}timedOut[0]
+        final fun <get-timedOut>(): kotlin/Long // com.davils.knot.shutdown/ShutdownMetrics.timedOut.<get-timedOut>|<get-timedOut>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.knot.shutdown/ShutdownMetrics.toString|toString(){}[0]
+}
+
+final class com.davils.knot.shutdown/ShutdownPlan : com.davils.kore.core.validation/Validatable { // com.davils.knot.shutdown/ShutdownPlan|null[0]
+    final val tasks // com.davils.knot.shutdown/ShutdownPlan.tasks|{}tasks[0]
+        final fun <get-tasks>(): kotlin.collections/List<com.davils.knot.shutdown.task/ShutdownTaskConfiguration> // com.davils.knot.shutdown/ShutdownPlan.tasks.<get-tasks>|<get-tasks>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.knot.shutdown/ShutdownPlan.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.shutdown/ShutdownPlan.toString|toString(){}[0]
+}
+
+final class com.davils.knot.shutdown/ShutdownRegistrationBuilder : com.davils.knot.shutdown/ShutdownPlanBuilder<com.davils.knot.shutdown/ShutdownPlan> // com.davils.knot.shutdown/ShutdownRegistrationBuilder|null[0]
+
+final value class com.davils.knot.shutdown.exit/ExitCode { // com.davils.knot.shutdown.exit/ExitCode|null[0]
+    constructor <init>(kotlin/Int) // com.davils.knot.shutdown.exit/ExitCode.<init>|<init>(kotlin.Int){}[0]
+
+    final val value // com.davils.knot.shutdown.exit/ExitCode.value|{}value[0]
+        final fun <get-value>(): kotlin/Int // com.davils.knot.shutdown.exit/ExitCode.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.shutdown.exit/ExitCode.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.knot.shutdown.exit/ExitCode.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.shutdown.exit/ExitCode.toString|toString(){}[0]
+
+    final object Companion { // com.davils.knot.shutdown.exit/ExitCode.Companion|null[0]
+        final val FAILURE // com.davils.knot.shutdown.exit/ExitCode.Companion.FAILURE|{}FAILURE[0]
+            final fun <get-FAILURE>(): com.davils.knot.shutdown.exit/ExitCode // com.davils.knot.shutdown.exit/ExitCode.Companion.FAILURE.<get-FAILURE>|<get-FAILURE>(){}[0]
+        final val SOFTWARE // com.davils.knot.shutdown.exit/ExitCode.Companion.SOFTWARE|{}SOFTWARE[0]
+            final fun <get-SOFTWARE>(): com.davils.knot.shutdown.exit/ExitCode // com.davils.knot.shutdown.exit/ExitCode.Companion.SOFTWARE.<get-SOFTWARE>|<get-SOFTWARE>(){}[0]
+        final val SUCCESS // com.davils.knot.shutdown.exit/ExitCode.Companion.SUCCESS|{}SUCCESS[0]
+            final fun <get-SUCCESS>(): com.davils.knot.shutdown.exit/ExitCode // com.davils.knot.shutdown.exit/ExitCode.Companion.SUCCESS.<get-SUCCESS>|<get-SUCCESS>(){}[0]
+        final val TIMED_OUT // com.davils.knot.shutdown.exit/ExitCode.Companion.TIMED_OUT|{}TIMED_OUT[0]
+            final fun <get-TIMED_OUT>(): com.davils.knot.shutdown.exit/ExitCode // com.davils.knot.shutdown.exit/ExitCode.Companion.TIMED_OUT.<get-TIMED_OUT>|<get-TIMED_OUT>(){}[0]
+    }
+}
+
+final value class com.davils.knot.shutdown.task/ShutdownTaskName { // com.davils.knot.shutdown.task/ShutdownTaskName|null[0]
+    constructor <init>(kotlin/String) // com.davils.knot.shutdown.task/ShutdownTaskName.<init>|<init>(kotlin.String){}[0]
+
+    final val value // com.davils.knot.shutdown.task/ShutdownTaskName.value|{}value[0]
+        final fun <get-value>(): kotlin/String // com.davils.knot.shutdown.task/ShutdownTaskName.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.knot.shutdown.task/ShutdownTaskName.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.knot.shutdown.task/ShutdownTaskName.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.knot.shutdown.task/ShutdownTaskName.toString|toString(){}[0]
+}
+
+sealed class com.davils.knot.shutdown/ShutdownEvent : com.davils.konfetti.core/Event { // com.davils.knot.shutdown/ShutdownEvent|null[0]
+    final val shutdown // com.davils.knot.shutdown/ShutdownEvent.shutdown|{}shutdown[0]
+        final fun <get-shutdown>(): kotlin/String // com.davils.knot.shutdown/ShutdownEvent.shutdown.<get-shutdown>|<get-shutdown>(){}[0]
+
+    final class Escalated : com.davils.knot.shutdown/ShutdownEvent { // com.davils.knot.shutdown/ShutdownEvent.Escalated|null[0]
+        final val after // com.davils.knot.shutdown/ShutdownEvent.Escalated.after|{}after[0]
+            final fun <get-after>(): kotlin.time/Duration // com.davils.knot.shutdown/ShutdownEvent.Escalated.after.<get-after>|<get-after>(){}[0]
+        final val exitCode // com.davils.knot.shutdown/ShutdownEvent.Escalated.exitCode|{}exitCode[0]
+            final fun <get-exitCode>(): com.davils.knot.shutdown.exit/ExitCode // com.davils.knot.shutdown/ShutdownEvent.Escalated.exitCode.<get-exitCode>|<get-exitCode>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.knot.shutdown/ShutdownEvent.Escalated.toString|toString(){}[0]
+    }
+
+    final class Initiated : com.davils.knot.shutdown/ShutdownEvent { // com.davils.knot.shutdown/ShutdownEvent.Initiated|null[0]
+        final val reason // com.davils.knot.shutdown/ShutdownEvent.Initiated.reason|{}reason[0]
+            final fun <get-reason>(): com.davils.knot.shutdown/ShutdownReason // com.davils.knot.shutdown/ShutdownEvent.Initiated.reason.<get-reason>|<get-reason>(){}[0]
+        final val tasks // com.davils.knot.shutdown/ShutdownEvent.Initiated.tasks|{}tasks[0]
+            final fun <get-tasks>(): kotlin/Int // com.davils.knot.shutdown/ShutdownEvent.Initiated.tasks.<get-tasks>|<get-tasks>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.knot.shutdown/ShutdownEvent.Initiated.toString|toString(){}[0]
+    }
+
+    final class PhaseCompleted : com.davils.knot.shutdown/ShutdownEvent { // com.davils.knot.shutdown/ShutdownEvent.PhaseCompleted|null[0]
+        final val report // com.davils.knot.shutdown/ShutdownEvent.PhaseCompleted.report|{}report[0]
+            final fun <get-report>(): com.davils.knot.shutdown.report/PhaseReport // com.davils.knot.shutdown/ShutdownEvent.PhaseCompleted.report.<get-report>|<get-report>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.knot.shutdown/ShutdownEvent.PhaseCompleted.toString|toString(){}[0]
+    }
+
+    final class PhaseStarted : com.davils.knot.shutdown/ShutdownEvent { // com.davils.knot.shutdown/ShutdownEvent.PhaseStarted|null[0]
+        final val phase // com.davils.knot.shutdown/ShutdownEvent.PhaseStarted.phase|{}phase[0]
+            final fun <get-phase>(): com.davils.knot.shutdown/ShutdownPhase // com.davils.knot.shutdown/ShutdownEvent.PhaseStarted.phase.<get-phase>|<get-phase>(){}[0]
+        final val tasks // com.davils.knot.shutdown/ShutdownEvent.PhaseStarted.tasks|{}tasks[0]
+            final fun <get-tasks>(): kotlin.collections/List<kotlin/String> // com.davils.knot.shutdown/ShutdownEvent.PhaseStarted.tasks.<get-tasks>|<get-tasks>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.knot.shutdown/ShutdownEvent.PhaseStarted.toString|toString(){}[0]
+    }
+
+    final class TaskConcluded : com.davils.knot.shutdown/ShutdownEvent { // com.davils.knot.shutdown/ShutdownEvent.TaskConcluded|null[0]
+        final val task // com.davils.knot.shutdown/ShutdownEvent.TaskConcluded.task|{}task[0]
+            final fun <get-task>(): com.davils.knot.shutdown.report/TaskReport // com.davils.knot.shutdown/ShutdownEvent.TaskConcluded.task.<get-task>|<get-task>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.knot.shutdown/ShutdownEvent.TaskConcluded.toString|toString(){}[0]
+    }
+
+    final class Terminated : com.davils.knot.shutdown/ShutdownEvent { // com.davils.knot.shutdown/ShutdownEvent.Terminated|null[0]
+        final val report // com.davils.knot.shutdown/ShutdownEvent.Terminated.report|{}report[0]
+            final fun <get-report>(): com.davils.knot.shutdown.report/ShutdownReport // com.davils.knot.shutdown/ShutdownEvent.Terminated.report.<get-report>|<get-report>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.knot.shutdown/ShutdownEvent.Terminated.toString|toString(){}[0]
+    }
+
+    final object Companion { // com.davils.knot.shutdown/ShutdownEvent.Companion|null[0]
+        final val TOPIC // com.davils.knot.shutdown/ShutdownEvent.Companion.TOPIC|{}TOPIC[0]
+            final fun <get-TOPIC>(): com.davils.konfetti.core/TopicKey<com.davils.knot.shutdown/ShutdownEvent> // com.davils.knot.shutdown/ShutdownEvent.Companion.TOPIC.<get-TOPIC>|<get-TOPIC>(){}[0]
+    }
+}
+
+final object com.davils.knot.shutdown/ShutdownLimits { // com.davils.knot.shutdown/ShutdownLimits|null[0]
+    final const val MAX_DEPENDENCIES // com.davils.knot.shutdown/ShutdownLimits.MAX_DEPENDENCIES|{}MAX_DEPENDENCIES[0]
+        final fun <get-MAX_DEPENDENCIES>(): kotlin/Int // com.davils.knot.shutdown/ShutdownLimits.MAX_DEPENDENCIES.<get-MAX_DEPENDENCIES>|<get-MAX_DEPENDENCIES>(){}[0]
+    final const val MAX_EVENT_CAPACITY // com.davils.knot.shutdown/ShutdownLimits.MAX_EVENT_CAPACITY|{}MAX_EVENT_CAPACITY[0]
+        final fun <get-MAX_EVENT_CAPACITY>(): kotlin/Int // com.davils.knot.shutdown/ShutdownLimits.MAX_EVENT_CAPACITY.<get-MAX_EVENT_CAPACITY>|<get-MAX_EVENT_CAPACITY>(){}[0]
+    final const val MAX_NAME_LENGTH // com.davils.knot.shutdown/ShutdownLimits.MAX_NAME_LENGTH|{}MAX_NAME_LENGTH[0]
+        final fun <get-MAX_NAME_LENGTH>(): kotlin/Int // com.davils.knot.shutdown/ShutdownLimits.MAX_NAME_LENGTH.<get-MAX_NAME_LENGTH>|<get-MAX_NAME_LENGTH>(){}[0]
+    final const val MAX_TASKS // com.davils.knot.shutdown/ShutdownLimits.MAX_TASKS|{}MAX_TASKS[0]
+        final fun <get-MAX_TASKS>(): kotlin/Int // com.davils.knot.shutdown/ShutdownLimits.MAX_TASKS.<get-MAX_TASKS>|<get-MAX_TASKS>(){}[0]
+
+    final val MAX_GRACE_PERIOD // com.davils.knot.shutdown/ShutdownLimits.MAX_GRACE_PERIOD|{}MAX_GRACE_PERIOD[0]
+        final fun <get-MAX_GRACE_PERIOD>(): kotlin.time/Duration // com.davils.knot.shutdown/ShutdownLimits.MAX_GRACE_PERIOD.<get-MAX_GRACE_PERIOD>|<get-MAX_GRACE_PERIOD>(){}[0]
+}
+
+final object com.davils.knot.shutdown/ShutdownViolationCodes { // com.davils.knot.shutdown/ShutdownViolationCodes|null[0]
+    final val DEPENDENCY_CYCLE // com.davils.knot.shutdown/ShutdownViolationCodes.DEPENDENCY_CYCLE|{}DEPENDENCY_CYCLE[0]
+        final fun <get-DEPENDENCY_CYCLE>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.shutdown/ShutdownViolationCodes.DEPENDENCY_CYCLE.<get-DEPENDENCY_CYCLE>|<get-DEPENDENCY_CYCLE>(){}[0]
+    final val DUPLICATE_TASK // com.davils.knot.shutdown/ShutdownViolationCodes.DUPLICATE_TASK|{}DUPLICATE_TASK[0]
+        final fun <get-DUPLICATE_TASK>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.shutdown/ShutdownViolationCodes.DUPLICATE_TASK.<get-DUPLICATE_TASK>|<get-DUPLICATE_TASK>(){}[0]
+    final val EMPTY_REGISTRATION // com.davils.knot.shutdown/ShutdownViolationCodes.EMPTY_REGISTRATION|{}EMPTY_REGISTRATION[0]
+        final fun <get-EMPTY_REGISTRATION>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.shutdown/ShutdownViolationCodes.EMPTY_REGISTRATION.<get-EMPTY_REGISTRATION>|<get-EMPTY_REGISTRATION>(){}[0]
+    final val INVALID_CANCELLATION_GRACE // com.davils.knot.shutdown/ShutdownViolationCodes.INVALID_CANCELLATION_GRACE|{}INVALID_CANCELLATION_GRACE[0]
+        final fun <get-INVALID_CANCELLATION_GRACE>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.shutdown/ShutdownViolationCodes.INVALID_CANCELLATION_GRACE.<get-INVALID_CANCELLATION_GRACE>|<get-INVALID_CANCELLATION_GRACE>(){}[0]
+    final val INVALID_ESCALATION // com.davils.knot.shutdown/ShutdownViolationCodes.INVALID_ESCALATION|{}INVALID_ESCALATION[0]
+        final fun <get-INVALID_ESCALATION>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.shutdown/ShutdownViolationCodes.INVALID_ESCALATION.<get-INVALID_ESCALATION>|<get-INVALID_ESCALATION>(){}[0]
+    final val INVALID_EVENT_CAPACITY // com.davils.knot.shutdown/ShutdownViolationCodes.INVALID_EVENT_CAPACITY|{}INVALID_EVENT_CAPACITY[0]
+        final fun <get-INVALID_EVENT_CAPACITY>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.shutdown/ShutdownViolationCodes.INVALID_EVENT_CAPACITY.<get-INVALID_EVENT_CAPACITY>|<get-INVALID_EVENT_CAPACITY>(){}[0]
+    final val INVALID_GRACE_PERIOD // com.davils.knot.shutdown/ShutdownViolationCodes.INVALID_GRACE_PERIOD|{}INVALID_GRACE_PERIOD[0]
+        final fun <get-INVALID_GRACE_PERIOD>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.shutdown/ShutdownViolationCodes.INVALID_GRACE_PERIOD.<get-INVALID_GRACE_PERIOD>|<get-INVALID_GRACE_PERIOD>(){}[0]
+    final val INVALID_NAME // com.davils.knot.shutdown/ShutdownViolationCodes.INVALID_NAME|{}INVALID_NAME[0]
+        final fun <get-INVALID_NAME>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.shutdown/ShutdownViolationCodes.INVALID_NAME.<get-INVALID_NAME>|<get-INVALID_NAME>(){}[0]
+    final val INVALID_TASK_NAME // com.davils.knot.shutdown/ShutdownViolationCodes.INVALID_TASK_NAME|{}INVALID_TASK_NAME[0]
+        final fun <get-INVALID_TASK_NAME>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.shutdown/ShutdownViolationCodes.INVALID_TASK_NAME.<get-INVALID_TASK_NAME>|<get-INVALID_TASK_NAME>(){}[0]
+    final val INVALID_TIMEOUT // com.davils.knot.shutdown/ShutdownViolationCodes.INVALID_TIMEOUT|{}INVALID_TIMEOUT[0]
+        final fun <get-INVALID_TIMEOUT>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.shutdown/ShutdownViolationCodes.INVALID_TIMEOUT.<get-INVALID_TIMEOUT>|<get-INVALID_TIMEOUT>(){}[0]
+    final val LATER_PHASE_DEPENDENCY // com.davils.knot.shutdown/ShutdownViolationCodes.LATER_PHASE_DEPENDENCY|{}LATER_PHASE_DEPENDENCY[0]
+        final fun <get-LATER_PHASE_DEPENDENCY>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.shutdown/ShutdownViolationCodes.LATER_PHASE_DEPENDENCY.<get-LATER_PHASE_DEPENDENCY>|<get-LATER_PHASE_DEPENDENCY>(){}[0]
+    final val MISSING_ACTION // com.davils.knot.shutdown/ShutdownViolationCodes.MISSING_ACTION|{}MISSING_ACTION[0]
+        final fun <get-MISSING_ACTION>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.shutdown/ShutdownViolationCodes.MISSING_ACTION.<get-MISSING_ACTION>|<get-MISSING_ACTION>(){}[0]
+    final val NO_TRIGGER // com.davils.knot.shutdown/ShutdownViolationCodes.NO_TRIGGER|{}NO_TRIGGER[0]
+        final fun <get-NO_TRIGGER>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.shutdown/ShutdownViolationCodes.NO_TRIGGER.<get-NO_TRIGGER>|<get-NO_TRIGGER>(){}[0]
+    final val TIMEOUT_EXCEEDS_GRACE // com.davils.knot.shutdown/ShutdownViolationCodes.TIMEOUT_EXCEEDS_GRACE|{}TIMEOUT_EXCEEDS_GRACE[0]
+        final fun <get-TIMEOUT_EXCEEDS_GRACE>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.shutdown/ShutdownViolationCodes.TIMEOUT_EXCEEDS_GRACE.<get-TIMEOUT_EXCEEDS_GRACE>|<get-TIMEOUT_EXCEEDS_GRACE>(){}[0]
+    final val TOO_MANY_DEPENDENCIES // com.davils.knot.shutdown/ShutdownViolationCodes.TOO_MANY_DEPENDENCIES|{}TOO_MANY_DEPENDENCIES[0]
+        final fun <get-TOO_MANY_DEPENDENCIES>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.shutdown/ShutdownViolationCodes.TOO_MANY_DEPENDENCIES.<get-TOO_MANY_DEPENDENCIES>|<get-TOO_MANY_DEPENDENCIES>(){}[0]
+    final val TOO_MANY_TASKS // com.davils.knot.shutdown/ShutdownViolationCodes.TOO_MANY_TASKS|{}TOO_MANY_TASKS[0]
+        final fun <get-TOO_MANY_TASKS>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.shutdown/ShutdownViolationCodes.TOO_MANY_TASKS.<get-TOO_MANY_TASKS>|<get-TOO_MANY_TASKS>(){}[0]
+    final val UNKNOWN_DEPENDENCY // com.davils.knot.shutdown/ShutdownViolationCodes.UNKNOWN_DEPENDENCY|{}UNKNOWN_DEPENDENCY[0]
+        final fun <get-UNKNOWN_DEPENDENCY>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.knot.shutdown/ShutdownViolationCodes.UNKNOWN_DEPENDENCY.<get-UNKNOWN_DEPENDENCY>|<get-UNKNOWN_DEPENDENCY>(){}[0]
+}
+
+final fun (com.davils.knot.shutdown/ShutdownPlanBuilder<*>).com.davils.knot.shutdown/eventBus(com.davils.konfetti.core/EventBus, kotlin.time/Duration = ..., kotlin/String = ...) // com.davils.knot.shutdown/eventBus|eventBus@com.davils.knot.shutdown.ShutdownPlanBuilder<*>(com.davils.konfetti.core.EventBus;kotlin.time.Duration;kotlin.String){}[0]
+final fun com.davils.knot.shutdown/shutdown(kotlinx.coroutines/CoroutineScope, kotlin/Function1<com.davils.knot.shutdown/ShutdownBuilder, kotlin/Unit> = ...): com.davils.knot.shutdown/Shutdown // com.davils.knot.shutdown/shutdown|shutdown(kotlinx.coroutines.CoroutineScope;kotlin.Function1<com.davils.knot.shutdown.ShutdownBuilder,kotlin.Unit>){}[0]
