@@ -23,8 +23,9 @@ Everyone who takes part follows the [Code of Conduct](CODE_OF_CONDUCT.md).
 ./gradlew check
 ```
 
-It compiles with warnings as errors, runs Detekt, the tests, coverage, the API check, the license header check,
-the changelog check, Trivy and the Kreate assurance gate. A pull request is only merged when it is green.
+It compiles with warnings as errors, runs Detekt over the main and the test sources, the tests on the JVM and on
+Wasm, the process tests of the shutdown, coverage, the API check, the license header check, the changelog check,
+Trivy, the standards audit and the Kreate assurance gate. A pull request is only merged when it is green.
 
 ### Security first
 
@@ -35,8 +36,8 @@ fails closed. It ships with tests that feed hostile input through every new sink
 
 ### The public API is a gate
 
-`knot-platform/api/knot-platform.api` and `knot-environment/api/knot-environment.api` record the binary API, the
-`.klib.api` files next to them the API of the Wasm target. A deliberate change is recorded with
+The `api` folder of every module records its binary API, for the JVM and, in the `.klib.api` file, for the Wasm
+target. A deliberate change is recorded with
 `./gradlew kreateApiDump`, gets an entry in [CHANGELOG.md](CHANGELOG.md) and, when it breaks compatibility, waits for
 the next major version.
 
@@ -51,11 +52,7 @@ Every dependency, the classpath of `build-logic` included, is locked and verifie
 `gradle/libs.versions.toml`, refresh both and review what changed:
 
 ```bash
-./gradlew kreateResolveAndLockAll :build-logic:dependencies --write-locks --no-configuration-cache
-```
-
-```bash
-./gradlew --write-verification-metadata pgp,sha256 --export-keys --no-configuration-cache check
+./gradlew kreateResolveAndLockAll :build-logic:dependencies --write-locks --write-verification-metadata pgp,sha256 --export-keys --no-configuration-cache
 ```
 
 A new dependency other than a library of JetBrains or Davils needs the approval of a maintainer.

@@ -1,8 +1,10 @@
 # Third-Party Material
 
 No published artifact of Knot contains third-party code. Knot is ported from the `kide-common` modules of kide,
-Copyright Davils, and builds on [Kore](https://github.com/davils-com/kore), Copyright 2026 Davils, under the same
-Apache License 2.0.
+Copyright Davils, and builds on [Kore](https://github.com/davils-com/kore), [konfetti](https://github.com/davils-com/konfetti) and
+[kollect](https://github.com/davils-com/kollect), Copyright 2026 Davils, under the same Apache License 2.0, and on
+[kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines), Copyright JetBrains s.r.o., under the Apache
+License 2.0.
 
 The build and the tests depend on libraries under their own licenses; `gradle/verification-metadata.xml` records
 each of them, and the Trivy license scan of `./gradlew check` checks them.
