@@ -22,7 +22,7 @@ plugins {
     id("knot.base")
 }
 
-val knotModuleName: String = "com.davils.knot.${name.removePrefix("knot-")}"
+val knotModuleName: String = "com.davils.knot.${name.removePrefix("knot-").replace("-", "")}"
 
 kreate {
     platform {

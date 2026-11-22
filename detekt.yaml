@@ -105,6 +105,16 @@ ktlint:
     active: false
 
 potential-bugs:
+  # Tests keep handlers and installations open on purpose, to inspect them after the act.
+  MissingUseCall:
+    active: true
+    excludes: *testSources
+  # The JVM runtime of knot-shutdown ends the process on purpose, and the probe of its process tests is a main program.
+  ExitOutsideMain:
+    active: true
+    excludes:
+      - '**/shutdown/process/JvmShutdownRuntime.kt'
+      - '**/shutdown/process/fixture/ShutdownProbe.kt'
   # Tests cast public collections to MutableList on purpose, to prove that they cannot be changed.
   DontDowncastCollectionTypes:
     active: true
@@ -129,26 +139,41 @@ style:
   # Explicit API mode requires the modifier, which this rule would report as redundant.
   RedundantVisibilityModifier:
     active: false
-  # Parameters and ParameterDeclarations are abstract so that a schema can only be declared by subclassing.
+  # An environment schema is abstract so that its settings can only be declared by subclassing.
   AbstractClassCanBeConcreteClass:
     active: true
     excludes:
-      - '**/arguments/Parameters.kt'
-      - '**/arguments/ParameterDeclarations.kt'
+      - '**/schema/EnvironmentSchema.kt'
   # A public class may not be a data class (ForbiddenPublicDataClass), so a public holder of a value writes equals,
   # hashCode and toString by hand, which this rule takes for a class without functionality.
   UseDataClass:
     active: true
     excludes:
-      - '**/outcome/Outcome.kt'
+      - '**/report/*.kt'
+      - '**/exit/*.kt'
+      - '**/*Event.kt'
+      - '**/*Reason.kt'
+      - '**/*State.kt'
+      - '**/*Refusal.kt'
+      - '**/process/Escalation.kt'
+      - '**/process/FatalErrorPolicy.kt'
+      - '**/*Metrics.kt'
+      - '**/*Report.kt'
+      - '**/failure/UnexpectedFailure.kt'
+      - '**/render/RenderOptions.kt'
+      - '**/platform/HostProbe.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   OptionalUnit:
     active: false
   MaxLineLength:
     maxLineLength: 120
     excludeCommentStatements: false
+  # The JVM runtime of knot-shutdown is the one sanctioned place that binds a shutdown to the process.
   ForbiddenMethodCall:
     active: true
+    excludes:
+      - '**/shutdown/process/JvmShutdownRuntime.kt'
+      - '**/shutdown/process/fixture/ShutdownProbe.kt'
     methods:
       - value: 'kotlin.io.print'
         reason: 'A library never writes to the standard streams. Return the result and let the caller decide where it goes.'
@@ -196,6 +221,8 @@ style:
         reason: 'Predictable randomness. Use the SecureRandom-backed generators of Kore or java.security.SecureRandom behind a seam.'
   ForbiddenImport:
     active: true
+    excludes:
+      - '**/shutdown/process/JvmShutdownRuntime.kt'
     forbiddenImports:
       - value: 'java.util.Random'
         reason: 'java.util.Random is predictable. Use the cryptographically secure randomness of kotlin.uuid or java.security.SecureRandom behind a seam.'

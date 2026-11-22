@@ -21,6 +21,7 @@ plugins {
     id("knot.git-hooks")
     id("knot.trivy")
     id("knot.assurance")
+    id("knot.standards")
     id("knot.changelog")
     id("knot.license-header")
     id("knot.web-tools")

@@ -27,9 +27,3 @@ kreate {
 dependencies {
     commonMainApi(libs.kore.core)
 }
-
-val unitTestConfigurations: Set<String> = setOf("commonUnitTestImplementation", "wasmJsTestImplementation")
-
-configurations.matching { configuration -> configuration.name in unitTestConfigurations }.configureEach {
-    dependencies.add(project.dependencies.create(libs.kore.testing.get()))
-}
