@@ -16,6 +16,4 @@
 
 package com.davils.knot.platform
 
-internal expect fun hostOsName(): String
-
-internal expect fun hostOsArch(): String
+internal data class Detected<T>(val value: T, val source: DetectionSource)

@@ -18,6 +18,7 @@ package com.davils.knot.platform
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
 
 class OperatingSystemWasmTest : FunSpec({
     context("current system on wasmJs") {
@@ -25,8 +26,22 @@ class OperatingSystemWasmTest : FunSpec({
             OperatingSystem.current shouldBe OperatingSystem.Wasm
         }
 
-        test("has no native platform") {
-            Platform.current shouldBe null
+        test("finds the native platform of the machine behind Node.js") {
+            Platform.current shouldBe Host.current.platform
+            Host.current.systemSource shouldBe DetectionSource.Process
+        }
+    }
+
+    context("current host on wasmJs") {
+        test("is Node.js with its version, the runtime the tests run in") {
+            Host.current.runtime shouldBe HostRuntime.NodeJs
+            Host.current.runtimeVersion shouldNotBe null
+            Host.current.isMobile shouldBe false
+        }
+
+        test("knows the system and the architecture from the process") {
+            Host.current.system shouldNotBe HostSystem.Unknown
+            Host.current.architectureSource shouldBe DetectionSource.Process
         }
     }
 })

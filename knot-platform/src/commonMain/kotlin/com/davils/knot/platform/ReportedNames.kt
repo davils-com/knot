@@ -21,11 +21,17 @@ import com.davils.kore.core.Limits
 private const val FIRST_PRINTABLE: Char = ' '
 private const val LAST_PRINTABLE: Char = '~'
 
-internal fun comparableName(reported: String): String? {
-    val isComparable = reported.length <= Limits.MAX_NAME_LENGTH && reported.all(::isPrintableAscii)
+internal fun comparableName(reported: String, maxLength: Int = Limits.MAX_NAME_LENGTH): String? {
+    val isComparable = reported.length <= maxLength && reported.all(::isPrintableAscii)
     if (!isComparable) return null
     val trimmed = reported.trim()
     return trimmed.lowercase()
+}
+
+internal fun reportedVersion(reported: String?): String? {
+    val text = reported ?: return null
+    val isShown = text.length <= PlatformLimits.MAX_VERSION_LENGTH && text.all(::isPrintableAscii)
+    return text.trim().takeIf { trimmed -> isShown && trimmed.isNotEmpty() }
 }
 
 private fun isPrintableAscii(character: Char): Boolean = character in FIRST_PRINTABLE..LAST_PRINTABLE

@@ -12,6 +12,168 @@ public final class com/davils/knot/platform/Architecture$Companion {
 	public final fun resolve (Ljava/lang/String;)Lcom/davils/knot/platform/Architecture;
 }
 
+public final class com/davils/knot/platform/DetectionSource : java/lang/Enum {
+	public static final field ClientHints Lcom/davils/knot/platform/DetectionSource;
+	public static final field DenoBuild Lcom/davils/knot/platform/DetectionSource;
+	public static final field None Lcom/davils/knot/platform/DetectionSource;
+	public static final field Process Lcom/davils/knot/platform/DetectionSource;
+	public static final field SystemProperty Lcom/davils/knot/platform/DetectionSource;
+	public static final field UserAgent Lcom/davils/knot/platform/DetectionSource;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getIdentifier ()Ljava/lang/String;
+	public final fun isAuthoritative ()Z
+	public fun toString ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/knot/platform/DetectionSource;
+	public static fun values ()[Lcom/davils/knot/platform/DetectionSource;
+}
+
+public final class com/davils/knot/platform/Host {
+	public static final field Companion Lcom/davils/knot/platform/Host$Companion;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getArchitecture ()Lcom/davils/knot/platform/HostArchitecture;
+	public final fun getArchitectureSource ()Lcom/davils/knot/platform/DetectionSource;
+	public final fun getPlatform ()Lcom/davils/knot/platform/Platform;
+	public final fun getRuntime ()Lcom/davils/knot/platform/HostRuntime;
+	public final fun getRuntimeVersion ()Ljava/lang/String;
+	public final fun getSystem ()Lcom/davils/knot/platform/HostSystem;
+	public final fun getSystemSource ()Lcom/davils/knot/platform/DetectionSource;
+	public fun hashCode ()I
+	public final fun isAuthoritative ()Z
+	public final fun isMobile ()Ljava/lang/Boolean;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/platform/Host$Companion {
+	public final fun detailed (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun detect (Lcom/davils/knot/platform/HostProbe;)Lcom/davils/knot/platform/Host;
+	public final fun getCurrent ()Lcom/davils/knot/platform/Host;
+}
+
+public final class com/davils/knot/platform/HostArchitecture : java/lang/Enum {
+	public static final field Arm32 Lcom/davils/knot/platform/HostArchitecture;
+	public static final field Arm64 Lcom/davils/knot/platform/HostArchitecture;
+	public static final field Unknown Lcom/davils/knot/platform/HostArchitecture;
+	public static final field X64 Lcom/davils/knot/platform/HostArchitecture;
+	public static final field X86 Lcom/davils/knot/platform/HostArchitecture;
+	public final fun getArchitecture ()Lcom/davils/knot/platform/Architecture;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getIdentifier ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/knot/platform/HostArchitecture;
+	public static fun values ()[Lcom/davils/knot/platform/HostArchitecture;
+}
+
+public final class com/davils/knot/platform/HostProbe {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBunVersion ()Ljava/lang/String;
+	public final fun getClientHintsArchitecture ()Ljava/lang/String;
+	public final fun getClientHintsBitness ()Ljava/lang/String;
+	public final fun getClientHintsPlatform ()Ljava/lang/String;
+	public final fun getDenoArch ()Ljava/lang/String;
+	public final fun getDenoOs ()Ljava/lang/String;
+	public final fun getDenoVersion ()Ljava/lang/String;
+	public final fun getHasWindow ()Z
+	public final fun getJavaVersion ()Ljava/lang/String;
+	public final fun getNodeVersion ()Ljava/lang/String;
+	public final fun getOsArch ()Ljava/lang/String;
+	public final fun getOsName ()Ljava/lang/String;
+	public final fun getProcessArch ()Ljava/lang/String;
+	public final fun getProcessPlatform ()Ljava/lang/String;
+	public final fun getUserAgent ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isClientHintsMobile ()Ljava/lang/Boolean;
+	public final fun isDedicatedWorker ()Z
+	public final fun isJvm ()Z
+	public final fun isServiceWorker ()Z
+	public final fun isSharedWorker ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/knot/platform/HostProbeBuilder {
+	public final fun getBunVersion ()Ljava/lang/String;
+	public final fun getClientHintsArchitecture ()Ljava/lang/String;
+	public final fun getClientHintsBitness ()Ljava/lang/String;
+	public final fun getClientHintsPlatform ()Ljava/lang/String;
+	public final fun getDenoArch ()Ljava/lang/String;
+	public final fun getDenoOs ()Ljava/lang/String;
+	public final fun getDenoVersion ()Ljava/lang/String;
+	public final fun getHasWindow ()Z
+	public final fun getJavaVersion ()Ljava/lang/String;
+	public final fun getNodeVersion ()Ljava/lang/String;
+	public final fun getOsArch ()Ljava/lang/String;
+	public final fun getOsName ()Ljava/lang/String;
+	public final fun getProcessArch ()Ljava/lang/String;
+	public final fun getProcessPlatform ()Ljava/lang/String;
+	public final fun getUserAgent ()Ljava/lang/String;
+	public final fun isClientHintsMobile ()Ljava/lang/Boolean;
+	public final fun isDedicatedWorker ()Z
+	public final fun isJvm ()Z
+	public final fun isServiceWorker ()Z
+	public final fun isSharedWorker ()Z
+	public final fun setBunVersion (Ljava/lang/String;)V
+	public final fun setClientHintsArchitecture (Ljava/lang/String;)V
+	public final fun setClientHintsBitness (Ljava/lang/String;)V
+	public final fun setClientHintsMobile (Ljava/lang/Boolean;)V
+	public final fun setClientHintsPlatform (Ljava/lang/String;)V
+	public final fun setDedicatedWorker (Z)V
+	public final fun setDenoArch (Ljava/lang/String;)V
+	public final fun setDenoOs (Ljava/lang/String;)V
+	public final fun setDenoVersion (Ljava/lang/String;)V
+	public final fun setHasWindow (Z)V
+	public final fun setJavaVersion (Ljava/lang/String;)V
+	public final fun setJvm (Z)V
+	public final fun setNodeVersion (Ljava/lang/String;)V
+	public final fun setOsArch (Ljava/lang/String;)V
+	public final fun setOsName (Ljava/lang/String;)V
+	public final fun setProcessArch (Ljava/lang/String;)V
+	public final fun setProcessPlatform (Ljava/lang/String;)V
+	public final fun setServiceWorker (Z)V
+	public final fun setSharedWorker (Z)V
+	public final fun setUserAgent (Ljava/lang/String;)V
+}
+
+public final class com/davils/knot/platform/HostProbesKt {
+	public static final fun hostProbe (Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/platform/HostProbe;
+}
+
+public final class com/davils/knot/platform/HostRuntime : java/lang/Enum {
+	public static final field Browser Lcom/davils/knot/platform/HostRuntime;
+	public static final field Bun Lcom/davils/knot/platform/HostRuntime;
+	public static final field DedicatedWorker Lcom/davils/knot/platform/HostRuntime;
+	public static final field Deno Lcom/davils/knot/platform/HostRuntime;
+	public static final field Jvm Lcom/davils/knot/platform/HostRuntime;
+	public static final field NodeJs Lcom/davils/knot/platform/HostRuntime;
+	public static final field ServiceWorker Lcom/davils/knot/platform/HostRuntime;
+	public static final field SharedWorker Lcom/davils/knot/platform/HostRuntime;
+	public static final field UnknownWasm Lcom/davils/knot/platform/HostRuntime;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getHasProcess ()Z
+	public final fun getIdentifier ()Ljava/lang/String;
+	public final fun isWasm ()Z
+	public final fun isWeb ()Z
+	public final fun isWorker ()Z
+	public fun toString ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/knot/platform/HostRuntime;
+	public static fun values ()[Lcom/davils/knot/platform/HostRuntime;
+}
+
+public final class com/davils/knot/platform/HostSystem : java/lang/Enum {
+	public static final field Android Lcom/davils/knot/platform/HostSystem;
+	public static final field ChromeOs Lcom/davils/knot/platform/HostSystem;
+	public static final field FreeBsd Lcom/davils/knot/platform/HostSystem;
+	public static final field Ios Lcom/davils/knot/platform/HostSystem;
+	public static final field Linux Lcom/davils/knot/platform/HostSystem;
+	public static final field MacOs Lcom/davils/knot/platform/HostSystem;
+	public static final field Unknown Lcom/davils/knot/platform/HostSystem;
+	public static final field Windows Lcom/davils/knot/platform/HostSystem;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getIdentifier ()Ljava/lang/String;
+	public final fun getOperatingSystem ()Lcom/davils/knot/platform/OperatingSystem;
+	public fun toString ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/knot/platform/HostSystem;
+	public static fun values ()[Lcom/davils/knot/platform/HostSystem;
+}
+
 public final class com/davils/knot/platform/OperatingSystem : java/lang/Enum {
 	public static final field Companion Lcom/davils/knot/platform/OperatingSystem$Companion;
 	public static final field Linux Lcom/davils/knot/platform/OperatingSystem;
@@ -54,5 +216,11 @@ public final class com/davils/knot/platform/Platform$Companion {
 	public final fun parseOrNull (Ljava/lang/String;)Lcom/davils/knot/platform/Platform;
 	public final fun requireCurrent ()Lcom/davils/knot/platform/Platform;
 	public final fun resolve (Ljava/lang/String;Ljava/lang/String;)Lcom/davils/knot/platform/Platform;
+}
+
+public final class com/davils/knot/platform/PlatformLimits {
+	public static final field INSTANCE Lcom/davils/knot/platform/PlatformLimits;
+	public static final field MAX_USER_AGENT_LENGTH I
+	public static final field MAX_VERSION_LENGTH I
 }
 

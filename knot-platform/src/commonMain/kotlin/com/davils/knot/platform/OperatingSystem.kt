@@ -83,15 +83,16 @@ public enum class OperatingSystem(public val identifier: String, public val isUn
      */
     public companion object {
         /**
-         * The operating system this program runs on, or `null` if the JVM reports a system without a build.
+         * The operating system this program runs on directly, or `null` if the JVM reports a system without a build.
          *
          * On the JVM it is read from the system property `os.name`; on the `wasmJs` target it is always [Wasm], in a
-         * browser and under Node.js alike. It is read once, on first use, and then kept; it is safe to share between
-         * threads.
+         * browser and under Node.js alike, because the program runs on WebAssembly. The system of the machine behind
+         * a WebAssembly runtime is [Host.system] of [Host.current]. It is read once, on first use, and then kept; it
+         * is safe to share between threads.
          *
          * @since 1.0.0
          */
-        public val current: OperatingSystem? by lazy { resolve(hostOsName()) }
+        public val current: OperatingSystem? by lazy { currentOf(Host.current) }
 
         /**
          * Returns the operating system that [osName] names, as a JVM or Node.js reports it.
@@ -110,6 +111,11 @@ public enum class OperatingSystem(public val identifier: String, public val isUn
             val name = comparableName(osName) ?: return null
             val prefixed = namePrefixes.firstOrNull { (prefix, _) -> name.startsWith(prefix) }?.second
             return exactNames[name] ?: prefixed
+        }
+
+        internal fun currentOf(host: Host): OperatingSystem? {
+            if (host.runtime.isWasm) return Wasm
+            return host.system.operatingSystem
         }
     }
 }

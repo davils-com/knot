@@ -21,7 +21,6 @@ package com.davils.knot.platform
 import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.collection.immutableList
 import com.davils.kore.core.collection.immutableSet
-import com.davils.kore.core.text.SafeText
 
 private const val SEPARATOR: Char = '-'
 
@@ -73,9 +72,8 @@ public class Platform private constructor(
     /**
      * Whether the operating system is [OperatingSystem.Wasm], see [OperatingSystem.isWasm].
      *
-     * WebAssembly has no native build, so no platform of [entries], [resolve] or [parse] runs on it and the value is
-     * always `false` for them; on the `wasmJs` target there is no [current] platform. Check
-     * [OperatingSystem.current] to find out whether the program runs on WebAssembly.
+     * WebAssembly has no native build, so no platform runs on it and the value is always `false`. Check
+     * [OperatingSystem.current] or [Host.runtime] to find out whether the program runs on WebAssembly.
      *
      * @since 1.0.0
      */
@@ -136,27 +134,27 @@ public class Platform private constructor(
         public val identifiers: Set<String> = entries.map { platform -> platform.identifier }.immutableSet()
 
         /**
-         * The platform this program runs on, or `null` if the JVM reports a system or an architecture that is not
-         * supported.
+         * The native platform of the machine this program runs on, [Host.platform] of [Host.current], or `null` if
+         * the machine has no native build or its runtime does not tell its system and architecture authoritatively.
          *
-         * It is read once, on first use, from the system properties `os.name` and `os.arch` on the JVM, and then kept;
-         * it is safe to share between threads. On the `wasmJs` target, in a browser and under Node.js alike, the
-         * operating system is [OperatingSystem.Wasm], which has no native build, so there is none; check
-         * [OperatingSystem.current] instead.
+         * On the JVM it comes from the system properties `os.name` and `os.arch`. On the `wasmJs` target it comes from
+         * `process` under Node.js and Bun and from `Deno.build` under Deno, so a program on WebAssembly finds the
+         * native platform of its machine there; in a browser and in a web worker there is none, because they report
+         * their machine only as a hint. It is read once, on first use, and then kept; it is safe to share between
+         * threads.
          *
          * @since 1.0.0
          */
-        public val current: Platform? by lazy { resolve(osName = hostOsName(), osArch = hostOsArch()) }
+        public val current: Platform? by lazy { Host.current.platform }
 
         /**
          * Returns the platform this program runs on and refuses to go on without one.
          *
          * @return the current platform.
-         * @throws IllegalStateException if the runtime reports a system or an architecture that is not supported, and
-         * always on the `wasmJs` target, whose system is [OperatingSystem.Wasm].
+         * @throws IllegalStateException if [current] is `null`; the message names the detected host.
          * @since 1.0.0
          */
-        public fun requireCurrent(): Platform = requireSupported(osName = hostOsName(), osArch = hostOsArch())
+        public fun requireCurrent(): Platform = requireSupported(Host.current)
 
         /**
          * Returns the platform that the names [osName] and [osArch] describe, in any spelling that
@@ -172,9 +170,7 @@ public class Platform private constructor(
             val operatingSystem = OperatingSystem.resolve(osName)
             val architecture = Architecture.resolve(osArch)
             if (operatingSystem == null || architecture == null) return null
-            return entries.firstOrNull { platform ->
-                platform.operatingSystem == operatingSystem && platform.architecture == architecture
-            }
+            return of(operatingSystem = operatingSystem, architecture = architecture)
         }
 
         /**
@@ -200,12 +196,14 @@ public class Platform private constructor(
         public fun parseOrNull(identifier: String): Platform? =
             entries.firstOrNull { platform -> platform.identifier == identifier }
 
-        internal fun requireSupported(osName: String, osArch: String): Platform =
-            checkNotNull(resolve(osName = osName, osArch = osArch)) {
-                val system = SafeText.quoted(osName)
-                val architecture = SafeText.quoted(osArch)
-                "The system $system with the architecture $architecture is not supported, only ${supportedList()} are"
+        internal fun of(operatingSystem: OperatingSystem, architecture: Architecture): Platform? =
+            entries.firstOrNull { platform ->
+                platform.operatingSystem == operatingSystem && platform.architecture == architecture
             }
+
+        internal fun requireSupported(host: Host): Platform = checkNotNull(host.platform) {
+            "The host $host has no supported platform, which is one of ${supportedList()}"
+        }
 
         private fun pairs(): List<Platform> {
             val native = OperatingSystem.entries.filterNot { operatingSystem -> operatingSystem.isWasm }

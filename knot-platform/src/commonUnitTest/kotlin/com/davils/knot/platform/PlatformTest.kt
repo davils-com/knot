@@ -141,10 +141,8 @@ class PlatformTest : FunSpec({
     }
 
     context("current machine") {
-        test("resolves to what the runtime reports about it") {
-            val reported = Platform.resolve(osName = hostOsName(), osArch = hostOsArch())
-
-            Platform.current shouldBe reported
+        test("is the native platform of the current host") {
+            Platform.current shouldBe Host.current.platform
         }
 
         test("is read once and held") {
@@ -157,17 +155,17 @@ class PlatformTest : FunSpec({
     }
 
     context("requiring a supported machine") {
-        test("gives the platform of supported names") {
-            Platform.requireSupported(osName = LINUX, osArch = AMD64) shouldBe Platform.parse(LINUX_X64)
+        test("gives the platform of a supported host") {
+            Platform.requireSupported(jvmHost(osName = LINUX, osArch = AMD64)) shouldBe Platform.parse(LINUX_X64)
         }
 
-        test("explains which machine is not supported") {
+        test("explains which host is not supported") {
             val failure = shouldThrow<IllegalStateException> {
-                Platform.requireSupported(osName = FREEBSD, osArch = "riscv64")
+                Platform.requireSupported(jvmHost(osName = FREEBSD, osArch = "riscv64"))
             }
 
-            failure.message.orEmpty() shouldContain
-                """The system "FreeBSD" with the architecture "riscv64" is not supported, only linux-aarch64"""
+            failure.message.orEmpty() shouldContain "system=freebsd (system-property)"
+            failure.message.orEmpty() shouldContain "has no supported platform, which is one of linux-aarch64"
         }
 
         test("shows hostile names escaped") {
@@ -181,7 +179,7 @@ class PlatformTest : FunSpec({
 
             names.forEach { name ->
                 val failure = shouldThrow<IllegalStateException> {
-                    Platform.requireSupported(osName = name, osArch = name)
+                    Platform.requireSupported(jvmHost(osName = name, osArch = name))
                 }
 
                 isSafeToShow(failure.message.orEmpty()) shouldBe true
@@ -189,3 +187,12 @@ class PlatformTest : FunSpec({
         }
     }
 })
+
+private fun jvmHost(osName: String, osArch: String): Host = Host.detect(
+    hostProbe {
+        isJvm = true
+        this.osName = osName
+        this.osArch = osArch
+        javaVersion = osName
+    },
+)

@@ -26,4 +26,18 @@ class OperatingSystemJvmTest : FunSpec({
             OperatingSystem.current?.isWasm shouldBe false
         }
     }
+
+    context("current host on the JVM") {
+        test("is the JVM with the version and the machine it reports") {
+            val host = Host.current
+
+            host.runtime shouldBe HostRuntime.Jvm
+            host.runtimeVersion shouldBe System.getProperty("java.version")
+            host.systemSource shouldBe DetectionSource.SystemProperty
+            host.platform shouldBe Platform.resolve(
+                osName = System.getProperty("os.name"),
+                osArch = System.getProperty("os.arch"),
+            )
+        }
+    }
 })

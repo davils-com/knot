@@ -16,8 +16,15 @@
 
 package com.davils.knot.platform
 
-private const val WASM: String = "wasm"
+private const val OS_NAME_PROPERTY: String = "os.name"
+private const val OS_ARCH_PROPERTY: String = "os.arch"
+private const val JAVA_VERSION_PROPERTY: String = "java.version"
 
-internal actual fun hostOsName(): String = WASM
+internal actual fun observedHostProbe(): HostProbe = hostProbe {
+    isJvm = true
+    osName = System.getProperty(OS_NAME_PROPERTY)
+    osArch = System.getProperty(OS_ARCH_PROPERTY)
+    javaVersion = System.getProperty(JAVA_VERSION_PROPERTY)
+}
 
-internal actual fun hostOsArch(): String = WASM
+internal actual suspend fun observedHighEntropyProbe(): HostProbe = observedHostProbe()

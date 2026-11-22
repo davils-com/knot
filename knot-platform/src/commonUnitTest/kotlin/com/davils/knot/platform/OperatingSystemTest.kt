@@ -101,8 +101,31 @@ class OperatingSystemTest : FunSpec({
     }
 
     context("current system") {
-        test("resolves to what the runtime reports about it") {
-            OperatingSystem.current shouldBe OperatingSystem.resolve(hostOsName())
+        test("is the system the host runs on directly") {
+            OperatingSystem.current shouldBe OperatingSystem.currentOf(Host.current)
+        }
+
+        test("is wasm on every WebAssembly runtime, whatever machine runs it") {
+            val probe = hostProbe {
+                nodeVersion = "22.11.0"
+                processPlatform = "linux"
+            }
+
+            OperatingSystem.currentOf(Host.detect(probe)) shouldBe OperatingSystem.Wasm
+        }
+
+        test("is the native system the JVM reports, or nothing without a build") {
+            val linux = hostProbe {
+                isJvm = true
+                osName = "Linux"
+            }
+            val freeBsd = hostProbe {
+                isJvm = true
+                osName = "FreeBSD"
+            }
+
+            OperatingSystem.currentOf(Host.detect(linux)) shouldBe OperatingSystem.Linux
+            OperatingSystem.currentOf(Host.detect(freeBsd)) shouldBe null
         }
 
         test("is read once and held") {

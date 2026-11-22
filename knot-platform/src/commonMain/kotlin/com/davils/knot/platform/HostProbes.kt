@@ -16,9 +16,22 @@
 
 package com.davils.knot.platform
 
-private const val OS_NAME_PROPERTY: String = "os.name"
-private const val OS_ARCH_PROPERTY: String = "os.arch"
-
-internal actual fun hostOsName(): String = System.getProperty(OS_NAME_PROPERTY, "")
-
-internal actual fun hostOsArch(): String = System.getProperty(OS_ARCH_PROPERTY, "")
+/**
+ * Declares the facts of a runtime by hand, for [Host.detect].
+ *
+ * ```kotlin
+ * val host = Host.detect(hostProbe {
+ *     hasWindow = true
+ *     userAgent = request.userAgent
+ * })
+ * ```
+ *
+ * @param block declares the facts; every fact left out counts as not reported.
+ * @return the probe.
+ * @since 1.0.0
+ */
+public fun hostProbe(block: HostProbeBuilder.() -> Unit): HostProbe {
+    val builder = HostProbeBuilder()
+    builder.block()
+    return builder.build()
+}
