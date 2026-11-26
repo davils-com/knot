@@ -14,12 +14,17 @@
  * limitations under the License.
  */
 
+@file:OptIn(DavilsInternal::class)
+
 package com.davils.knot.shutdown.internal
 
 import com.davils.knot.shutdown.RegistrationRefusal
 import com.davils.knot.shutdown.ShutdownRegistration
 import com.davils.knot.shutdown.ShutdownRegistrationBuilder
 import com.davils.knot.shutdown.task.ShutdownTaskName
+import com.davils.kore.core.annotation.DavilsInternal
+import com.davils.kore.core.concurrency.Guard
+import com.davils.kore.core.concurrency.guard
 import kotlin.time.Duration
 
 internal class TaskRegistry(
@@ -27,7 +32,7 @@ internal class TaskRegistry(
     private val defaultTimeout: Duration,
     private val refused: (RegistrationRefusal) -> Unit,
 ) {
-    private val guard: Guard = platformGuard()
+    private val guard: Guard = guard()
     private var tasks: Map<ShutdownTaskName, ShutdownTask> = initial.associateBy { task -> task.name }
     private var isSealed: Boolean = false
 

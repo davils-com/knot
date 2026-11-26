@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-@file:OptIn(ExperimentalAtomicApi::class)
+@file:OptIn(ExperimentalAtomicApi::class, DavilsInternal::class)
 
 package com.davils.knot.failure
 
 import com.davils.knot.failure.internal.FailureTelemetry
-import com.davils.knot.failure.internal.Guard
 import com.davils.knot.failure.internal.RecentFailures
 import com.davils.knot.failure.internal.SinkWriter
 import com.davils.knot.failure.internal.StormGuard
 import com.davils.knot.failure.internal.currentThreadName
-import com.davils.knot.failure.internal.platformGuard
 import com.davils.knot.shutdown.ShutdownReason
 import com.davils.kollect.core.health.Health
 import com.davils.kollect.core.health.HealthIndicator
 import com.davils.kollect.core.health.ReasonCode
+import com.davils.kore.core.annotation.DavilsInternal
+import com.davils.kore.core.concurrency.Guard
+import com.davils.kore.core.concurrency.guard
 import com.davils.kore.core.failure.attempted
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineName
@@ -69,7 +70,7 @@ public class FailureHandler internal constructor(
     private val telemetry: FailureTelemetry = FailureTelemetry(configuration, recent)
     private val storm: StormGuard = StormGuard(configuration.storm)
     private val writer: SinkWriter = SinkWriter(configuration.sinks, telemetry)
-    private val guard: Guard = platformGuard()
+    private val guard: Guard = guard()
     private val writes: MutableSet<Job> = mutableSetOf()
     private val closed: AtomicBoolean = AtomicBoolean(false)
     private val fatalOnce: AtomicBoolean = AtomicBoolean(false)

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@file:OptIn(ExperimentalAtomicApi::class)
+@file:OptIn(ExperimentalAtomicApi::class, DavilsInternal::class)
 
 package com.davils.knot.shutdown.internal
 
@@ -23,6 +23,9 @@ import com.davils.knot.shutdown.ShutdownPhase
 import com.davils.knot.shutdown.ShutdownReason
 import com.davils.knot.shutdown.ShutdownState
 import com.davils.knot.shutdown.report.ShutdownReport
+import com.davils.kore.core.annotation.DavilsInternal
+import com.davils.kore.core.concurrency.Guard
+import com.davils.kore.core.concurrency.guard
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
@@ -46,7 +49,7 @@ internal class ShutdownCoordinator(
     private val mutableState = MutableStateFlow<ShutdownState>(ShutdownState.Running)
     private val result = CompletableDeferred<ShutdownReport>()
     private val started = AtomicBoolean(false)
-    private val guard: Guard = platformGuard()
+    private val guard: Guard = guard()
     private val observers: MutableList<(ShutdownReason) -> AutoCloseable?> = mutableListOf()
 
     val state: StateFlow<ShutdownState> = mutableState.asStateFlow()

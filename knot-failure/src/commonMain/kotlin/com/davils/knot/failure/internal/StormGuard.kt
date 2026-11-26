@@ -14,15 +14,20 @@
  * limitations under the License.
  */
 
+@file:OptIn(DavilsInternal::class)
+
 package com.davils.knot.failure.internal
 
 import com.davils.knot.failure.FailureFingerprint
 import com.davils.knot.failure.FailureLimits
 import com.davils.knot.failure.storm.FailureStormConfiguration
+import com.davils.kore.core.annotation.DavilsInternal
+import com.davils.kore.core.concurrency.Guard
+import com.davils.kore.core.concurrency.guard
 import kotlin.time.Instant
 
 internal class StormGuard(private val storm: FailureStormConfiguration) {
-    private val guard: Guard = platformGuard()
+    private val guard: Guard = guard()
     private val windows: LinkedHashMap<FailureFingerprint, StormWindow> = LinkedHashMap()
 
     val tracked: Int get() = guard.locked { windows.size }

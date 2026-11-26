@@ -14,15 +14,20 @@
  * limitations under the License.
  */
 
+@file:OptIn(DavilsInternal::class)
+
 package com.davils.knot.failure.internal
 
 import com.davils.knot.failure.FailureLimits
+import com.davils.kore.core.annotation.DavilsInternal
+import com.davils.kore.core.concurrency.Guard
+import com.davils.kore.core.concurrency.guard
 import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.Instant
 
 internal class RecentFailures(private val window: Duration, private val clock: Clock) {
-    private val guard: Guard = platformGuard()
+    private val guard: Guard = guard()
     private val times: ArrayDeque<Instant> = ArrayDeque()
 
     fun record(at: Instant) {
