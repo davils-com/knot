@@ -40,7 +40,7 @@ dependencyResolutionManagement {
 ```kotlin
 // build.gradle.kts
 dependencies {
-    implementation(platform("com.davils:knot-bom:1.0.0"))
+    implementation(platform("com.davils:knot-bom:1.1.0"))
     implementation("com.davils:knot-platform")
     implementation("com.davils:knot-environment")
     implementation("com.davils:knot-shutdown")

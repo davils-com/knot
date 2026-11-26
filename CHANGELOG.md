@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.1.0 - 2026-11-26
+
+### Added
+
+- **`knot-telemetry`, the resource of the process for kollect.** `hostResource(serviceName, attributes, environment,
+  host)` builds the OpenTelemetry `Resource` of kollect from the host facts of `knot-platform` (`os.type`,
+  `host.arch`, `process.runtime.name` and `process.runtime.version`), the variable `OTEL_RESOURCE_ATTRIBUTES` and the
+  attributes of the caller, in rising precedence, and names the service by the argument, `OTEL_SERVICE_NAME` or
+  `service.name`. The attribute list is read by hand, percent-decoded as strict UTF-8, bounded by the limits of
+  kollect and refused with a constant message that never repeats a value.
+- **A shutdown task for the metric exporter of kollect.** `metricExporter(exporter, flushTimeout, name)` stops the
+  exporter in `ShutdownPhase.Flush`, so the last snapshot of every earlier phase leaves the process and every point
+  stays accounted for.
+- **Typed reads of data sizes and UUIDs.** `Environment.dataSize(name, min, max)` and `Environment.uuid(name)` and the
+  schema settings `dataSize()` and `uuid()` read through the new converters of Kore 2.4.1.
+
+### Changed
+
+- **Built on Kore 2.4.1, konfetti 1.0.1 and kollect 1.0.1.**
+
 ## 1.0.0 - 2026-11-22
 
 The first version of Knot: the system modules of kide as an open source library under the Apache License 2.0, for
