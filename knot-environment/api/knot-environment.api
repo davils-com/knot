@@ -54,6 +54,8 @@ public final class com/davils/knot/environment/EnvironmentLimits {
 
 public final class com/davils/knot/environment/EnvironmentReadsKt {
 	public static final fun boolean (Lcom/davils/knot/environment/Environment;Ljava/lang/String;)Ljava/lang/Boolean;
+	public static final fun dataSize-olOVz5Y (Lcom/davils/knot/environment/Environment;Ljava/lang/String;JJ)Lcom/davils/kore/core/size/DataSize;
+	public static synthetic fun dataSize-olOVz5Y$default (Lcom/davils/knot/environment/Environment;Ljava/lang/String;JJILjava/lang/Object;)Lcom/davils/kore/core/size/DataSize;
 	public static final fun double (Lcom/davils/knot/environment/Environment;Ljava/lang/String;)Ljava/lang/Double;
 	public static final fun duration-VTINZ0E (Lcom/davils/knot/environment/Environment;Ljava/lang/String;JJ)Lkotlin/time/Duration;
 	public static synthetic fun duration-VTINZ0E$default (Lcom/davils/knot/environment/Environment;Ljava/lang/String;JJILjava/lang/Object;)Lkotlin/time/Duration;
@@ -67,6 +69,7 @@ public final class com/davils/knot/environment/EnvironmentReadsKt {
 	public static final fun map (Lcom/davils/knot/environment/Environment;Ljava/lang/String;CC)Ljava/util/Map;
 	public static synthetic fun map$default (Lcom/davils/knot/environment/Environment;Ljava/lang/String;CCILjava/lang/Object;)Ljava/util/Map;
 	public static final fun requireValue (Lcom/davils/knot/environment/Environment;Ljava/lang/String;Lcom/davils/kore/core/arguments/conversion/Converter;)Ljava/lang/Object;
+	public static final fun uuid (Lcom/davils/knot/environment/Environment;Ljava/lang/String;)Lcom/davils/kore/core/identity/Uuid;
 	public static final fun value (Lcom/davils/knot/environment/Environment;Ljava/lang/String;Lcom/davils/kore/core/arguments/conversion/Converter;)Ljava/lang/Object;
 	public static final fun value (Lcom/davils/knot/environment/Environment;Ljava/lang/String;Lcom/davils/kore/core/arguments/conversion/Converter;Ljava/lang/Object;)Ljava/lang/Object;
 }
@@ -139,6 +142,8 @@ public abstract class com/davils/knot/environment/schema/EnvironmentSchema {
 	public static synthetic fun boolean$default (Lcom/davils/knot/environment/schema/EnvironmentSchema;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/schema/Setting;
 	protected final fun choice (Ljava/lang/String;[Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/environment/schema/Setting;
 	public static synthetic fun choice$default (Lcom/davils/knot/environment/schema/EnvironmentSchema;Ljava/lang/String;[Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/schema/Setting;
+	protected final fun dataSize-eWxOoLk (Ljava/lang/String;JJLkotlin/jvm/functions/Function1;)Lcom/davils/knot/environment/schema/Setting;
+	public static synthetic fun dataSize-eWxOoLk$default (Lcom/davils/knot/environment/schema/EnvironmentSchema;Ljava/lang/String;JJLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/schema/Setting;
 	public final fun describe ()Ljava/util/List;
 	protected final fun double (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/environment/schema/Setting;
 	public static synthetic fun double$default (Lcom/davils/knot/environment/schema/EnvironmentSchema;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/schema/Setting;
@@ -157,6 +162,8 @@ public abstract class com/davils/knot/environment/schema/EnvironmentSchema {
 	public static synthetic fun setting$default (Lcom/davils/knot/environment/schema/EnvironmentSchema;Ljava/lang/String;Lcom/davils/kore/core/arguments/conversion/Converter;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/schema/Setting;
 	protected final fun string (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/environment/schema/Setting;
 	public static synthetic fun string$default (Lcom/davils/knot/environment/schema/EnvironmentSchema;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/schema/Setting;
+	protected final fun uuid (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lcom/davils/knot/environment/schema/Setting;
+	public static synthetic fun uuid$default (Lcom/davils/knot/environment/schema/EnvironmentSchema;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/knot/environment/schema/Setting;
 }
 
 public final class com/davils/knot/environment/schema/EnvironmentSettings {

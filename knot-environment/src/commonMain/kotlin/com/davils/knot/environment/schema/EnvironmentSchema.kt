@@ -24,6 +24,8 @@ import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.arguments.conversion.Converter
 import com.davils.kore.core.arguments.conversion.Converters
 import com.davils.kore.core.collection.immutableList
+import com.davils.kore.core.identity.Uuid
+import com.davils.kore.core.size.DataSize
 import com.davils.kore.core.validation.validateOrThrow
 import kotlin.time.Duration
 
@@ -175,6 +177,35 @@ public abstract class EnvironmentSchema(public val prefix: String = "", public v
         max: Duration = Duration.INFINITE,
         block: SettingBuilder<Duration>.() -> Unit = {},
     ): Setting<Duration> = setting(name, Converters.duration(min = min, max = max), block)
+
+    /**
+     * Declares a setting read as a [DataSize] between [min] and [max], such as `512 KiB`.
+     *
+     * @param name the name of the variable without [prefix].
+     * @param min the smallest size accepted; zero by default.
+     * @param max the largest size accepted; unbounded by default.
+     * @param block declares the default, the description and the rules.
+     * @return the setting.
+     * @throws IllegalArgumentException if [max] is smaller than [min].
+     * @since 1.1.0
+     */
+    protected fun dataSize(
+        name: String,
+        min: DataSize = DataSize.ZERO,
+        max: DataSize = DataSize(Long.MAX_VALUE),
+        block: SettingBuilder<DataSize>.() -> Unit = {},
+    ): Setting<DataSize> = setting(name, Converters.dataSize(min = min, max = max), block)
+
+    /**
+     * Declares a setting read as a [Uuid] of version 4 or 7 in canonical form.
+     *
+     * @param name the name of the variable without [prefix].
+     * @param block declares the default, the description and the rules.
+     * @return the setting.
+     * @since 1.1.0
+     */
+    protected fun uuid(name: String, block: SettingBuilder<Uuid>.() -> Unit = {}): Setting<Uuid> =
+        setting(name, Converters.uuid, block)
 
     /**
      * Declares a setting whose value is one of [choices], compared without regard to ASCII case.

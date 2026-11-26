@@ -24,6 +24,8 @@ import com.davils.kore.core.arguments.conversion.Converters
 import com.davils.kore.core.collection.immutableList
 import com.davils.kore.core.collection.immutableMap
 import com.davils.kore.core.failure.contained
+import com.davils.kore.core.identity.Uuid
+import com.davils.kore.core.size.DataSize
 import com.davils.kore.core.text.SafeText
 import kotlin.time.Duration
 
@@ -153,6 +155,37 @@ public fun Environment.duration(
     min: Duration = Duration.ZERO,
     max: Duration = Duration.INFINITE,
 ): Duration? = value(name, Converters.duration(min = min, max = max))
+
+/**
+ * Reads the variable [name] as a [DataSize] between [min] and [max], such as `512 KiB` or `64MiB`, see
+ * [Converters.dataSize][com.davils.kore.core.arguments.conversion.Converters.dataSize].
+ *
+ * Only binary units in their exact case are read; `1 GB` is refused rather than guessed.
+ *
+ * @param name the name of the variable.
+ * @param min the smallest size accepted; zero by default.
+ * @param max the largest size accepted; unbounded by default.
+ * @return the size, or `null` if the variable is not set.
+ * @throws EnvironmentException if the value is not a data size between [min] and [max].
+ * @throws IllegalArgumentException if [max] is smaller than [min].
+ * @since 1.1.0
+ */
+public fun Environment.dataSize(
+    name: String,
+    min: DataSize = DataSize.ZERO,
+    max: DataSize = DataSize(Long.MAX_VALUE),
+): DataSize? = value(name, Converters.dataSize(min = min, max = max))
+
+/**
+ * Reads the variable [name] as a [Uuid] of version 4 or 7 in canonical form, see
+ * [Converters.uuid][com.davils.kore.core.arguments.conversion.Converters.uuid].
+ *
+ * @param name the name of the variable.
+ * @return the identifier, or `null` if the variable is not set.
+ * @throws EnvironmentException if the value is not a canonical identifier of version 4 or 7.
+ * @since 1.1.0
+ */
+public fun Environment.uuid(name: String): Uuid? = value(name, Converters.uuid)
 
 /**
  * Reads the variable [name] as one of the constants of [E], compared by their names without regard to ASCII case.
