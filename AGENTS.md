@@ -32,8 +32,10 @@ only packages with public API, never an `internal` package. `knot-testing` has n
 `kore-testing` is an automatic module.
 
 Knot uses Kore wherever Kore has the building block: `ValidatingBuilder` and `@DavilsDsl`, validation and violation
-codes, `Limits`, `SafeText`, `immutableList()`, `Converters`, `contained` and `attempted`, the UUID generators and the
-`Davils*` annotations. Never write a second version of something Kore has; what Knot needs from Kore and Kore does not
+codes, `Limits`, `SafeText`, `immutableList()`, `Converters`, `contained` and `attempted`, the UUID generators, the
+process environment (`processVariable`, `processVariableNames`), `Deadline` for the budgets of a shutdown, `guard` for
+short critical sections, `TestClock`
+of `kore-testing` and the `Davils*` annotations. Never write a second version of something Kore has; what Knot needs from Kore and Kore does not
 offer yet is added to Kore.
 
 Knot is ported from the `kide-common-system` modules of kide. A module is ported, not redesigned, but it follows every
@@ -50,7 +52,7 @@ Node.js; the published klib runs in the browser, in web workers, under Deno and 
   `knot-failure` and the recording runtime of `knot-testing`. The `wasmJs` target has no shutdown hook, no handler of
   uncaught exceptions and no way to end its process; an application there calls `Shutdown.initiate` itself.
 - A platform difference hides behind an `internal expect fun` in `<Role>.kt` with its `actual` in `<Role>.jvm.kt` and
-  `<Role>.wasmJs.kt`, such as `HostFacts` of `knot-platform`, `HostVariables` of `knot-environment`, `Guard` and
+  `<Role>.wasmJs.kt`, such as `HostFacts` of `knot-platform`,
   `ResourceClosing` of `knot-shutdown` and `FailureFrames` of `knot-failure`. Knot declares no `expect` or `actual`
   class: they are a Beta language feature.
 - The detection of the host is common code over a `HostProbe` of raw facts; only gathering those facts is platform
@@ -264,7 +266,8 @@ failures and messages that reach a failure handler. Knot is built so that a mist
 ## Kore internals
 
 Knot opts into these `@DavilsInternal` declarations of Kore; Kore changes them only in a major version: `SafeText.text`,
-`SafeText.quoted`, `SafeText.isSafe`, `SafeText.REDACTED`, `immutableList`, `immutableSet` and `immutableMap`. A new
+`SafeText.quoted`, `SafeText.isSafe`, `SafeText.REDACTED`, `immutableList`, `immutableSet`, `immutableMap` and, since
+1.2.0, `guard`. A new
 use is added here and to the table of Kore's `AGENTS.md`.
 
 ## Public API
