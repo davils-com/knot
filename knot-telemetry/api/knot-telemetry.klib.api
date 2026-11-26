@@ -1,0 +1,9 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:knot-telemetry>
+final fun com.davils.knot.telemetry/hostResource(kotlin/String? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., com.davils.knot.environment/Environment = ..., com.davils.knot.platform/Host = ...): com.davils.kollect.core.otlp/Resource // com.davils.knot.telemetry/hostResource|hostResource(kotlin.String?;kotlin.collections.Map<kotlin.String,kotlin.String>;com.davils.knot.environment.Environment;com.davils.knot.platform.Host){}[0]

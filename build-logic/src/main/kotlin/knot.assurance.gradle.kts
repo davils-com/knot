@@ -92,6 +92,7 @@ kreate {
                 ":knot-environment",
                 ":knot-shutdown",
                 ":knot-failure",
+                ":knot-telemetry",
                 ":knot-testing",
             )
         }

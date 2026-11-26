@@ -28,18 +28,21 @@ check:
       - ":knot-environment:clean"
       - ":knot-shutdown:clean"
       - ":knot-failure:clean"
+      - ":knot-telemetry:clean"
       - ":knot-testing:clean"
     tasks:
       - ":knot-platform:jvmJar"
       - ":knot-environment:jvmJar"
       - ":knot-shutdown:jvmJar"
       - ":knot-failure:jvmJar"
+      - ":knot-telemetry:jvmJar"
       - ":knot-testing:jvmJar"
     artifacts:
       - "knot-platform/build/libs/*.jar"
       - "knot-environment/build/libs/*.jar"
       - "knot-shutdown/build/libs/*.jar"
       - "knot-failure/build/libs/*.jar"
+      - "knot-telemetry/build/libs/*.jar"
       - "knot-testing/build/libs/*.jar"
 
 policy:
@@ -72,6 +75,7 @@ publish:
     - ":knot-environment:publishAllPublicationsToDavilsRepository"
     - ":knot-shutdown:publishAllPublicationsToDavilsRepository"
     - ":knot-failure:publishAllPublicationsToDavilsRepository"
+    - ":knot-telemetry:publishAllPublicationsToDavilsRepository"
     - ":knot-testing:publishAllPublicationsToDavilsRepository"
     - ":knot-bom:publishAllPublicationsToDavilsRepository"
 
@@ -120,6 +124,15 @@ release:
       - path: com/davils/knot-failure
         artifact: knot-failure
         task: ":knot-failure:publishKotlinMultiplatformPublicationToDavilsRepository"
+      - path: com/davils/knot-telemetry-jvm
+        artifact: knot-telemetry-jvm
+        task: ":knot-telemetry:publishJvmPublicationToDavilsRepository"
+      - path: com/davils/knot-telemetry-wasm-js
+        artifact: knot-telemetry-wasm-js
+        task: ":knot-telemetry:publishWasmJsPublicationToDavilsRepository"
+      - path: com/davils/knot-telemetry
+        artifact: knot-telemetry
+        task: ":knot-telemetry:publishKotlinMultiplatformPublicationToDavilsRepository"
       - path: com/davils/knot-testing-jvm
         artifact: knot-testing-jvm
         task: ":knot-testing:publishJvmPublicationToDavilsRepository"
@@ -142,6 +155,8 @@ release:
       - "knot-shutdown/build/libs/*.klib"
       - "knot-failure/build/libs/*.jar"
       - "knot-failure/build/libs/*.klib"
+      - "knot-telemetry/build/libs/*.jar"
+      - "knot-telemetry/build/libs/*.klib"
       - "knot-testing/build/libs/*.jar"
       - "knot-testing/build/libs/*.klib"
   github-release:

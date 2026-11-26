@@ -12,6 +12,7 @@ meters, spans and health in [kollect](https://github.com/davils-com/kollect), is
 | `knot-environment` | `com.davils:knot-environment` | Environment variables: the `environment { }` DSL, dotenv texts, expansion, typed reads and declarative schemas |
 | `knot-shutdown` | `com.davils:knot-shutdown` | The coordinated shutdown: phases, ordered tasks, budgets and, on the JVM, the shutdown hook, the fatal error trigger and the watchdog |
 | `knot-failure` | `com.davils:knot-failure` | The failure handler: classification, storm protection, crash reports for sinks of the application and, on the JVM, uncaught exceptions |
+| `knot-telemetry` | `com.davils:knot-telemetry` | The OpenTelemetry resource of the process for kollect: host facts, `OTEL_SERVICE_NAME` and `OTEL_RESOURCE_ATTRIBUTES` |
 | `knot-testing` | `com.davils:knot-testing` | Host probes of every runtime, recording sinks and runtimes, failing and slow sinks and ready reports |
 | `knot-bom` | `com.davils:knot-bom` | The bill of materials of every module |
 

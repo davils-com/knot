@@ -1,0 +1,5 @@
+public final class com/davils/knot/telemetry/HostResourcesKt {
+	public static final fun hostResource (Ljava/lang/String;Ljava/util/Map;Lcom/davils/knot/environment/Environment;Lcom/davils/knot/platform/Host;)Lcom/davils/kollect/core/otlp/Resource;
+	public static synthetic fun hostResource$default (Ljava/lang/String;Ljava/util/Map;Lcom/davils/knot/environment/Environment;Lcom/davils/knot/platform/Host;ILjava/lang/Object;)Lcom/davils/kollect/core/otlp/Resource;
+}
+

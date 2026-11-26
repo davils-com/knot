@@ -16,12 +16,14 @@ with security first.
 | `knot-environment` | `com.davils:knot-environment` | Environment variables: the live process environment, the `environment { }` DSL with layers, dotenv texts, overrides, defaults, aliases, filters, scopes and expansion, typed reads and declarative `EnvironmentSchema`s |
 | `knot-shutdown` | `com.davils:knot-shutdown` | The coordinated shutdown: phases, ordered tasks, budgets, reports, exit codes and telemetry in common code, and on the JVM the shutdown hook, the fatal error trigger and the watchdog in package `process` |
 | `knot-failure` | `com.davils:knot-failure` | The failure handler: classification, the storm guard, crash reports rendered as text or JSON and handed to `FailureSink`s of the application, and on the JVM the handler of uncaught exceptions |
+| `knot-telemetry` | `com.davils:knot-telemetry` | The OpenTelemetry resource of the process: the host facts of `knot-platform`, `OTEL_SERVICE_NAME` and `OTEL_RESOURCE_ATTRIBUTES` read through `knot-environment`, bounded and validated, as a `Resource` of kollect |
 | `knot-testing` | `com.davils:knot-testing` | Test support: host probes of every runtime, recording, failing and slow sinks, test failures, ready shutdown reports and, on the JVM, a recording shutdown runtime |
 | `knot-bom` | `com.davils:knot-bom` | The bill of materials of every module |
 | `build-logic` | - | One convention plugin per Kreate concern, composed by `knot.kotlin-library` for a library module, `knot.bom` for the BOM and `knot.root` for the root project; they hold nothing but `plugins { }` and `kreate { }` |
 
 `knot-platform` and `knot-environment` build on `kore-core` alone. `knot-shutdown` builds on `kore-core`,
-`konfetti-core`, `kollect-core` and `kotlinx-coroutines-core`, and `knot-failure` on `knot-shutdown`. `knot-testing`
+`konfetti-core`, `kollect-core` and `kotlinx-coroutines-core`, `knot-failure` on `knot-shutdown`, and `knot-telemetry`
+on `knot-platform`, `knot-environment` and `kollect-core`. `knot-testing`
 builds on every library module, `kore-testing` and `konfetti-testing`.
 
 The root package of a module is `com.davils.knot.<module without knot->`, such as `com.davils.knot.shutdown`, and its

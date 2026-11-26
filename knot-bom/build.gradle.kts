@@ -30,6 +30,7 @@ dependencies {
         api(project(":knot-environment"))
         api(project(":knot-shutdown"))
         api(project(":knot-failure"))
+        api(project(":knot-telemetry"))
         api(project(":knot-testing"))
     }
 }
