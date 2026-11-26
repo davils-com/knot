@@ -17,7 +17,8 @@
 package com.davils.knot.failure.internal
 
 import com.davils.knot.failure.FailureLimits
-import com.davils.knot.failure.fixture.MovableClock
+import com.davils.knot.failure.fixture.STARTED_AT
+import com.davils.kore.testing.TestClock
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import kotlin.time.Duration.Companion.minutes
@@ -25,19 +26,19 @@ import kotlin.time.Duration.Companion.seconds
 
 class RecentFailuresTest : FunSpec({
     test("counts the failures within the window") {
-        val clock = MovableClock()
+        val clock = TestClock(STARTED_AT)
         val recent = RecentFailures(window = 1.minutes, clock = clock)
         recent.record(clock.now())
-        clock.advance(30.seconds)
+        clock.advanceBy(30.seconds)
         recent.record(clock.now())
 
         recent.count() shouldBe 2
-        clock.advance(40.seconds)
+        clock.advanceBy(40.seconds)
         recent.count() shouldBe 1
     }
 
     test("keeps at most the limit of failures") {
-        val clock = MovableClock()
+        val clock = TestClock(STARTED_AT)
         val recent = RecentFailures(window = 1.minutes, clock = clock)
         repeat(FailureLimits.MAX_RECENT + 1) { recent.record(clock.now()) }
 

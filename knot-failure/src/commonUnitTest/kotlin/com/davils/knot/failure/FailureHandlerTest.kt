@@ -19,14 +19,15 @@
 package com.davils.knot.failure
 
 import com.davils.knot.failure.fixture.BROKEN
-import com.davils.knot.failure.fixture.MovableClock
 import com.davils.knot.failure.fixture.ORIGIN
 import com.davils.knot.failure.fixture.RecordingSink
+import com.davils.knot.failure.fixture.STARTED_AT
 import com.davils.knot.failure.fixture.failure
 import com.davils.knot.failure.fixture.testHandler
 import com.davils.knot.failure.sink.SinkResult
 import com.davils.knot.shutdown.ShutdownReason
 import com.davils.knot.shutdown.shutdown
+import com.davils.kore.testing.TestClock
 import io.kotest.common.ExperimentalKotest
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.core.test.testCoroutineScheduler
@@ -194,14 +195,14 @@ class FailureHandlerTest : FunSpec({
 
     context("storms") {
         test("suppress the same failure beyond the limit and tell the next report how many") {
-            val clock = MovableClock()
+            val clock = TestClock(STARTED_AT)
             val handler = testHandler(clock) { storm { maxReports = 1 } }
             val cause = failure()
 
             handler.report(cause, ORIGIN).shouldBeInstanceOf<FailureReport.Unrecorded>()
             handler.report(cause, ORIGIN).shouldBeInstanceOf<FailureReport.Suppressed>()
             handler.report(cause, ORIGIN).shouldBeInstanceOf<FailureReport.Suppressed>()
-            clock.advance(2.minutes)
+            clock.advanceBy(2.minutes)
             val next = handler.report(cause, ORIGIN) as FailureReport.Unrecorded
 
             next.failure.suppressed shouldBe 2
@@ -222,13 +223,13 @@ class FailureHandlerTest : FunSpec({
 
     context("health") {
         test("is up, degraded after enough recent failures and down once closed") {
-            val clock = MovableClock()
+            val clock = TestClock(STARTED_AT)
             val handler = testHandler(clock) { degradedAt = 2 }
 
             handler.check().status.name shouldBe "Up"
             repeat(2) { handler.report(failure(), ORIGIN) }
             handler.check().status.name shouldBe "Degraded"
-            clock.advance(2.minutes)
+            clock.advanceBy(2.minutes)
             handler.check().status.name shouldBe "Up"
             handler.close()
             handler.check().status.name shouldBe "Down"

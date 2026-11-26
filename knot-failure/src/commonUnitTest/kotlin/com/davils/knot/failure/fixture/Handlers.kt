@@ -21,6 +21,7 @@ import com.davils.knot.failure.FailureHandlerBuilder
 import com.davils.knot.failure.FailureOrigin
 import com.davils.knot.failure.failures
 import com.davils.kore.core.identity.generator.UuidV7Generator
+import com.davils.kore.testing.TestClock
 import kotlinx.coroutines.CoroutineScope
 
 const val BROKEN: String = "broken"
@@ -28,7 +29,7 @@ const val BROKEN: String = "broken"
 val ORIGIN: FailureOrigin = FailureOrigin.Job("nightly")
 
 fun CoroutineScope.testHandler(
-    clock: MovableClock = MovableClock(),
+    clock: TestClock = TestClock(STARTED_AT),
     block: FailureHandlerBuilder.() -> Unit = {
     },
 ): FailureHandler = failures(this) {

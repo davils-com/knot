@@ -16,16 +16,6 @@
 
 package com.davils.knot.failure.fixture
 
-import kotlin.time.Clock
-import kotlin.time.Duration
 import kotlin.time.Instant
 
 val STARTED_AT: Instant = Instant.parse("2026-11-22T12:30:45.123Z")
-
-class MovableClock(private var now: Instant = STARTED_AT) : Clock {
-    override fun now(): Instant = now
-
-    fun advance(by: Duration) {
-        now += by
-    }
-}

@@ -21,6 +21,7 @@ package com.davils.knot.shutdown.fixture
 import com.davils.knot.shutdown.Shutdown
 import com.davils.knot.shutdown.ShutdownBuilder
 import com.davils.knot.shutdown.shutdown
+import com.davils.kore.testing.TestClock
 import io.kotest.common.ExperimentalKotest
 import io.kotest.core.test.TestScope
 import io.kotest.core.test.testCoroutineScheduler
@@ -30,6 +31,6 @@ val STARTED_AT: Instant = Instant.parse("2026-11-22T12:00:00Z")
 
 fun TestScope.virtualShutdown(block: ShutdownBuilder.() -> Unit = {}): Shutdown = shutdown(this) {
     timeSource = testCoroutineScheduler.timeSource
-    clock = FixedClock
+    clock = TestClock(STARTED_AT)
     block()
 }
