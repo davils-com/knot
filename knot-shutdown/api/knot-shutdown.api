@@ -3,6 +3,11 @@ public final class com/davils/knot/shutdown/EventBusShutdownsKt {
 	public static synthetic fun eventBus-exY8QGI$default (Lcom/davils/knot/shutdown/ShutdownPlanBuilder;Lcom/davils/konfetti/core/EventBus;JLjava/lang/String;ILjava/lang/Object;)V
 }
 
+public final class com/davils/knot/shutdown/MetricExporterShutdownsKt {
+	public static final fun metricExporter-exY8QGI (Lcom/davils/knot/shutdown/ShutdownPlanBuilder;Lcom/davils/kollect/core/export/MetricExporter;JLjava/lang/String;)V
+	public static synthetic fun metricExporter-exY8QGI$default (Lcom/davils/knot/shutdown/ShutdownPlanBuilder;Lcom/davils/kollect/core/export/MetricExporter;JLjava/lang/String;ILjava/lang/Object;)V
+}
+
 public abstract interface class com/davils/knot/shutdown/RegistrationRefusal {
 }
 

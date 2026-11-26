@@ -576,4 +576,5 @@ final object com.davils.knot.shutdown/ShutdownViolationCodes { // com.davils.kno
 }
 
 final fun (com.davils.knot.shutdown/ShutdownPlanBuilder<*>).com.davils.knot.shutdown/eventBus(com.davils.konfetti.core/EventBus, kotlin.time/Duration = ..., kotlin/String = ...) // com.davils.knot.shutdown/eventBus|eventBus@com.davils.knot.shutdown.ShutdownPlanBuilder<*>(com.davils.konfetti.core.EventBus;kotlin.time.Duration;kotlin.String){}[0]
+final fun (com.davils.knot.shutdown/ShutdownPlanBuilder<*>).com.davils.knot.shutdown/metricExporter(com.davils.kollect.core.export/MetricExporter, kotlin.time/Duration = ..., kotlin/String = ...) // com.davils.knot.shutdown/metricExporter|metricExporter@com.davils.knot.shutdown.ShutdownPlanBuilder<*>(com.davils.kollect.core.export.MetricExporter;kotlin.time.Duration;kotlin.String){}[0]
 final fun com.davils.knot.shutdown/shutdown(kotlinx.coroutines/CoroutineScope, kotlin/Function1<com.davils.knot.shutdown/ShutdownBuilder, kotlin/Unit> = ...): com.davils.knot.shutdown/Shutdown // com.davils.knot.shutdown/shutdown|shutdown(kotlinx.coroutines.CoroutineScope;kotlin.Function1<com.davils.knot.shutdown.ShutdownBuilder,kotlin.Unit>){}[0]
