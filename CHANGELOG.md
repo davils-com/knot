@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.2.0 - 2026-11-26
+
+### Changed
+
+- **`Environment.SYSTEM` reads the process environment through Kore 2.5.0.** Knot drops its copy of the platform code
+  of the JVM and of Node.js and reads with `processVariable` and `processVariableNames`; a name no platform allows,
+  such as an empty one or one with NUL, reads as unset instead of reaching the platform.
+- **The budgets of a shutdown are `Deadline`s of Kore.** The grace period of a run and the budget of each task share one
+  end on the time source of the shutdown; the reports are unchanged.
+- **The shutdown and the failure handler take the guard of their critical sections from Kore**, instead of a copy of
+  their own each.
+- **Built with Kreate 5.5.2 and Gradle 9.9.2 on Kore 2.5.0, konfetti 1.1.0 and kollect 1.1.0**, with the version
+  floors of the build tools raised.
+
 ## 1.1.0 - 2026-11-26
 
 ### Added
