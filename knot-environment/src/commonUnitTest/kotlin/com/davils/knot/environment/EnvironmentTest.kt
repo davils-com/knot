@@ -16,6 +16,9 @@
 
 package com.davils.knot.environment
 
+import com.davils.kore.core.Limits
+import com.davils.kore.core.processVariable
+import com.davils.kore.core.processVariableNames
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.shouldBe
@@ -37,7 +40,7 @@ class EnvironmentTest : FunSpec({
     context("the system environment") {
         test("reads every variable the process reports") {
             Environment.SYSTEM.names.forEach { name ->
-                Environment.SYSTEM.variable(name) shouldBe hostVariable(name)
+                Environment.SYSTEM.variable(name) shouldBe processVariable(name)
             }
         }
 
@@ -50,8 +53,14 @@ class EnvironmentTest : FunSpec({
             Environment.SYSTEM.variable("__proto__") shouldBe null
         }
 
+        test("returns null for a name no platform allows, instead of failing") {
+            Environment.SYSTEM.variable("") shouldBe null
+            Environment.SYSTEM.variable("SECRET\u0000NAME") shouldBe null
+            Environment.SYSTEM.variable("N".repeat(Limits.MAX_NAME_LENGTH + 1)) shouldBe null
+        }
+
         test("lists the names the process reports") {
-            Environment.SYSTEM.names shouldBe hostVariableNames()
+            Environment.SYSTEM.names shouldBe processVariableNames().toSet()
         }
 
         test("names itself and no variable") {
