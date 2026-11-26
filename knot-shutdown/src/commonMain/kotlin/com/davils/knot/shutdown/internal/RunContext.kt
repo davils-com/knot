@@ -17,19 +17,18 @@
 package com.davils.knot.shutdown.internal
 
 import com.davils.knot.shutdown.ShutdownReason
+import com.davils.kore.core.budget.Deadline
 import kotlinx.coroutines.CoroutineScope
-import kotlin.time.ComparableTimeMark
 import kotlin.time.Duration
 import kotlin.time.TimeSource
 
 internal class RunContext(
     val reason: ShutdownReason,
-    val started: ComparableTimeMark,
-    val gracePeriod: Duration,
+    val deadline: Deadline,
     val workers: CoroutineScope,
     val timeSource: TimeSource.WithComparableMarks,
     val cancellationGrace: Duration,
     val telemetry: ShutdownTelemetry,
 ) {
-    fun remaining(): Duration = gracePeriod - started.elapsedNow()
+    fun budgetOf(timeout: Duration): Duration = deadline.within(timeout)
 }

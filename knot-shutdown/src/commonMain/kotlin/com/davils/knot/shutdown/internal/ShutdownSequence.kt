@@ -21,6 +21,7 @@ import com.davils.knot.shutdown.ShutdownPhase
 import com.davils.knot.shutdown.ShutdownReason
 import com.davils.knot.shutdown.report.PhaseReport
 import com.davils.knot.shutdown.report.ShutdownReport
+import com.davils.kore.core.budget.Deadline
 import kotlinx.coroutines.CoroutineScope
 
 internal class ShutdownSequence(
@@ -35,8 +36,7 @@ internal class ShutdownSequence(
         val span = telemetry.initiated(reason, tasks.size)
         val run = RunContext(
             reason = reason,
-            started = mark,
-            gracePeriod = configuration.gracePeriod,
+            deadline = Deadline.after(budget = configuration.gracePeriod, timeSource = configuration.timeSource),
             workers = workers,
             timeSource = configuration.timeSource,
             cancellationGrace = configuration.cancellationGrace,

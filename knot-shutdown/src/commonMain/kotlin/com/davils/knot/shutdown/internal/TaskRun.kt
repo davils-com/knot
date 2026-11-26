@@ -19,6 +19,7 @@ package com.davils.knot.shutdown.internal
 import com.davils.knot.shutdown.report.TaskOutcome
 import com.davils.knot.shutdown.report.TaskReport
 import com.davils.knot.shutdown.task.ShutdownContext
+import com.davils.kore.core.budget.Deadline
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
@@ -35,7 +36,7 @@ internal class TaskRun(private val task: ShutdownTask, private val run: RunConte
     }
 
     private suspend fun outcome(): TaskOutcome {
-        val budget = minOf(a = task.timeout, b = run.remaining())
+        val budget = run.budgetOf(task.timeout)
         if (!budget.isPositive()) return TaskOutcome.DeadlineExceeded
         return within(budget)
     }
@@ -46,8 +47,7 @@ internal class TaskRun(private val task: ShutdownTask, private val run: RunConte
             reason = run.reason,
             phase = task.phase,
             task = task.name,
-            started = mark,
-            budget = budget,
+            deadline = Deadline.after(budget = budget, timeSource = run.timeSource),
         )
         val ended = CompletableDeferred<Throwable?>()
         val work = run.workers.async { task.action(context) }
