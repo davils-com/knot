@@ -31,6 +31,8 @@ private const val OS_TYPE: String = "os.type"
 private const val HOST_ARCH: String = "host.arch"
 private const val RUNTIME_NAME: String = "process.runtime.name"
 private const val RUNTIME_VERSION: String = "process.runtime.version"
+private const val HOST_NAME: String = "host.name"
+private const val PROCESS_ID: String = "process.pid"
 private const val MISSING_SERVICE: String =
     "A resource needs a service name: pass one, or set OTEL_SERVICE_NAME or service.name in OTEL_RESOURCE_ATTRIBUTES"
 
@@ -45,8 +47,9 @@ private val keysAllowedByDefault: Set<String> =
  *
  * The attributes come from three sources; a later one replaces a key of an earlier one:
  * 1. the [host]: `os.type` (`linux`, `darwin`, `windows` or `freebsd`), `host.arch` (`amd64`, `arm64`, `x86` or
- *    `arm32`), `process.runtime.name` and, where the runtime reports it, `process.runtime.version`; what Knot cannot
- *    tell is left out, never guessed;
+ *    `arm32`), `process.runtime.name` and, where the runtime reports them, `process.runtime.version` and, since
+ *    1.3.0, `process.pid` and `host.name` from `HOSTNAME` or `COMPUTERNAME`; what Knot cannot tell is left out, never
+ *    guessed;
  * 2. `OTEL_RESOURCE_ATTRIBUTES` of [environment], a list of `key=value` pairs separated by commas whose values are
  *    percent-encoded UTF-8, as the OpenTelemetry specification defines it;
  * 3. [attributes] of the caller.
@@ -95,6 +98,8 @@ private fun hostAttributesOf(host: Host): Map<String, String> = buildMap {
     architectureOf(host.architecture)?.let { architecture -> put(key = HOST_ARCH, value = architecture) }
     put(key = RUNTIME_NAME, value = host.runtime.identifier)
     host.runtimeVersion?.let { version -> put(key = RUNTIME_VERSION, value = version) }
+    host.processId?.let { id -> put(key = PROCESS_ID, value = id.toString()) }
+    host.hostName?.let { name -> put(key = HOST_NAME, value = name) }
 }
 
 private fun osTypeOf(system: HostSystem): String? = when (system) {

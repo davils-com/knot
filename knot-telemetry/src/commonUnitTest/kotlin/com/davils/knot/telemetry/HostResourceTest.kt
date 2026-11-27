@@ -70,6 +70,22 @@ class HostResourceTest : FunSpec({
             attributes shouldContain (SERVICE_NAME to SHOP)
         }
 
+        test("name the process and the machine where the runtime reports them") {
+            val host = Host.detect(
+                hostProbe {
+                    isJvm = true
+                    processId = 4_242L
+                    hostNameVariable = "build-01"
+                },
+            )
+            val withProcess = hostResource(serviceName = SHOP, environment = Environment.EMPTY, host = host)
+            val attributes = withProcess.attributes.toMap()
+
+            attributes shouldContain ("process.pid" to "4242")
+            attributes shouldContain ("host.name" to "build-01")
+            Environment.EMPTY.resourceOf() shouldNotContainKey "host.name"
+        }
+
         test("name every system and architecture by its value in the semantic conventions") {
             val cases = listOf(
                 Triple(first = "Mac OS X", second = "aarch64", third = DARWIN to "arm64"),
