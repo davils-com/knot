@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.3.0 - 2026-11-27
+
+### Added
+
+- **`Host.processId` and `Host.hostName`.** A host with a process of its own, the JVM, Node.js, Deno or Bun, tells
+  the id the operating system gave the process and the name of the machine from `HOSTNAME`, or else `COMPUTERNAME`.
+  Knot never asks DNS and never reads a file for the name, and keeps it only when it is a host name of RFC 1123 of at
+  most `PlatformLimits.MAX_HOST_NAME_LENGTH` characters; under Deno the variables are read only when the permission
+  for them is already granted, so detection never prompts. A browser and a web worker have neither. Both facts take
+  part in `equals`, but `toString` leaves them out. `HostProbeBuilder` declares them as `processId`,
+  `hostNameVariable` and `computerNameVariable`.
+- **`hostResource` names the process and the machine.** The resource of `knot-telemetry` carries `process.pid` and
+  `host.name` of the semantic conventions where the host reports them.
+
 ## 1.2.0 - 2026-11-26
 
 ### Changed

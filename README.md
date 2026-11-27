@@ -40,7 +40,7 @@ dependencyResolutionManagement {
 ```kotlin
 // build.gradle.kts
 dependencies {
-    implementation(platform("com.davils:knot-bom:1.2.0"))
+    implementation(platform("com.davils:knot-bom:1.3.0"))
     implementation("com.davils:knot-platform")
     implementation("com.davils:knot-environment")
     implementation("com.davils:knot-shutdown")
@@ -62,6 +62,8 @@ host.architecture             // X64, Arm64, X86, Arm32 or Unknown
 host.systemSource             // where the system comes from, such as Process or UserAgent
 host.platform                 // linux-x86_64 under Node.js on Linux, null in a browser
 host.runtime.isWeb            // true in a browser window and in every web worker
+host.processId                // the id of the process, null in a browser
+host.hostName                 // HOSTNAME or COMPUTERNAME if it is a host name, never asked of DNS
 
 val detailed = Host.detailed()                 // asks Chromium for the architecture through client hints
 val visitor = Host.detect(hostProbe { userAgent = request.userAgent })
