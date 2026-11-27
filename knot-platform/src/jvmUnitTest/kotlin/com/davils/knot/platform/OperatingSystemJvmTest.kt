@@ -39,5 +39,9 @@ class OperatingSystemJvmTest : FunSpec({
                 osArch = System.getProperty("os.arch"),
             )
         }
+
+        test("has the id of this process") {
+            Host.current.processId shouldBe ProcessHandle.current().pid()
+        }
     }
 })

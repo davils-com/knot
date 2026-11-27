@@ -169,5 +169,27 @@ public class HostProbeBuilder internal constructor() {
      */
     public var clientHintsBitness: String? = null
 
+    /**
+     * The id the operating system gave the process, such as `ProcessHandle.current().pid()` of the JVM or
+     * `process.pid` of Node.js.
+     *
+     * @since 1.3.0
+     */
+    public var processId: Long? = null
+
+    /**
+     * The environment variable `HOSTNAME`, set by most container runtimes and by many Unix shells.
+     *
+     * @since 1.3.0
+     */
+    public var hostNameVariable: String? = null
+
+    /**
+     * The environment variable `COMPUTERNAME`, set by Windows.
+     *
+     * @since 1.3.0
+     */
+    public var computerNameVariable: String? = null
+
     internal fun build(): HostProbe = HostProbe(this)
 }

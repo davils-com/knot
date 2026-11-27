@@ -16,15 +16,22 @@
 
 package com.davils.knot.platform
 
+import com.davils.kore.core.processVariable
+
 private const val OS_NAME_PROPERTY: String = "os.name"
 private const val OS_ARCH_PROPERTY: String = "os.arch"
 private const val JAVA_VERSION_PROPERTY: String = "java.version"
+private const val HOST_NAME_VARIABLE: String = "HOSTNAME"
+private const val COMPUTER_NAME_VARIABLE: String = "COMPUTERNAME"
 
 internal actual fun observedHostProbe(): HostProbe = hostProbe {
     isJvm = true
     osName = System.getProperty(OS_NAME_PROPERTY)
     osArch = System.getProperty(OS_ARCH_PROPERTY)
     javaVersion = System.getProperty(JAVA_VERSION_PROPERTY)
+    processId = ProcessHandle.current().pid()
+    hostNameVariable = processVariable(HOST_NAME_VARIABLE)
+    computerNameVariable = processVariable(COMPUTER_NAME_VARIABLE)
 }
 
 internal actual suspend fun observedHighEntropyProbe(): HostProbe = observedHostProbe()

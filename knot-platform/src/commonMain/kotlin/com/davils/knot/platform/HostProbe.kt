@@ -172,6 +172,27 @@ public class HostProbe internal constructor(builder: HostProbeBuilder) {
      */
     public val clientHintsBitness: String? = builder.clientHintsBitness
 
+    /**
+     * The fact [HostProbeBuilder.processId] declared.
+     *
+     * @since 1.3.0
+     */
+    public val processId: Long? = builder.processId
+
+    /**
+     * The fact [HostProbeBuilder.hostNameVariable] declared.
+     *
+     * @since 1.3.0
+     */
+    public val hostNameVariable: String? = builder.hostNameVariable
+
+    /**
+     * The fact [HostProbeBuilder.computerNameVariable] declared.
+     *
+     * @since 1.3.0
+     */
+    public val computerNameVariable: String? = builder.computerNameVariable
+
     private val texts: List<String?> get() = listOf(
         osName,
         osArch,
@@ -187,6 +208,8 @@ public class HostProbe internal constructor(builder: HostProbeBuilder) {
         clientHintsPlatform,
         clientHintsArchitecture,
         clientHintsBitness,
+        hostNameVariable,
+        computerNameVariable,
     )
 
     private val flags: List<Boolean?> get() = listOf(
@@ -198,6 +221,8 @@ public class HostProbe internal constructor(builder: HostProbeBuilder) {
         isClientHintsMobile,
     )
 
+    private val facts: List<Any?> get() = listOf(texts, flags, processId)
+
     /**
      * Tells whether [other] is a probe with the same facts.
      *
@@ -205,7 +230,7 @@ public class HostProbe internal constructor(builder: HostProbeBuilder) {
      * @return `true` if [other] is an equal probe.
      * @since 1.0.0
      */
-    override fun equals(other: Any?): Boolean = other is HostProbe && texts == other.texts && flags == other.flags
+    override fun equals(other: Any?): Boolean = other is HostProbe && facts == other.facts
 
     /**
      * Returns a hash code derived from every fact, consistent with [equals].
@@ -213,7 +238,7 @@ public class HostProbe internal constructor(builder: HostProbeBuilder) {
      * @return the hash code.
      * @since 1.0.0
      */
-    override fun hashCode(): Int = listOf(texts, flags).hashCode()
+    override fun hashCode(): Int = facts.hashCode()
 
     /**
      * Returns the facts that were reported, every text escaped and quoted.
@@ -228,7 +253,8 @@ public class HostProbe internal constructor(builder: HostProbeBuilder) {
         val shownFlags = flagNames.zip(flags).mapNotNull { (name, value) ->
             value?.takeIf { flag -> flag || name == MOBILE_NAME }?.let { flag -> "$name=$flag" }
         }
-        val shown = shownFlags + shownTexts
+        val shownProcess = listOfNotNull(processId?.let { id -> "processId=$id" })
+        val shown = shownFlags + shownProcess + shownTexts
         return shown.joinToString(prefix = "HostProbe(", postfix = ")")
     }
 
@@ -250,6 +276,8 @@ public class HostProbe internal constructor(builder: HostProbeBuilder) {
             "clientHintsPlatform",
             "clientHintsArchitecture",
             "clientHintsBitness",
+            "hostNameVariable",
+            "computerNameVariable",
         )
 
         val flagNames: List<String> = listOf(

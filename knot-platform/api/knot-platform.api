@@ -32,7 +32,9 @@ public final class com/davils/knot/platform/Host {
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getArchitecture ()Lcom/davils/knot/platform/HostArchitecture;
 	public final fun getArchitectureSource ()Lcom/davils/knot/platform/DetectionSource;
+	public final fun getHostName ()Ljava/lang/String;
 	public final fun getPlatform ()Lcom/davils/knot/platform/Platform;
+	public final fun getProcessId ()Ljava/lang/Long;
 	public final fun getRuntime ()Lcom/davils/knot/platform/HostRuntime;
 	public final fun getRuntimeVersion ()Ljava/lang/String;
 	public final fun getSystem ()Lcom/davils/knot/platform/HostSystem;
@@ -69,15 +71,18 @@ public final class com/davils/knot/platform/HostProbe {
 	public final fun getClientHintsArchitecture ()Ljava/lang/String;
 	public final fun getClientHintsBitness ()Ljava/lang/String;
 	public final fun getClientHintsPlatform ()Ljava/lang/String;
+	public final fun getComputerNameVariable ()Ljava/lang/String;
 	public final fun getDenoArch ()Ljava/lang/String;
 	public final fun getDenoOs ()Ljava/lang/String;
 	public final fun getDenoVersion ()Ljava/lang/String;
 	public final fun getHasWindow ()Z
+	public final fun getHostNameVariable ()Ljava/lang/String;
 	public final fun getJavaVersion ()Ljava/lang/String;
 	public final fun getNodeVersion ()Ljava/lang/String;
 	public final fun getOsArch ()Ljava/lang/String;
 	public final fun getOsName ()Ljava/lang/String;
 	public final fun getProcessArch ()Ljava/lang/String;
+	public final fun getProcessId ()Ljava/lang/Long;
 	public final fun getProcessPlatform ()Ljava/lang/String;
 	public final fun getUserAgent ()Ljava/lang/String;
 	public fun hashCode ()I
@@ -94,15 +99,18 @@ public final class com/davils/knot/platform/HostProbeBuilder {
 	public final fun getClientHintsArchitecture ()Ljava/lang/String;
 	public final fun getClientHintsBitness ()Ljava/lang/String;
 	public final fun getClientHintsPlatform ()Ljava/lang/String;
+	public final fun getComputerNameVariable ()Ljava/lang/String;
 	public final fun getDenoArch ()Ljava/lang/String;
 	public final fun getDenoOs ()Ljava/lang/String;
 	public final fun getDenoVersion ()Ljava/lang/String;
 	public final fun getHasWindow ()Z
+	public final fun getHostNameVariable ()Ljava/lang/String;
 	public final fun getJavaVersion ()Ljava/lang/String;
 	public final fun getNodeVersion ()Ljava/lang/String;
 	public final fun getOsArch ()Ljava/lang/String;
 	public final fun getOsName ()Ljava/lang/String;
 	public final fun getProcessArch ()Ljava/lang/String;
+	public final fun getProcessId ()Ljava/lang/Long;
 	public final fun getProcessPlatform ()Ljava/lang/String;
 	public final fun getUserAgent ()Ljava/lang/String;
 	public final fun isClientHintsMobile ()Ljava/lang/Boolean;
@@ -115,17 +123,20 @@ public final class com/davils/knot/platform/HostProbeBuilder {
 	public final fun setClientHintsBitness (Ljava/lang/String;)V
 	public final fun setClientHintsMobile (Ljava/lang/Boolean;)V
 	public final fun setClientHintsPlatform (Ljava/lang/String;)V
+	public final fun setComputerNameVariable (Ljava/lang/String;)V
 	public final fun setDedicatedWorker (Z)V
 	public final fun setDenoArch (Ljava/lang/String;)V
 	public final fun setDenoOs (Ljava/lang/String;)V
 	public final fun setDenoVersion (Ljava/lang/String;)V
 	public final fun setHasWindow (Z)V
+	public final fun setHostNameVariable (Ljava/lang/String;)V
 	public final fun setJavaVersion (Ljava/lang/String;)V
 	public final fun setJvm (Z)V
 	public final fun setNodeVersion (Ljava/lang/String;)V
 	public final fun setOsArch (Ljava/lang/String;)V
 	public final fun setOsName (Ljava/lang/String;)V
 	public final fun setProcessArch (Ljava/lang/String;)V
+	public final fun setProcessId (Ljava/lang/Long;)V
 	public final fun setProcessPlatform (Ljava/lang/String;)V
 	public final fun setServiceWorker (Z)V
 	public final fun setSharedWorker (Z)V
@@ -220,6 +231,7 @@ public final class com/davils/knot/platform/Platform$Companion {
 
 public final class com/davils/knot/platform/PlatformLimits {
 	public static final field INSTANCE Lcom/davils/knot/platform/PlatformLimits;
+	public static final field MAX_HOST_NAME_LENGTH I
 	public static final field MAX_USER_AGENT_LENGTH I
 	public static final field MAX_VERSION_LENGTH I
 }

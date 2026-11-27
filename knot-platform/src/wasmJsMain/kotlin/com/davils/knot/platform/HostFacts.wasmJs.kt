@@ -25,6 +25,8 @@ private const val ARCHITECTURE_HINT: String = "architecture"
 private const val BITNESS_HINT: String = "bitness"
 private const val TRUE: Int = 1
 private const val FALSE: Int = 0
+private const val HOST_NAME_VARIABLE: String = "HOSTNAME"
+private const val COMPUTER_NAME_VARIABLE: String = "COMPUTERNAME"
 
 private val mobileFlags: Map<Int, Boolean> = mapOf(TRUE to true, FALSE to false)
 
@@ -38,6 +40,8 @@ internal actual suspend fun observedHighEntropyProbe(): HostProbe {
         clientHintsBitness = hints?.let { found -> hintOf(found, BITNESS_HINT) }
     }
 }
+
+private fun processIdOf(reported: Double): Long? = reported.takeIf { id -> id > 0 }?.toLong()
 
 private fun HostProbeBuilder.observe() {
     processPlatform = processText("platform")
@@ -54,6 +58,9 @@ private fun HostProbeBuilder.observe() {
     userAgent = userAgentText()
     clientHintsPlatform = clientHintsPlatformText()
     isClientHintsMobile = mobileFlags[isClientHintsMobileFlag()]
+    processId = processIdOf(processIdNumber())
+    hostNameVariable = environmentText(HOST_NAME_VARIABLE)
+    computerNameVariable = environmentText(COMPUTER_NAME_VARIABLE)
 }
 
 @JsFun(
@@ -131,3 +138,20 @@ private external fun highEntropyHints(): Promise<JsAny?>?
         catch (e) { return null; } }""",
 )
 private external fun hintOf(hints: JsAny, name: String): String?
+
+@JsFun(
+    """() => { try { const id = (typeof Deno === "object" && Deno !== null) ? Deno.pid
+        : ((typeof process === "object" && process !== null) ? process.pid : undefined);
+        return Number.isSafeInteger(id) ? id : -1; } catch (e) { return -1; } }""",
+)
+private external fun processIdNumber(): Double
+
+@JsFun(
+    """(name) => { try { if (typeof Deno === "object" && Deno !== null) { const state = (Deno.permissions &&
+        typeof Deno.permissions.querySync === "function") ? Deno.permissions.querySync({ name: "env", variable: name })
+        .state : "denied"; const value = state === "granted" ? Deno.env.get(name) : undefined;
+        return typeof value === "string" ? value : null; } const env = (typeof process === "object" &&
+        process !== null) ? process.env : undefined; return (env && typeof env[name] === "string") ? env[name] : null; }
+        catch (e) { return null; } }""",
+)
+private external fun environmentText(name: String): String?

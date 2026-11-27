@@ -48,6 +48,12 @@ private const val UNKNOWN: String = "unknown"
  * when it is longer than [PlatformLimits.MAX_VERSION_LENGTH] or not printable ASCII.
  * @property isMobile whether the host is a mobile device, as far as a browser tells it; `false` for a runtime with a
  * process of its own and `null` when a browser does not tell.
+ * @property processId the id the operating system gave the process, or `null` in a browser, in a web worker or when
+ * the runtime reports none or one that is not positive. Since 1.3.0.
+ * @property hostName the name of the machine from the environment variable `HOSTNAME`, or else `COMPUTERNAME`, or
+ * `null` if neither holds a host name of RFC 1123 of at most [PlatformLimits.MAX_HOST_NAME_LENGTH] characters. Knot
+ * never asks DNS and never reads a file for it, so the name is what the environment of the process claims and never
+ * decides anything that matters for security. Since 1.3.0.
  * @since 1.0.0
  */
 public class Host private constructor(
@@ -58,6 +64,8 @@ public class Host private constructor(
     public val architectureSource: DetectionSource,
     public val runtimeVersion: String?,
     public val isMobile: Boolean?,
+    public val processId: Long?,
+    public val hostName: String?,
 ) {
     /**
      * Whether both the system and the architecture come from an authoritative source.
@@ -84,7 +92,17 @@ public class Host private constructor(
         }
 
     private val facts: List<Any?>
-        get() = listOf(runtime, system, architecture, systemSource, architectureSource, runtimeVersion, isMobile)
+        get() = listOf(
+            runtime,
+            system,
+            architecture,
+            systemSource,
+            architectureSource,
+            runtimeVersion,
+            isMobile,
+            processId,
+            hostName,
+        )
 
     /**
      * Tells whether [other] is a host with the same facts from the same sources.
@@ -104,7 +122,8 @@ public class Host private constructor(
     override fun hashCode(): Int = facts.hashCode()
 
     /**
-     * Returns the facts of the host, the version escaped.
+     * Returns the facts of the host, the version escaped; the process id and the host name are left out, so that the
+     * text does not tell one machine or process from another.
      *
      * @return the facts, such as `Host(runtime=nodejs, system=linux (process), architecture=x86_64 (process),
      * version="22.11.0", mobile=false)`.
@@ -171,6 +190,8 @@ public class Host private constructor(
                 architectureSource = architecture.source,
                 runtimeVersion = runtimeVersionOf(probe, runtime),
                 isMobile = mobileOf(probe, runtime),
+                processId = processIdOf(probe, runtime),
+                hostName = hostNameOf(probe, runtime),
             )
         }
     }
